@@ -1,0 +1,134 @@
+package com.mvc.constroller;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Properties;
+//import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import com.mvc.service.EventInsertService;
+import com.wang.form.EventInsertForm;
+import com.wang.utility.Constant;
+
+@Controller
+public class RestConstroller {
+	
+	static Logger log = Logger.getLogger(RestConstroller.class.getName());
+
+	@Autowired(required = false)
+	private EventInsertService eventInsertService;
+
+	@RequestMapping(value = "/eventAdd", method = RequestMethod.GET)
+	public String eventAdd() {
+		log.info("WelcomePage called");
+
+		return "eventAdd";
+	}
+
+	@RequestMapping(value = "/maineventAdd", method = RequestMethod.POST)
+	public String springUpload(HttpServletRequest request,
+			HttpServletResponse response, EventInsertForm eventInsertForm
+			) throws IllegalStateException, IOException {
+		log.info("maineventAdd called");
+		String mainflg = new String();
+
+		String iphoneimgtime = new SimpleDateFormat(
+		"yyyyMMddHHmmssSSS").format(new Date());
+		
+		
+		HashMap<String, String> filename = new HashMap<String, String>();
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		if (multipartResolver.isMultipart(request)) {
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+			Iterator<?> iter = multiRequest.getFileNames();
+			while (iter.hasNext()) {
+				StringBuilder filenamesave = new StringBuilder();
+				MultipartFile file = multiRequest.getFile(iter.next()
+						.toString());
+				String picturename = file.getOriginalFilename();
+				int position = picturename.indexOf(Constant.POINT);	
+				if (file != null && file.getOriginalFilename() != Constant.BLANK) {
+					filenamesave.append(file.getName());
+					filenamesave.append(Constant.UNDERLINE);
+					filenamesave.append(picturename.substring(0,
+							position));		
+					filenamesave.append(iphoneimgtime);
+					filenamesave.append(picturename.substring(position));
+					//
+					filename.put(file.getName(), filenamesave.toString());
+					
+				}
+			}
+			String sucflg = eventInsertService.add(eventInsertForm,filename);
+			log.info("InsertForm called");
+			if(sucflg.equals(Constant.FORWARD_SUCCESS)){
+				Properties properties = new Properties();
+				properties.load(this.getClass().getClassLoader()
+						.getResourceAsStream("Webinfo.properties"));
+				String pictureposition = properties.getProperty("pictureposition");
+				MultipartFile file = multiRequest.getFile(iter.next()
+						.toString());
+				if (eventInsertForm.getiPhone4IMGName() != null) {
+				String path = pictureposition + eventInsertForm.getiPhone4IMGName();
+				file.transferTo(new File(path));
+				}
+				if (eventInsertForm.getiPhone5IMGName() != null) {
+
+				String path = pictureposition + eventInsertForm.getiPhone5IMGName();
+				file.transferTo(new File(path));
+				}
+				if (eventInsertForm.getiPhone6IMGName() != null) {
+				String path = pictureposition + eventInsertForm.getiPhone6IMGName();
+				file.transferTo(new File(path));
+				}
+				if (eventInsertForm.getiPhone6PIMGName() != null) {
+				String path = pictureposition + eventInsertForm.getiPhone6PIMGName();
+				file.transferTo(new File(path));
+				}
+				if (eventInsertForm.getEventDef() != null) {
+				String path = pictureposition + eventInsertForm.getEndDate();
+				file.transferTo(new File(path));
+				}
+				if (eventInsertForm.getFriendDef() != null) {
+				String path = pictureposition + eventInsertForm.getFriendDef();
+				file.transferTo(new File(path));
+				}
+				if (eventInsertForm.getpKDef() != null) {
+				String path = pictureposition + eventInsertForm.getpKDef();
+				file.transferTo(new File(path));
+				}
+				if (eventInsertForm.getMetalDef() != null) {
+				String path = pictureposition + eventInsertForm.getMetalDef();
+				file.transferTo(new File(path));
+				}
+				
+				 mainflg = Constant.FORWARD_SUCCESS;
+			}else{
+				 mainflg = Constant.FORWARD_FAILURE;
+				
+				}
+			}else{
+				 mainflg = Constant.FORWARD_FAILURE;
+			}
+
+		return Constant.VIRGULE + mainflg;
+
+	}
+
+}

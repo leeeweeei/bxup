@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+ <!DOCTYPE sqlMap    
+ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"    
+ "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="FirstSpace">
+	<typeAlias alias="EventInsertForm" type="com.wang.form.EventInsertForm" />
+	<!-- select -->
+	<select id="getEventInsertForm" parameterClass="java.lang.Integer"
+		resultClass="EventInsertForm">  
+         <![CDATA[ 
+             select imgtype from t_event where id = #id# 
+         ]]>
+	</select>
+	<!-- insert -->
+	<insert id="insertEventInsertForm1" parameterClass="EventInsertForm">
+		insert into
+		t_event(event_name,event_desc,event_place,img_type,iphone4_img,iphone5_img,iphone6_img,iphone6p_img,android_img1,
+		android_img2,android_img3,event_date,event_time,create_date,create_id)
+		values(#eventName#,#eventDesc#,#eventPlace#,#imgtype#,#iPhone4IMGName#,#iPhone5IMGName#,#iPhone6IMGName#,#iPhone6PIMGName#,
+		#androidIMGName1#,#androidIMGName2#,#androidIMGName3#,#eventDate#,#eventTime#,#createDate#,#createID#)
+	</insert>
+	<insert id="insertEventInsertForm2" parameterClass="EventInsertForm">
+		insert into
+		t_icon_img(event_def_name,fri_def_name,pk_def_name,metal_def_name,start_date,end_date,create_date,create_id)
+		values(#eventDef#,#friendDef#,#pKDef#,#metalDef#,#startDate#,#endDate#,#createDate#,#createID#)
+	</insert>
+	<!-- update -->
+	<update id="updateEventInsertForm" parameterClass="EventInsertForm">   
+         <![CDATA[ 
+			update t_event  
+			SET event_name=#eventName#
+			WHERE create_date = #createDate#  
+         ]]>
+	</update>
+	<!-- delete -->
+	<delete id="deleteEventInsertForm" parameterClass="java.lang.Integer">
+		delete from t_event where create_date = #createDate#
+	</delete>
+</sqlMap> 
