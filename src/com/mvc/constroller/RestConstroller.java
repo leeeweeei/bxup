@@ -3,9 +3,11 @@ package com.mvc.constroller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 //import java.util.logging.Logger;
 import org.apache.log4j.Logger;
@@ -52,11 +54,20 @@ public class RestConstroller {
 		
 		
 		HashMap<String, String> filename = new HashMap<String, String>();
+		List<String> decfileList  = new ArrayList<String>();
+		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
 				request.getSession().getServletContext());
+		
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader()
+				.getResourceAsStream("Webinfo.properties"));
+		String pictureposition = properties.getProperty("pictureposition");
+		
 		if (multipartResolver.isMultipart(request)) {
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
 			Iterator<?> iter = multiRequest.getFileNames();
+
 			while (iter.hasNext()) {
 				StringBuilder filenamesave = new StringBuilder();
 				MultipartFile file = multiRequest.getFile(iter.next()
@@ -72,61 +83,28 @@ public class RestConstroller {
 					filenamesave.append(picturename.substring(position));
 					//
 					filename.put(file.getName(), filenamesave.toString());
+					String path = pictureposition + filenamesave.toString();
+					file.transferTo(new File(path));
+					decfileList.add(filenamesave.toString());
 					
+			
 				}
 			}
 			String sucflg = eventInsertService.add(eventInsertForm,filename);
 			log.info("InsertForm called");
-			if(sucflg.equals(Constant.FORWARD_SUCCESS)){
-				Properties properties = new Properties();
-				properties.load(this.getClass().getClassLoader()
-						.getResourceAsStream("Webinfo.properties"));
-				String pictureposition = properties.getProperty("pictureposition");
-				MultipartFile file = multiRequest.getFile(iter.next()
-						.toString());
-				if (eventInsertForm.getiPhone4IMGName() != null) {
-				String path = pictureposition + eventInsertForm.getiPhone4IMGName();
-				file.transferTo(new File(path));
+			if(sucflg.equals(Constant.FORWARD_FAILURE)){
+				for(int i=0 ; i < decfileList.size(); i++){
+					File file =new File(pictureposition+decfileList.get(i));		
+					file.delete();
 				}
-				if (eventInsertForm.getiPhone5IMGName() != null) {
-
-				String path = pictureposition + eventInsertForm.getiPhone5IMGName();
-				file.transferTo(new File(path));
-				}
-				if (eventInsertForm.getiPhone6IMGName() != null) {
-				String path = pictureposition + eventInsertForm.getiPhone6IMGName();
-				file.transferTo(new File(path));
-				}
-				if (eventInsertForm.getiPhone6PIMGName() != null) {
-				String path = pictureposition + eventInsertForm.getiPhone6PIMGName();
-				file.transferTo(new File(path));
-				}
-				if (eventInsertForm.getEventDef() != null) {
-				String path = pictureposition + eventInsertForm.getEndDate();
-				file.transferTo(new File(path));
-				}
-				if (eventInsertForm.getFriendDef() != null) {
-				String path = pictureposition + eventInsertForm.getFriendDef();
-				file.transferTo(new File(path));
-				}
-				if (eventInsertForm.getpKDef() != null) {
-				String path = pictureposition + eventInsertForm.getpKDef();
-				file.transferTo(new File(path));
-				}
-				if (eventInsertForm.getMetalDef() != null) {
-				String path = pictureposition + eventInsertForm.getMetalDef();
-				file.transferTo(new File(path));
-				}
-				
-				 mainflg = Constant.FORWARD_SUCCESS;
+				mainflg = Constant.FORWARD_FAILURE;
 			}else{
-				 mainflg = Constant.FORWARD_FAILURE;
-				
+				log.info("InsertForm ended");
+				 mainflg = Constant.FORWARD_SUCCESS;
 				}
 			}else{
 				 mainflg = Constant.FORWARD_FAILURE;
 			}
-
 		return Constant.VIRGULE + mainflg;
 
 	}
