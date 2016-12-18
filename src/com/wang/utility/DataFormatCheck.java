@@ -166,8 +166,8 @@ public class DataFormatCheck {
 				if (csvData[1].length() > 15){
 					errList.add("gym_id Field length is 0-15");
 				}
-				if (!match(csvData[3], "^\\d+$")){
-					errList.add("Location Field write by the number of 0-15");
+				if (!match(csvData[1], "^\\d+$")){
+					errList.add("gym_id Field write by the number of 0-15");
 				}
 			}			
 							

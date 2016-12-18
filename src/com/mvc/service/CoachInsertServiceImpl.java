@@ -16,6 +16,9 @@ public class CoachInsertServiceImpl implements CoachInsertService{
 	
 	public String add(List<CoachForm> coachList){
 		Logger log = Logger.getLogger(RestConstroller.class.getName());	
+		
+		log.info("CoachInsertServiceImpl add");
+		
 		LoginDao dao = null;
 		String sucflg = Constant.FORWARD_SUCCESS;
 		try {
@@ -30,10 +33,10 @@ public class CoachInsertServiceImpl implements CoachInsertService{
 			}			
 			
 			if(sucflg.equals(Constant.FORWARD_SUCCESS)){
-				log.info("coachInsertSuccess");
+				log.info("CoachInsertServiceImpl Success");
 				return Constant.FORWARD_SUCCESS;
 			}else{
-				log.info("coachInsertFailure");
+				log.info("CoachInsertServiceImpl Failure");
 				return Constant.FORWARD_FAILURE;
 			}
 			

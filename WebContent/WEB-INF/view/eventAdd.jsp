@@ -10,7 +10,7 @@
 <html lang="true">
 <head>
 <title>eventadd.jsp</title>
-<script type="text/javascript" src="js/test.js"></script>
+<script type="text/javascript" src="./js/test.js"></script>
 <SCRIPT Language="JavaScript">
 
 function show(r){
@@ -19,11 +19,15 @@ function show(r){
 			//alert(document.getElementById("c").border);
 			document.getElementById("c").style.display ='block';// 
 			document.getElementById("d").style.display ='none';
+			document.getElementById("gymDiv").style.display ='none';
+			document.getElementById("coachDiv").style.display ='none';
 			clearAll();
 		} else if(r.value=='3'){
 			//alert(document.getElementById("c").border);
 			document.getElementById("d").style.display ='block';//
 			document.getElementById("c").style.display ='none';
+			document.getElementById("gymDiv").style.display ='none';
+			document.getElementById("coachDiv").style.display ='none';
 			clearAll(); 
 		} else if(r.value=='4'){
 			document.getElementById("coachDiv").style.display ='block';
@@ -47,13 +51,27 @@ function show(r){
 }
 
 function clearAll(){
-	document.EventAddForm.eventName.value = "";
-	document.EventAddForm.eventDate.value = "";
-	document.EventAddForm.eventTime.value = "";
-	document.EventAddForm.eventDesc.value = "";
-	document.EventAddForm.eventPlace.value = "";
-	document.EventAddForm.startDate.value = "";
-	document.EventAddForm.endDate.value = ""; 	
+	document.getElementById("eventName").value = "";
+	document.getElementById("eventStartDate").value = "";
+	document.getElementById("eventEndDate").value = "";
+	document.getElementById("eventTime").value = "";
+	document.getElementById("eventLink").value = "";
+	document.getElementById("eventDesc").value = "";
+	document.getElementById("eventPlace").value = "";
+	document.getElementById("iPhone4IMG").value = "";
+	document.getElementById("iPhone5IMG").value = "";
+	document.getElementById("iPhone6IMG").value = "";
+	document.getElementById("iPhone6PIMG").value = "";
+	
+	document.getElementById("startDate").value = "";
+	document.getElementById("endDate").value = "";
+	document.getElementById("event_def").value = "";
+	document.getElementById("fri_def").value = "";
+	document.getElementById("pk_def").value = "";
+	document.getElementById("metal_def").value = "";
+	
+	document.getElementById("coachCsv").value = "";
+	document.getElementById("gymCsv").value = "";
 }
 
 function onSubmit(cmd){
@@ -86,17 +104,26 @@ function checkInput(){
 			document.getElementById("eventName").focus();
 			return false;
 		}
-		if(document.getElementById("eventDate").value == ""){
-			alert("Please fill in the eventdate");
-			document.getElementById("eventDate").focus();
+		if(document.getElementById("eventStartDate").value == ""){
+			alert("Please fill in the eventStartDate");
+			document.getElementById("eventStartDate").focus();
 			return false;
 		}
+		if(document.getElementById("eventEndDate").value == ""){
+			alert("Please fill in the eventEndDate");
+			document.getElementById("eventEndDate").focus();
+			return false;
+		}		
 		if(document.getElementById("eventTime").value == ""){
 			alert("Please fill in the eventtime");
 			document.getElementById("eventTime").focus();
 			return false;
 		}        
-	
+		if(document.getElementById("eventLink").value == ""){
+			alert("Please fill in the eventLink");
+			document.getElementById("eventLink").focus();
+			return false;
+		}
 		if(document.getElementById("eventDesc").value == ""){
 			alert("Please fill in the eventdesc");
 			document.getElementById("eventDesc").focus();
@@ -108,7 +135,7 @@ function checkInput(){
 			document.getElementById("eventPlace").focus();
 			return false;
 		}
-	} else if(document.getElementById("3").status == true){
+	} else if(document.getElementById("3").status == true) {
 		if(document.getElementById("startDate").value == ""){
 			alert("Please fill in the startdate");
 			document.getElementById("startDate").focus();
@@ -120,7 +147,28 @@ function checkInput(){
 			document.getElementById("endDate").focus();
 			return false;
 		}  
-	} 
+	} else if(document.getElementById("4").status == true){
+		if(document.getElementById("coachCsv").value == ""){
+			alert("Please fill in the coachCsv");
+			return false;
+		}
+		alert(document.getElementById("coachCsv").value);
+		alert(document.getElementById("coachCsv").value.indexOf(".csv"));
+		if(document.getElementById("coachCsv").value.indexOf(".csv") == -1 ) {
+			alert("Please fill in the .csv file");
+			return false;
+		}
+		
+	} else if(document.getElementById("5").status == true){
+		if(document.getElementById("gymCsv").value == ""){
+			alert("Please fill in the gymCsv");
+			return false;
+		}
+		if(document.getElementById("gymCsv").value.indexOf(".csv") == -1 ) {
+			alert("Please fill in the .csv file");
+			return false;
+		}
+	}
 
 	return true;
 }
@@ -143,6 +191,14 @@ function formatDate(date){
 			    var d = date.value.substring(6,8);
 			    var eventDate  = y + '/' + m + '/' + d;
 				    if(ret.test(eventDate)==true) {
+				    	var eventStartDate = document.getElementById("eventStartDate").value.replace(/\//g,'');
+				    	var eventEndDate = document.getElementById("eventEndDate").value.replace(/\//g,'');
+				    	if(eventStartDate != "" && eventEndDate !="" && eventStartDate > eventEndDate){
+				    		alert("Eventstartdate is greater than eventenddate");
+				    		date.value = "";
+							date.focus();
+							return false;
+				    	}
 				    	date.value = eventDate;
 						return true;
 					}else{
@@ -221,13 +277,22 @@ function formatTime(time){
 						id="eventName" size="35" maxlength="45" value="" /></td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventDate</td>
-					<td style="width: 220px"><input type="text" name="eventDate"
-						id="eventDate" size="35" maxlength="10" value=""
+					<td style="width: 70px">EventStartDate</td>
+					<td style="width: 220px"><input type="text" name="eventStartDate"
+						id="eventStartDate" size="35" maxlength="10" value=""
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
 					<td>*Please write by yyyymmdd</td>
 				</tr>
+				<tr>
+					<td style="width: 70px">EventEndDate</td>
+					<td style="width: 220px"><input type="text" name="eventEndDate"
+						id="eventEndDate" size="35" maxlength="10" value=""
+						onfocus="this.style.imeMode='disabled'"
+						onchange="formatDate(this)" /></td>
+					<td>*Please write by yyyymmdd</td>
+				</tr>
+				
 				<tr>
 					<td style="width: 70px">EventTime</td>
 					<td style="width: 220px"><input type="text" name="eventTime"
@@ -235,6 +300,11 @@ function formatTime(time){
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatTime(this)" /></td>
 					<td>*Please write by hhmm (24-hour)</td>
+				</tr>
+				<tr>
+					<td style="width: 70px">EventLink</td>
+					<td style="width: 220px"><input type="text" name="eventLink"
+						id="eventLink" size="35" maxlength="200" value="" /></td>
 				</tr>
 				<tr>
 					<td style="width: 70px">EventDesc</td>
@@ -248,22 +318,22 @@ function formatTime(time){
 				</tr>
 				<tr>
 					<td>iPhone4IMG</td>
-					<td colspan="2"><input type="file" name="iPhone4IMG" size="35" />
+					<td colspan="2"><input type="file" id="iPhone4IMG" name="iPhone4IMG" size="35" />
 					</td>
 				</tr>
 				<tr>
 					<td>iPhone5IMG</td>
-					<td colspan="2"><input type="file" name="iPhone5IMG" size="35" />
+					<td colspan="2"><input type="file" id="iPhone5IMG" name="iPhone5IMG" size="35" />
 					</td>
 				</tr>
 				<tr>
 					<td>iPhone6IMG</td>
-					<td colspan="2"><input type="file" name="iPhone6IMG" size="35" />
+					<td colspan="2"><input type="file" id="iPhone6IMG" name="iPhone6IMG" size="35" />
 					</td>
 				</tr>
 				<tr>
 					<td>iPhone6PIMG</td>
-					<td colspan="2"><input type="file" name="iPhone6PIMG"
+					<td colspan="2"><input type="file" id="iPhone6PIMG" name="iPhone6PIMG"
 						size="35" /></td>
 				</tr>
 			</table>
@@ -287,46 +357,46 @@ function formatTime(time){
 				</tr>
 				<tr>
 					<td>event_def</td>
-					<td colspan="2"><input type="file" name="event_def" size="35">
+					<td colspan="2"><input type="file" id="event_def" name="event_def" size="35">
 					</td>
 				</tr>
 				<tr>
 					<td>fri_def</td>
-					<td colspan="2"><input type="file" name="fri_def" size="35">
+					<td colspan="2"><input type="file" id="fri_def" name="fri_def" size="35">
 					</td>
 				</tr>
 				<tr>
 					<td>pk_def</td>
-					<td colspan="2"><input type="file" name="pk_def" size="35">
+					<td colspan="2"><input type="file" id="pk_def" name="pk_def" size="35">
 					</td>
 				</tr>
 				<tr>
 					<td>metal_def</td>
-					<td colspan="2"><input type="file" name="metal_def" size="35">
+					<td colspan="2"><input type="file" id="metal_def" name="metal_def" size="35">
 					</td>
 				</tr>
 			</table>
 		</div>
 		<div id="coachDiv" style="margin: 20px; border: 2px; display: none">
-			<table border="0">
+			<table>
 				<tr>
 					<td>coachCsv</td>
-					<td colspan="2"><input type="file" name="coachCsv" size="35">
+					<td colspan="2"><input type="file" id="coachCsv" name="coachCsv" size="35">
 					</td>
 				</tr>
 			</table>
 		</div>
 		<div id="gymDiv" style="margin: 20px; border: 2px; display: none">
-			<table border="0">
+			<table>
 				<tr>
 					<td>gymCsv</td>
-					<td colspan="2"><input type="file" name="gymCsv" size="35">
+					<td colspan="2"><input type="file" id="gymCsv" name="gymCsv" size="35">
 					</td>
 				</tr>
 			</table>
 		</div>
 		<br> <input type="submit" value="Upload"
-			onclick="return onSubmit('Upload');" class="input"></input> <input
-			type="reset" value="Reset">
+			onclick="return onSubmit('Upload');" class="input">
+			</input> <input type="button" value="Reset" onclick="clearAll();">
 
 	</form>

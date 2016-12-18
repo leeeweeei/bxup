@@ -16,8 +16,11 @@ public class GymInsertServiceImpl implements GymInsertService{
 	
 	public String add(List<GymForm> gymList){
 		Logger log = Logger.getLogger(RestConstroller.class.getName());	
+		
+		log.info("GymInsertServiceImpl add");
+		
 		LoginDao dao = null;
-		String sucflg = null;
+		String sucflg = Constant.FORWARD_SUCCESS;
 		try {
 			
 			Properties properties = new Properties();
@@ -30,10 +33,10 @@ public class GymInsertServiceImpl implements GymInsertService{
 			}			
 			
 			if(sucflg.equals(Constant.FORWARD_SUCCESS)){
-				log.info("GymInsertSuccess");
+				log.info("GymInsertServiceImpl Success");
 				return Constant.FORWARD_SUCCESS;
 			}else{
-				log.info("GymInsertFailure");
+				log.info("GymInsertServiceImpl Failure");
 				return Constant.FORWARD_FAILURE;
 			}
 			

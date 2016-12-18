@@ -53,7 +53,9 @@ public class LoginDao {
 			eventAdd.setAndroidIMGName1(eventInsertForm.getAndroidIMGName1());
 			eventAdd.setAndroidIMGName2(eventInsertForm.getAndroidIMGName2());
 			eventAdd.setAndroidIMGName3(eventInsertForm.getAndroidIMGName3());
-			eventAdd.setEventDate(eventInsertForm.getEventDate());
+			eventAdd.setEventStartDate(eventInsertForm.getEventStartDate());
+			eventAdd.setEventEndDate(eventInsertForm.getEventEndDate());
+			eventAdd.setEventLink(eventInsertForm.getEventLink());
 			eventAdd.setEventTime(eventInsertForm.getEventTime());
 			eventAdd.setCreateDate(eventInsertForm.getCreateDate());
 			eventAdd.setCreateID(eventInsertForm.getCreateID());
@@ -96,7 +98,7 @@ public class LoginDao {
 		
 	}
 	
-	public static String AddT_coach(CoachForm coach) {
+	public static String AddT_coach(CoachForm coach) throws SQLException {
 		log.info("SqlAddT_coach Start.");
 		String sucflg = null;
 
@@ -107,7 +109,7 @@ public class LoginDao {
 			e.printStackTrace();
 			//log.error(e.getMessage());
 			sucflg=Constant.FORWARD_FAILURE;
-			return sucflg;
+			throw e;
 		}
 		sucflg=Constant.FORWARD_SUCCESS;
 			 
@@ -116,7 +118,7 @@ public class LoginDao {
 		
 	}
 	
-	public static String AddT_gym(GymForm gym) {
+	public static String AddT_gym(GymForm gym) throws SQLException {
 		log.info("SqlAddT_gym Start.");
 		String sucflg = null;
 
@@ -127,7 +129,7 @@ public class LoginDao {
 			e.printStackTrace();
 			//log.error(e.getMessage());
 			sucflg=Constant.FORWARD_FAILURE;
-			return sucflg;
+			throw e;
 		}
 		sucflg=Constant.FORWARD_SUCCESS;
 			 

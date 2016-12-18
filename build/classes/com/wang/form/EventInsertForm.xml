@@ -15,9 +15,9 @@
 	<insert id="insertEventInsertForm1" parameterClass="EventInsertForm">
 		insert into
 		t_event(event_name,event_desc,event_place,img_type,iphone4_img,iphone5_img,iphone6_img,iphone6p_img,android_img1,
-		android_img2,android_img3,event_date,event_time,create_date,create_id)
+		android_img2,android_img3,event_start_date,event_end_date,event_time,event_link,create_date,create_id)
 		values(#eventName#,#eventDesc#,#eventPlace#,#imgtype#,#iPhone4IMGName#,#iPhone5IMGName#,#iPhone6IMGName#,#iPhone6PIMGName#,
-		#androidIMGName1#,#androidIMGName2#,#androidIMGName3#,#eventDate#,#eventTime#,#createDate#,#createID#)
+		#androidIMGName1#,#androidIMGName2#,#androidIMGName3#,#eventStartDate#,#eventEndDate#,#eventTime#,#eventLink#,#createDate#,#createID#)
 	</insert>
 	<insert id="insertEventInsertForm2" parameterClass="EventInsertForm">
 		insert into

@@ -42,10 +42,14 @@ public class EventInsertServiceImpl implements EventInsertService{
 					|| img_type.equals(Imgtype.STRING_BANNER.getStringValue())) {
 				
 				imgtype = Integer.parseInt(img_type);				
-				String eventdate = eventInsertForm.getEventDate();		
-				Date dbdate = formatter.parse(eventdate);
-				eventdate = formatter.format(dbdate);
-				eventInsertForm.setEventDate(formatter.format(dbdate));					
+				String eventStartdate = eventInsertForm.getEventStartDate();		
+				Date dbdate = formatter.parse(eventStartdate);
+				eventStartdate = formatter.format(dbdate);
+				eventInsertForm.setEventStartDate(formatter.format(dbdate));	
+				String eventEnddate = eventInsertForm.getEventEndDate();	
+				dbdate = formatter.parse(eventEnddate);
+				eventEnddate = formatter.format(dbdate);
+				eventInsertForm.setEventEndDate(formatter.format(dbdate));
 				eventInsertForm.setiPhone4IMGName(filename.get(Constant.IPHONE4IMGNAME));
 				eventInsertForm.setiPhone5IMGName(filename.get(Constant.IPHONE5IMGNAME));
 				eventInsertForm.setiPhone6IMGName(filename.get(Constant.IPHONE6IMGNAME));

@@ -5,7 +5,9 @@ public class EventInsertForm {
 	private String img_Type;
 	private int imgtype;
 	private String eventName;
-	private String eventDate;
+	private String eventStartDate;
+	private String eventEndDate;
+	private String eventLink;
 	private String eventTime;
 	private String eventDesc;
 	private String eventPlace;
@@ -142,12 +144,24 @@ public class EventInsertForm {
 	}
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
+	}	
+	public String getEventStartDate() {
+		return eventStartDate;
 	}
-	public String getEventDate() {
-		return eventDate;
+	public void setEventStartDate(String eventStartDate) {
+		this.eventStartDate = eventStartDate;
 	}
-	public void setEventDate(String eventDate) {
-		this.eventDate = eventDate;
+	public String getEventEndDate() {
+		return eventEndDate;
+	}
+	public void setEventEndDate(String eventEndDate) {
+		this.eventEndDate = eventEndDate;
+	}
+	public String getEventLink() {
+		return eventLink;
+	}
+	public void setEventLink(String eventLink) {
+		this.eventLink = eventLink;
 	}
 	public String getEventTime() {
 		return eventTime;

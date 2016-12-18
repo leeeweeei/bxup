@@ -2,7 +2,6 @@ package com.mvc.constroller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -133,8 +132,7 @@ public class RestConstroller {
 	public String coachAdd(@RequestParam(value="coachCsv") MultipartFile fileUp,HttpServletRequest request,
 			HttpServletResponse response,Model model) throws IllegalStateException, IOException {
 		log.info("coachAdd called");		
-		String filePath = "";		
-		Map<String, Object> resMap = new HashMap<String, Object>();
+		String filePath = "";
 
 		if(fileUp==null || fileUp.isEmpty()){
 			log.info("coachAdd ended");
@@ -149,29 +147,36 @@ public class RestConstroller {
 			boolean localhost = request.getRequestURL().toString().contains("localhost");
 			String rootPath=localhost?request.getServletContext().getRealPath("/"):pictureposition;
 			
-			File dir = new File(rootPath+"\\orderData\\");
+			String pathfalg = System.getProperty("file.separator");
+			
+			File dir = new File(rootPath+ pathfalg + "orderData" + pathfalg);
 	        if(!dir.exists()){
 	             dir.mkdir();
 	        }
 	        
-	        filePath = rootPath+"\\orderData\\"+ (new Random().nextInt(100000)+100000)+ fileUp.getOriginalFilename();
+	        filePath = rootPath+ pathfalg +"orderData"  + pathfalg + (new Random().nextInt(100000)+100000)+ fileUp.getOriginalFilename();
 	        
 	        File fileServer = new File(filePath);
 	        fileUp.transferTo(fileServer);
 	        
 	        InputStreamReader inputReader = new InputStreamReader(new FileInputStream(filePath), Charset.forName("UTF-8")); 
 	        
-	        List<String[]> datalist = CSVUtils.readCsv(inputReader);
+	        List<String[]> datalist = CSVUtils.readCsv(inputReader);	        
 	        
 	        Map<String,List<CoachForm>> coachList = DataFormatCheck.csvCoachDataCheck(datalist);
 	        
-	        coachInsertService.add(coachList.get("success"));
+	        if(Constant.FORWARD_FAILURE == coachInsertService.add(coachList.get("success"))){
+	        	return Constant.VIRGULE + "failure";
+	        }
+	        
+	        fileServer.delete();
 	        
 	        model.addAllAttributes(coachList);
 	        
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        resMap.put("error", "err");
+	        log.info("coachAdd abend");
+	        return Constant.VIRGULE + "failure";
 	    }
 
 		log.info("coachAdd ended");
@@ -181,9 +186,9 @@ public class RestConstroller {
 	@RequestMapping(value = "/gymAdd", method = RequestMethod.POST)
 	public String gymAdd(@RequestParam(value="gymCsv") MultipartFile fileUp,HttpServletRequest request,
 			HttpServletResponse response,Model model) throws IllegalStateException, IOException {
+		
 		log.info("gymAdd called");
 		String filePath = "";
-		Map<String, Object> resMap = new HashMap<String, Object>();
 
 		if(fileUp==null || fileUp.isEmpty()){
 			log.info("gymAdd ended");
@@ -198,12 +203,14 @@ public class RestConstroller {
 			boolean localhost = request.getRequestURL().toString().contains("localhost");
 			String rootPath=localhost?request.getServletContext().getRealPath("/"):pictureposition;
 			
-			File dir = new File(rootPath+"\\orderData\\");
+			String pathfalg = System.getProperty("file.separator");
+			
+			File dir = new File(rootPath+ pathfalg + "orderData" + pathfalg);
 	        if(!dir.exists()){
 	             dir.mkdir();
 	        }
 	        
-	        filePath = rootPath+"\\orderData\\"+ (new Random().nextInt(100000)+100000)+ fileUp.getOriginalFilename();
+	        filePath = rootPath+ pathfalg +"orderData"  + pathfalg + (new Random().nextInt(100000)+100000)+ fileUp.getOriginalFilename();
 	        File fileServer = new File(filePath);
 	        fileUp.transferTo(fileServer);
 	        
@@ -213,13 +220,18 @@ public class RestConstroller {
 	        
 	        Map<String,List<GymForm>> gymList = DataFormatCheck.csvGymDataCheck(datalist);
 	        
-	        gymInsertService.add(gymList.get("success"));
+	        if(Constant.FORWARD_FAILURE == gymInsertService.add(gymList.get("success"))){
+	        	return Constant.VIRGULE + "failure";
+	        }
+	        
+	        fileServer.delete();
 	        
 	        model.addAllAttributes(gymList);
 	        
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        resMap.put("error", "err");
+	        log.info("gymAdd abend");
+	        return Constant.VIRGULE + "failure";
 	    }
 
 		log.info("gymAdd ended");

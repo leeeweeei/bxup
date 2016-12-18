@@ -22,9 +22,9 @@ public class DbUtil {
 					.getResourceAsStream("Webinfo.properties"));
 			/* プロパティの取り出し */    
 			String Driver = properties.getProperty("Driver"); // JDBCドライバ名
-			String url = properties.getProperty("url"); // JDBCドライバ名
-			String userName = properties.getProperty("userName"); // JDBCドライバ名
-			String password = properties.getProperty("password"); // JDBCドライバ名
+			String url = properties.getProperty("jdbc_url"); // JDBCドライバ名
+			String userName = properties.getProperty("jdbc_username"); // JDBCドライバ名
+			String password = properties.getProperty("jdbc_password"); // JDBCドライバ名
 
 			Class.forName(Driver);
 
