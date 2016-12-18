@@ -10,42 +10,71 @@
 <html lang="true">
 <head>
 <title>eventadd.jsp</title>
+<script type="text/javascript" src="js/test.js"></script>
 <SCRIPT Language="JavaScript">
 
 function show(r){
-   if(r.status){  
-	   
+   if(r.status){  	   
 		if(r.value=='1' || r.value=='2'){
 			//alert(document.getElementById("c").border);
 			document.getElementById("c").style.display ='block';// 
 			document.getElementById("d").style.display ='none';
-			document.EventAddForm.eventName.value = "";
-			document.EventAddForm.eventDate.value = "";
-			document.EventAddForm.eventTime.value = "";
-			document.EventAddForm.eventDesc.value = "";
-			document.EventAddForm.eventPlace.value = "";
+			clearAll();
 		} else if(r.value=='3'){
 			//alert(document.getElementById("c").border);
 			document.getElementById("d").style.display ='block';//
 			document.getElementById("c").style.display ='none';
-			document.EventAddForm.startDate.value = "";
-			document.EventAddForm.endDate.value = ""; 
+			clearAll(); 
+		} else if(r.value=='4'){
+			document.getElementById("coachDiv").style.display ='block';
+			document.getElementById("d").style.display ='none';
+			document.getElementById("c").style.display ='none';
+			document.getElementById("gymDiv").style.display ='none';
+			clearAll(); 
+		}  else if(r.value=='5'){
+			document.getElementById("gymDiv").style.display ='block';
+			document.getElementById("coachDiv").style.display ='none';
+			document.getElementById("d").style.display ='none';
+			document.getElementById("c").style.display ='none';
+			clearAll(); 
 		} else {
 			document.getElementById("c").style.display ='none';
 			document.getElementById("d").style.display ='none';
-			}
+			document.getElementById("gymDiv").style.display ='none';
+			document.getElementById("coachDiv").style.display ='none';
+		}
    }   
 }
 
-function onSubmit(cmd){
+function clearAll(){
+	document.EventAddForm.eventName.value = "";
+	document.EventAddForm.eventDate.value = "";
+	document.EventAddForm.eventTime.value = "";
+	document.EventAddForm.eventDesc.value = "";
+	document.EventAddForm.eventPlace.value = "";
+	document.EventAddForm.startDate.value = "";
+	document.EventAddForm.endDate.value = ""; 	
+}
 
+function onSubmit(cmd){
+	var rtn = document.getElementsByName("img_Type");
+	var rtnValue = '';
+	for (var i=0;i<rtn.length;i++){ 
+		if(rtn[i].checked){ 
+			rtnValue=rtn[i].value; 
+		} 
+	}	
 	if(checkInput()){
 		var form = document.forms[0];
-		form.action = "./maineventAdd";
+		if(rtnValue=='1' || rtnValue=='2' || rtnValue=='3'){
+			form.action = "./maineventAdd";
+		} else if(rtnValue=='4'){
+			form.action = "./coachAdd";
+		} else if(rtnValue=='5'){
+			form.action = "./gymAdd";
+		}		
 		form.submit();
-		form.actionCmd.value = "";
-	}
-	
+	}	
 		return false;
 }
 
@@ -174,10 +203,15 @@ function formatTime(time){
 	<form enctype="multipart/form-data" action="maineventAdd" method="post">
 
 		<input type="radio" name="img_Type" id="1" value="1"
-			onclick="show(this)">Event <input type="radio"
-			name="img_Type" id="2" value="2" onclick="show(this)">Banner
+			onclick="show(this)">Event 
+		<input type="radio"	name="img_Type" id="2" value="2" 
+			onclick="show(this)">Banner
 		<input type="radio" name="img_Type" id="3" value="3"
 			onclick="show(this)">Icon
+		<input type="radio" name="img_Type" id="4" value="4"
+			onclick="show(this)">coach
+		<input type="radio" name="img_Type" id="5" value="5"
+			onclick="show(this)">gym
 
 		<div id="c" style="margin: 20px; border: 2px; display: none">
 			<table>
@@ -269,6 +303,24 @@ function formatTime(time){
 				<tr>
 					<td>metal_def</td>
 					<td colspan="2"><input type="file" name="metal_def" size="35">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="coachDiv" style="margin: 20px; border: 2px; display: none">
+			<table border="0">
+				<tr>
+					<td>coachCsv</td>
+					<td colspan="2"><input type="file" name="coachCsv" size="35">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="gymDiv" style="margin: 20px; border: 2px; display: none">
+			<table border="0">
+				<tr>
+					<td>gymCsv</td>
+					<td colspan="2"><input type="file" name="gymCsv" size="35">
 					</td>
 				</tr>
 			</table>

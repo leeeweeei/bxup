@@ -9,7 +9,9 @@ import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.mvc.constroller.RestConstroller;
+import com.wang.form.CoachForm;
 import com.wang.form.EventInsertForm;
+import com.wang.form.GymForm;
 import com.wang.utility.Constant;
 import com.wang.utility.Imgtype;
 
@@ -90,6 +92,46 @@ public class LoginDao {
 			    return sucflg;
 		}
 		log.info("SqlAddT_event End.");
+		return sucflg;
+		
+	}
+	
+	public static String AddT_coach(CoachForm coach) {
+		log.info("SqlAddT_coach Start.");
+		String sucflg = null;
+
+		try {
+			sqlMap.insert("insertCoachInsertForm1", coach);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			//log.error(e.getMessage());
+			sucflg=Constant.FORWARD_FAILURE;
+			return sucflg;
+		}
+		sucflg=Constant.FORWARD_SUCCESS;
+			 
+		log.info("SqlAddAddT_coach End.");
+		return sucflg;
+		
+	}
+	
+	public static String AddT_gym(GymForm gym) {
+		log.info("SqlAddT_gym Start.");
+		String sucflg = null;
+
+		try {
+			sqlMap.insert("insertGymInsertForm1", gym);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			//log.error(e.getMessage());
+			sucflg=Constant.FORWARD_FAILURE;
+			return sucflg;
+		}
+		sucflg=Constant.FORWARD_SUCCESS;
+			 
+		log.info("SqlAddAddT_gym End.");
 		return sucflg;
 		
 	}

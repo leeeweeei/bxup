@@ -1,31 +1,45 @@
 package com.mvc.constroller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
-//import java.util.logging.Logger;
-import org.apache.log4j.Logger;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.mvc.service.CoachInsertServiceImpl;
 import com.mvc.service.EventInsertService;
+import com.mvc.service.GymInsertServiceImpl;
+import com.wang.form.CoachForm;
 import com.wang.form.EventInsertForm;
+import com.wang.form.GymForm;
+import com.wang.utility.CSVUtils;
 import com.wang.utility.Constant;
+import com.wang.utility.DataFormatCheck;
 
 @Controller
 public class RestConstroller {
@@ -34,7 +48,13 @@ public class RestConstroller {
 
 	@Autowired(required = false)
 	private EventInsertService eventInsertService;
+	
+	@Autowired(required = false)
+	private CoachInsertServiceImpl coachInsertService;
 
+	@Autowired(required = false)
+	private GymInsertServiceImpl gymInsertService;
+	
 	@RequestMapping(value = "/eventAdd", method = RequestMethod.GET)
 	public String eventAdd() {
 		log.info("WelcomePage called");
@@ -107,6 +127,103 @@ public class RestConstroller {
 			}
 		return Constant.VIRGULE + mainflg;
 
+	}
+	
+	@RequestMapping(value = "/coachAdd", method = RequestMethod.POST)
+	public String coachAdd(@RequestParam(value="coachCsv") MultipartFile fileUp,HttpServletRequest request,
+			HttpServletResponse response,Model model) throws IllegalStateException, IOException {
+		log.info("coachAdd called");		
+		String filePath = "";		
+		Map<String, Object> resMap = new HashMap<String, Object>();
+
+		if(fileUp==null || fileUp.isEmpty()){
+			log.info("coachAdd ended");
+			return Constant.VIRGULE + "coachUploadEnd";
+	    }
+		
+		try {
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader().getResourceAsStream("Webinfo.properties"));
+			String pictureposition = properties.getProperty("pictureposition");
+			
+			boolean localhost = request.getRequestURL().toString().contains("localhost");
+			String rootPath=localhost?request.getServletContext().getRealPath("/"):pictureposition;
+			
+			File dir = new File(rootPath+"\\orderData\\");
+	        if(!dir.exists()){
+	             dir.mkdir();
+	        }
+	        
+	        filePath = rootPath+"\\orderData\\"+ (new Random().nextInt(100000)+100000)+ fileUp.getOriginalFilename();
+	        
+	        File fileServer = new File(filePath);
+	        fileUp.transferTo(fileServer);
+	        
+	        InputStreamReader inputReader = new InputStreamReader(new FileInputStream(filePath), Charset.forName("UTF-8")); 
+	        
+	        List<String[]> datalist = CSVUtils.readCsv(inputReader);
+	        
+	        Map<String,List<CoachForm>> coachList = DataFormatCheck.csvCoachDataCheck(datalist);
+	        
+	        coachInsertService.add(coachList.get("success"));
+	        
+	        model.addAllAttributes(coachList);
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        resMap.put("error", "err");
+	    }
+
+		log.info("coachAdd ended");
+		return Constant.VIRGULE + "coachUploadEnd";
+	}
+	
+	@RequestMapping(value = "/gymAdd", method = RequestMethod.POST)
+	public String gymAdd(@RequestParam(value="gymCsv") MultipartFile fileUp,HttpServletRequest request,
+			HttpServletResponse response,Model model) throws IllegalStateException, IOException {
+		log.info("gymAdd called");
+		String filePath = "";
+		Map<String, Object> resMap = new HashMap<String, Object>();
+
+		if(fileUp==null || fileUp.isEmpty()){
+			log.info("gymAdd ended");
+			return Constant.VIRGULE + "gymUploadEnd";
+	    }
+		
+		try {
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader().getResourceAsStream("Webinfo.properties"));
+			String pictureposition = properties.getProperty("pictureposition");
+			
+			boolean localhost = request.getRequestURL().toString().contains("localhost");
+			String rootPath=localhost?request.getServletContext().getRealPath("/"):pictureposition;
+			
+			File dir = new File(rootPath+"\\orderData\\");
+	        if(!dir.exists()){
+	             dir.mkdir();
+	        }
+	        
+	        filePath = rootPath+"\\orderData\\"+ (new Random().nextInt(100000)+100000)+ fileUp.getOriginalFilename();
+	        File fileServer = new File(filePath);
+	        fileUp.transferTo(fileServer);
+	        
+	        InputStreamReader inputReader = new InputStreamReader(new FileInputStream(filePath), Charset.forName("UTF-8")); 
+	        
+	        List<String[]> datalist = CSVUtils.readCsv(inputReader);
+	        
+	        Map<String,List<GymForm>> gymList = DataFormatCheck.csvGymDataCheck(datalist);
+	        
+	        gymInsertService.add(gymList.get("success"));
+	        
+	        model.addAllAttributes(gymList);
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        resMap.put("error", "err");
+	    }
+
+		log.info("gymAdd ended");
+		return Constant.VIRGULE + "gymUploadEnd";
 	}
 
 }

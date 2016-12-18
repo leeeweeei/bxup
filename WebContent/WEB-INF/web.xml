@@ -70,5 +70,10 @@
 	 <param-name>log4jRefreshInterval</param-name> 
 	 <param-value>600000</param-value> 
 	 </context-param>
- 
+ 	<jsp-config>
+ 		<taglib>
+ 			<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/c.tld</taglib-location>
+ 		</taglib>
+ 	</jsp-config>
 </web-app> 
