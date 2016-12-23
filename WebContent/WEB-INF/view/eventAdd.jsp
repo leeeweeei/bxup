@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=MS932"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%  
     String path = request.getContextPath();  
     String basePath = request.getScheme() + "://"  
@@ -152,8 +152,6 @@ function checkInput(){
 			alert("Please fill in the coachCsv");
 			return false;
 		}
-		alert(document.getElementById("coachCsv").value);
-		alert(document.getElementById("coachCsv").value.indexOf(".csv"));
 		if(document.getElementById("coachCsv").value.indexOf(".csv") == -1 ) {
 			alert("Please fill in the .csv file");
 			return false;
