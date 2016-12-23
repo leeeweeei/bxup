@@ -2,7 +2,7 @@ package com.wang.access;
 
 import java.io.Reader;
 import java.sql.SQLException;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 //import org.apache.log4j.Logger;
 import com.ibatis.common.resources.Resources;
@@ -64,7 +64,7 @@ public class LoginDao {
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
-				//log.error(e.getMessage());
+				log.error(e.getMessage());
 				sucflg=Constant.FORWARD_FAILURE;
 				return sucflg;
 			}
@@ -86,7 +86,7 @@ public class LoginDao {
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
-				//log.error(e.getMessage());
+				log.error(e.getMessage());
 				sucflg=Constant.FORWARD_FAILURE;
 				return sucflg;
 			}
@@ -107,7 +107,7 @@ public class LoginDao {
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-			//log.error(e.getMessage());
+			log.error(e.getMessage());
 			sucflg=Constant.FORWARD_FAILURE;
 			throw e;
 		}
@@ -127,7 +127,7 @@ public class LoginDao {
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-			//log.error(e.getMessage());
+			log.error(e.getMessage());
 			sucflg=Constant.FORWARD_FAILURE;
 			throw e;
 		}
