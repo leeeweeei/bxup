@@ -14,40 +14,38 @@
 <SCRIPT Language="JavaScript">
 
 function show(r){
-   if(r.status){  	   
-		if(r.value=='1' || r.value=='2'){
-			//alert(document.getElementById("c").border);
-			document.getElementById("c").style.display ='block';// 
-			document.getElementById("d").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			document.getElementById("coachDiv").style.display ='none';
-			clearAll();
-		} else if(r.value=='3'){
-			//alert(document.getElementById("c").border);
-			document.getElementById("d").style.display ='block';//
-			document.getElementById("c").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			document.getElementById("coachDiv").style.display ='none';
-			clearAll(); 
-		} else if(r.value=='4'){
-			document.getElementById("coachDiv").style.display ='block';
-			document.getElementById("d").style.display ='none';
-			document.getElementById("c").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			clearAll(); 
-		}  else if(r.value=='5'){
-			document.getElementById("gymDiv").style.display ='block';
-			document.getElementById("coachDiv").style.display ='none';
-			document.getElementById("d").style.display ='none';
-			document.getElementById("c").style.display ='none';
-			clearAll(); 
-		} else {
-			document.getElementById("c").style.display ='none';
-			document.getElementById("d").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			document.getElementById("coachDiv").style.display ='none';
-		}
-   }   
+	if(r.value=='1' || r.value=='2'){
+		//alert(document.getElementById("c").border);
+		document.getElementById("c").style.display ='block';// 
+		document.getElementById("d").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+		clearAll();
+	} else if(r.value=='3'){
+		//alert(document.getElementById("c").border);
+		document.getElementById("d").style.display ='block';//
+		document.getElementById("c").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+		clearAll(); 
+	} else if(r.value=='4'){
+		document.getElementById("coachDiv").style.display ='block';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("c").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		clearAll(); 
+	}  else if(r.value=='5'){
+		document.getElementById("gymDiv").style.display ='block';
+		document.getElementById("coachDiv").style.display ='none';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("c").style.display ='none';
+		clearAll(); 
+	} else {
+		document.getElementById("c").style.display ='none';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+	}
 }
 
 function clearAll(){
