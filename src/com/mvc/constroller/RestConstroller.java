@@ -60,6 +60,95 @@ public class RestConstroller {
 
 		return "eventAdd";
 	}
+	
+	@RequestMapping(value = "/eventAdd", method = RequestMethod.POST)
+	public String eventAdd(Model model,HttpServletRequest request,
+			HttpServletResponse response, EventInsertForm eventInsertForm) {
+		log.info("eventAdd called");
+		model.addAttribute("event_name", eventInsertForm.getEvent_name());
+		model.addAttribute("event_start_date", eventInsertForm.getEvent_start_date());
+		model.addAttribute("event_end_date", eventInsertForm.getEvent_end_date());
+		model.addAttribute("event_time", eventInsertForm.getEvent_time());
+		model.addAttribute("event_link", eventInsertForm.getEvent_link());
+		model.addAttribute("event_desc", eventInsertForm.getEvent_desc());
+		model.addAttribute("event_place", eventInsertForm.getEvent_place());
+		model.addAttribute("img_Type", eventInsertForm.getImg_Type());
+		model.addAttribute("endDate", eventInsertForm.getEndDate());
+		model.addAttribute("startDate", eventInsertForm.getStartDate());
+		
+		return "eventAdd";
+	}
+	
+	@RequestMapping(value = "/comfirmeventAdd", method = RequestMethod.POST)
+	public String comfirmeventAdd(Model model,HttpServletRequest request,
+			HttpServletResponse response, EventInsertForm eventInsertForm
+			) throws IllegalStateException, IOException {
+		log.info("comfirmeventAdd called");
+	    model.addAttribute("event_name", eventInsertForm.getEventName());
+		model.addAttribute("event_start_date", eventInsertForm.getEventStartDate());
+		model.addAttribute("event_end_date", eventInsertForm.getEventEndDate());
+		model.addAttribute("event_time", eventInsertForm.getEventTime());
+		model.addAttribute("event_link", eventInsertForm.getEventLink());
+		model.addAttribute("event_desc", eventInsertForm.getEventDesc());
+		model.addAttribute("event_place", eventInsertForm.getEventPlace());
+		model.addAttribute("img_Type", eventInsertForm.getImg_Type());
+		model.addAttribute("endDate", eventInsertForm.getEndDate());
+		model.addAttribute("startDate", eventInsertForm.getStartDate());
+		
+		
+		String iphoneimgtime = new SimpleDateFormat(
+				"yyyyMMddHHmmssSSS").format(new Date());
+		
+		HashMap<String, String> filename = new HashMap<String, String>();
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader()
+				.getResourceAsStream("Webinfo.properties"));
+		String picturepositiontmp = properties.getProperty("picturepositiontmp");
+		if (multipartResolver.isMultipart(request)) {
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+			Iterator<?> iter = multiRequest.getFileNames();
+
+			while (iter.hasNext()) {
+				StringBuilder filenamesave = new StringBuilder();
+				MultipartFile file = multiRequest.getFile(iter.next()
+						.toString());
+				String picturename = file.getOriginalFilename();
+				int position = picturename.indexOf(Constant.POINT);	
+				if (file != null && file.getOriginalFilename() != Constant.BLANK) {
+					filenamesave.append(file.getName());
+					filenamesave.append(Constant.UNDERLINE);
+					filenamesave.append(picturename.substring(0,
+							position));		
+					filenamesave.append(iphoneimgtime);
+					filenamesave.append(picturename.substring(position));
+					//
+					filename.put(file.getName(), filenamesave.toString());
+					String path = picturepositiontmp + filenamesave.toString();
+					file.transferTo(new File(path));							
+				}
+			}		
+		}
+		model.addAttribute("iPhone4IMGName", filename.get(Constant.IPHONE4IMGNAME));
+		model.addAttribute("iPhone5IMGName", filename.get(Constant.IPHONE5IMGNAME));
+		model.addAttribute("iPhone6IMGName", filename.get(Constant.IPHONE6IMGNAME));
+		model.addAttribute("iPhone6PIMGName", filename.get(Constant.IPHONE6PIMGNAME));
+		model.addAttribute("event_def", filename.get(Constant.EVENTDEFNAME));
+		model.addAttribute("fri_def", filename.get(Constant.FRIENDDEFNAME));
+		model.addAttribute("pk_def", filename.get(Constant.PKDEFNAME));
+		model.addAttribute("metal_def", filename.get(Constant.METALDEFNAME));
+		
+		if(Constant.ONE.equals(eventInsertForm.getImg_Type()) || Constant.TWO.equals(eventInsertForm.getImg_Type())){
+			return "comfirmevent";
+			}
+		else if(Constant.THREE.equals(eventInsertForm.getImg_Type())){
+			return "comfirmeventtwo";
+		}
+	    	return	Constant.FORWARD_FAILURE;	
+		
+	}
 
 	@RequestMapping(value = "/maineventAdd", method = RequestMethod.POST)
 	public String springUpload(HttpServletRequest request,
@@ -67,8 +156,41 @@ public class RestConstroller {
 			) throws IllegalStateException, IOException {
 		log.info("maineventAdd called");
 		String mainflg = new String();
-
-		String iphoneimgtime = new SimpleDateFormat(
+		
+		String sucflg = eventInsertService.insertEvent(eventInsertForm);
+		List<String> decfileList  = new ArrayList<String>();
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader()
+				.getResourceAsStream("Webinfo.properties"));
+		String pictureposition = properties.getProperty("pictureposition");
+		String picturepositiontmp = properties.getProperty("picturepositiontmp");
+		if(eventInsertForm.getiPhone4IMGName() != null){
+			decfileList.add(eventInsertForm.getiPhone4IMGName());
+		}
+		if(eventInsertForm.getiPhone5IMGName() != null){
+			decfileList.add(eventInsertForm.getiPhone5IMGName());
+		}
+		if(eventInsertForm.getiPhone6IMGName() != null){
+			decfileList.add(eventInsertForm.getiPhone6IMGName());
+		}
+		if(eventInsertForm.getiPhone6PIMGName() != null){
+			decfileList.add(eventInsertForm.getiPhone6PIMGName());
+		}
+		if(eventInsertForm.getEventDef() != null){
+			decfileList.add(eventInsertForm.getEventDef());
+		}
+		if(eventInsertForm.getFriendDef() != null){
+			decfileList.add(eventInsertForm.getFriendDef());
+		}
+		if(eventInsertForm.getpKDef() != null){
+			decfileList.add(eventInsertForm.getpKDef());
+		}
+		if(eventInsertForm.getMetalDef() != null){
+			decfileList.add(eventInsertForm.getMetalDef());
+		}
+		
+		
+		/*String iphoneimgtime = new SimpleDateFormat(
 		"yyyyMMddHHmmssSSS").format(new Date());
 		
 		
@@ -123,10 +245,45 @@ public class RestConstroller {
 				}
 			}else{
 				 mainflg = Constant.FORWARD_FAILURE;
-			}
-		return Constant.VIRGULE + mainflg;
+			}*/
+		if(Constant.ONE.equals(eventInsertForm.getImg_Type()) || Constant.TWO.equals(eventInsertForm.getImg_Type())){
+			if(sucflg.equals(Constant.FORWARD_FAILURE)){
+				for(int i=0 ; i < decfileList.size(); i++){
+					File file =new File(pictureposition+decfileList.get(i));		
+					file.delete();
+				}
+				mainflg = Constant.FORWARD_FAILURE;	
+			}else{
+				for(int i=0 ; i < decfileList.size(); i++){
+					File file =new File(picturepositiontmp+decfileList.get(i));		
+					file.renameTo(new File(pictureposition + file.getName()));
+					file.delete();
+				}
+				log.info("InsertForm1 ended");
+				mainflg = Constant.FORWARD_SUCCESS; 
+				}
+		} else if(Constant.THREE.equals(eventInsertForm.getImg_Type())){
+			if(sucflg.equals(Constant.FORWARD_FAILURE)){
+				for(int i=0 ; i < decfileList.size(); i++){
+					File file =new File(pictureposition+decfileList.get(i));		
+					file.delete();
+				}
+				mainflg = Constant.FORWARD_FAILURE;	
+			}else{
+				for(int i=0 ; i < decfileList.size(); i++){
+					File file =new File(picturepositiontmp+decfileList.get(i));		
+					file.renameTo(new File(pictureposition + decfileList.get(i)));
+					file.delete();
+				}			
+				log.info("InsertForm2 ended");
+				mainflg = Constant.FORWARD_SUCCESS; 
+				}
+			
+			
+		}
+		return mainflg;
+		}
 
-	}
 	
 	@RequestMapping(value = "/coachAdd", method = RequestMethod.POST)
 	public String coachAdd(@RequestParam(value="coachCsv") MultipartFile fileUp,HttpServletRequest request,

@@ -14,40 +14,44 @@
 <SCRIPT Language="JavaScript">
 
 function show(r){
-   if(r.status){  	   
-		if(r.value=='1' || r.value=='2'){
-			//alert(document.getElementById("c").border);
-			document.getElementById("c").style.display ='block';// 
-			document.getElementById("d").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			document.getElementById("coachDiv").style.display ='none';
-			clearAll();
-		} else if(r.value=='3'){
-			//alert(document.getElementById("c").border);
-			document.getElementById("d").style.display ='block';//
-			document.getElementById("c").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			document.getElementById("coachDiv").style.display ='none';
-			clearAll(); 
-		} else if(r.value=='4'){
-			document.getElementById("coachDiv").style.display ='block';
-			document.getElementById("d").style.display ='none';
-			document.getElementById("c").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			clearAll(); 
-		}  else if(r.value=='5'){
-			document.getElementById("gymDiv").style.display ='block';
-			document.getElementById("coachDiv").style.display ='none';
-			document.getElementById("d").style.display ='none';
-			document.getElementById("c").style.display ='none';
-			clearAll(); 
-		} else {
-			document.getElementById("c").style.display ='none';
-			document.getElementById("d").style.display ='none';
-			document.getElementById("gymDiv").style.display ='none';
-			document.getElementById("coachDiv").style.display ='none';
-		}
-   }   
+	if(r.value=='1' || r.value=='2'){
+		//alert(document.getElementById("c").border);
+		document.getElementById("c").style.display ='block';// 
+		document.getElementById("d").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+		clearAll();
+	} else if(r.value=='3'){
+		//alert(document.getElementById("c").border);
+		document.getElementById("d").style.display ='block';//
+		document.getElementById("c").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+		clearAll(); 
+	} else if(r.value=='4'){
+		document.getElementById("coachDiv").style.display ='block';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("c").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		clearAll(); 
+	}  else if(r.value=='5'){
+		document.getElementById("gymDiv").style.display ='block';
+		document.getElementById("coachDiv").style.display ='none';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("c").style.display ='none';
+		clearAll(); 
+	} else {
+		document.getElementById("c").style.display ='none';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+	}
+}
+
+function back(){
+	if(window.confirm('Are you sure return to the List screen ?')){
+		javascript:window.location.href='resources'
+     }
 }
 
 function clearAll(){
@@ -85,7 +89,7 @@ function onSubmit(cmd){
 	if(checkInput()){
 		var form = document.forms[0];
 		if(rtnValue=='1' || rtnValue=='2' || rtnValue=='3'){
-			form.action = "./maineventAdd";
+			form.action = "./comfirmeventAdd";
 		} else if(rtnValue=='4'){
 			form.action = "./coachAdd";
 		} else if(rtnValue=='5'){
@@ -248,11 +252,48 @@ function formatTime(time){
 		} 
 }
 
+function load(){
+	var impType = '${img_Type}';
+	if(impType=='1' || impType=='2'){
+		if(impType=='1'){
+			document.getElementById("1").checked =true;
+		}else{
+			document.getElementById("2").checked =true;
+		}
+		document.getElementById("c").style.display ='block';// 
+		document.getElementById("d").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+	} else if(impType=='3'){
+		document.getElementById("3").checked =true;
+		document.getElementById("d").style.display ='block';//
+		document.getElementById("c").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+	} else if(impType=='4'){
+		document.getElementById("4").checked =true;
+		document.getElementById("coachDiv").style.display ='block';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("c").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+	}  else if(impType=='5'){
+		document.getElementById("5").checked =true;
+		document.getElementById("gymDiv").style.display ='block';
+		document.getElementById("coachDiv").style.display ='none';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("c").style.display ='none';
+	} else {
+		document.getElementById("c").style.display ='none';
+		document.getElementById("d").style.display ='none';
+		document.getElementById("gymDiv").style.display ='none';
+		document.getElementById("coachDiv").style.display ='none';
+	}
+}
 
 </script>
 
 </head>
-<body>
+<body onload="load()">
 	<h2>Picture Upload</h2>
 	<form enctype="multipart/form-data" action="maineventAdd" method="post">
 
@@ -272,12 +313,12 @@ function formatTime(time){
 				<tr>
 					<td style="width: 70px">EventName</td>
 					<td style="width: 220px"><input type="text" name="eventName"
-						id="eventName" size="35" maxlength="45" value="" /></td>
+						id="eventName" size="35" maxlength="45" value="${event_name}" /></td>
 				</tr>
 				<tr>
 					<td style="width: 70px">EventStartDate</td>
 					<td style="width: 220px"><input type="text" name="eventStartDate"
-						id="eventStartDate" size="35" maxlength="10" value=""
+						id="eventStartDate" size="35" maxlength="10" value="${event_start_date}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
 					<td>*Please write by yyyymmdd</td>
@@ -285,7 +326,7 @@ function formatTime(time){
 				<tr>
 					<td style="width: 70px">EventEndDate</td>
 					<td style="width: 220px"><input type="text" name="eventEndDate"
-						id="eventEndDate" size="35" maxlength="10" value=""
+						id="eventEndDate" size="35" maxlength="10" value="${event_end_date}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
 					<td>*Please write by yyyymmdd</td>
@@ -294,7 +335,7 @@ function formatTime(time){
 				<tr>
 					<td style="width: 70px">EventTime</td>
 					<td style="width: 220px"><input type="text" name="eventTime"
-						id="eventTime" size="35" maxlength="4" value=""
+						id="eventTime" size="35" maxlength="4" value="${event_time}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatTime(this)" /></td>
 					<td>*Please write by hhmm (24-hour)</td>
@@ -302,17 +343,17 @@ function formatTime(time){
 				<tr>
 					<td style="width: 70px">EventLink</td>
 					<td style="width: 220px"><input type="text" name="eventLink"
-						id="eventLink" size="35" maxlength="200" value="" /></td>
+						id="eventLink" size="35" maxlength="200" value="${event_link}" /></td>
 				</tr>
 				<tr>
 					<td style="width: 70px">EventDesc</td>
 					<td style="width: 220px"><textArea name="eventDesc"
-							id="eventDesc" cols="30" rows="4"></textArea></td>
+							id="eventDesc" cols="30" rows="4">${event_desc}</textArea></td>
 				</tr>
 				<tr>
 					<td style="width: 70px">EventPlace</td>
 					<td style="width: 220px"><input type="text" name="eventPlace"
-						id="eventPlace" size="35" maxlength="45" value="" /></td>
+						id="eventPlace" size="35" maxlength="45" value="${event_place}" /></td>
 				</tr>
 				<tr>
 					<td>iPhone4IMG</td>
@@ -331,8 +372,8 @@ function formatTime(time){
 				</tr>
 				<tr>
 					<td>iPhone6PIMG</td>
-					<td colspan="2"><input type="file" id="iPhone6PIMG" name="iPhone6PIMG"
-						size="35" /></td>
+					<td colspan="2"><input type="file" id="iPhone6PIMG" name="iPhone6PIMG" size="35" />
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -341,7 +382,7 @@ function formatTime(time){
 				<tr>
 					<td style="width: 70px">StartDate</td>
 					<td style="width: 220px"><input type="text" name="startDate"
-						id="startDate" size="35" maxlength="10" value=""
+						id="startDate" size="35" maxlength="10" value="${startDate}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
 					<td>*Please write by yyyymmdd</td>
@@ -349,7 +390,7 @@ function formatTime(time){
 				<tr>
 					<td>EndDate</td>
 					<td><input type="text" name="endDate" id="endDate" size="35"
-						maxlength="10" value="" onfocus="this.style.imeMode='disabled'"
+						maxlength="10" value="${endDate}" onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
 					<td>*Please write by yyyymmdd</td>
 				</tr>
@@ -393,8 +434,9 @@ function formatTime(time){
 				</tr>
 			</table>
 		</div>
-		<br> <input type="submit" value="Upload"
-			onclick="return onSubmit('Upload');" class="input">
-			</input> <input type="button" value="Reset" onclick="clearAll();">
+		<br> <input type="submit" value="Comfirm"
+			onclick="return onSubmit('Comfirm');" class="input">
+			<input type="button" value="Back" onclick="back();">
+			 <input type="button" value="Reset" onclick="clearAll();">
 
 	</form>

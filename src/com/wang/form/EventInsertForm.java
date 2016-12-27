@@ -28,8 +28,78 @@ public class EventInsertForm {
 	private String createID;
 	private String actionCmd;
 
+	private String event_name;
+	private String event_start_date;
+	private String event_end_date;
+	private String event_link;
+	private String event_time;
+	private String event_desc;
+	private String event_place;
+	private String create_id;
+	private String id;
+	private String del_fg;
+
 	
-	
+	public String getDel_fg() {
+		return del_fg;
+	}
+	public void setDel_fg(String del_fg) {
+		this.del_fg = del_fg;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getEvent_name() {
+		return event_name;
+	}
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
+	}
+	public String getEvent_start_date() {
+		return event_start_date;
+	}
+	public void setEvent_start_date(String event_start_date) {
+		this.event_start_date = event_start_date;
+	}
+	public String getEvent_end_date() {
+		return event_end_date;
+	}
+	public void setEvent_end_date(String event_end_date) {
+		this.event_end_date = event_end_date;
+	}
+	public String getEvent_link() {
+		return event_link;
+	}
+	public void setEvent_link(String event_link) {
+		this.event_link = event_link;
+	}
+	public String getEvent_time() {
+		return event_time;
+	}
+	public void setEvent_time(String event_time) {
+		this.event_time = event_time;
+	}
+	public String getEvent_desc() {
+		return event_desc;
+	}
+	public void setEvent_desc(String event_desc) {
+		this.event_desc = event_desc;
+	}
+	public String getEvent_place() {
+		return event_place;
+	}
+	public void setEvent_place(String event_place) {
+		this.event_place = event_place;
+	}
+	public String getCreate_id() {
+		return create_id;
+	}
+	public void setCreate_id(String create_id) {
+		this.create_id = create_id;
+	}
 	public int getImgtype() {
 		return imgtype;
 	}

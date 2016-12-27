@@ -13,7 +13,7 @@
 
 <body>
 <h2>Upload Failure</h2>
-    <br><input type="button"  class="blue_btn" value="Back" onclick="javascript:window.location.href='./eventAdd'"/>
+    <br><input type="button"  class="blue_btn" value="Back" onclick="javascript:window.location.href='./resources'"/>
 </body>
 
 </html>

@@ -22,5 +22,7 @@ public class Constant {
 	public static final String FRIENDDEFNAME = "fri_def";
 	public static final String PKDEFNAME = "pk_def";
 	public static final String METALDEFNAME = "metal_def";
-	
+	public static final String ONE = "1";
+	public static final String TWO = "2";
+	public static final String THREE = "3";
 }

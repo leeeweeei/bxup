@@ -2,6 +2,8 @@ package com.wang.access;
 
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 //import org.apache.log4j.Logger;
@@ -59,10 +61,11 @@ public class LoginDao {
 			eventAdd.setEventTime(eventInsertForm.getEventTime());
 			eventAdd.setCreateDate(eventInsertForm.getCreateDate());
 			eventAdd.setCreateID(eventInsertForm.getCreateID());
+			eventAdd.setDel_fg(eventInsertForm.getDel_fg());
 			try {
 				sqlMap.insert("insertEventInsertForm1", eventAdd);
 			} catch (SQLException e) {
-				// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+				// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
 				e.printStackTrace();
 				log.error(e.getMessage());
 				sucflg=Constant.FORWARD_FAILURE;
@@ -84,7 +87,7 @@ public class LoginDao {
 				sqlMap.insert("insertEventInsertForm2", eventAdd);
 
 			} catch (SQLException e) {
-				// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+				// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
 				e.printStackTrace();
 				log.error(e.getMessage());
 				sucflg=Constant.FORWARD_FAILURE;
@@ -105,7 +108,7 @@ public class LoginDao {
 		try {
 			sqlMap.insert("insertCoachInsertForm1", coach);
 		} catch (SQLException e) {
-			// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+			// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
 			e.printStackTrace();
 			log.error(e.getMessage());
 			sucflg=Constant.FORWARD_FAILURE;
@@ -125,7 +128,7 @@ public class LoginDao {
 		try {
 			sqlMap.insert("insertGymInsertForm1", gym);
 		} catch (SQLException e) {
-			// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+			// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
 			e.printStackTrace();
 			log.error(e.getMessage());
 			sucflg=Constant.FORWARD_FAILURE;
@@ -134,7 +137,87 @@ public class LoginDao {
 		sucflg=Constant.FORWARD_SUCCESS;
 			 
 		log.info("SqlAddAddT_gym End.");
-		return sucflg;
-		
+		return sucflg;	
 	}
+		
+	public static List<EventInsertForm> SelectAllEvent() throws SQLException {
+		log.info("SqlSelectAllEvent Start.");
+		List<EventInsertForm> eventInsertForm = null; 
+		String sucflg = null;
+		try { 
+			eventInsertForm = sqlMap.queryForList("selectAllEvent"); 
+		} catch (SQLException e) { 
+			e.printStackTrace(); 
+			log.error(e.getMessage());
+			sucflg=Constant.FORWARD_FAILURE;
+			throw e;
+		} 
+		sucflg=Constant.FORWARD_SUCCESS;
+		
+		log.info("SqlselectAllEvent End.");
+		return eventInsertForm; 
+		} 
+
+	public static EventInsertForm SelectEventById(String id) throws SQLException {
+		log.info("SqlSelectEventById Start.");
+		EventInsertForm eventInsertForm = null; 
+		String sucflg = null;
+		try { 
+			eventInsertForm = (EventInsertForm) sqlMap.queryForObject("selectEventById",id); 
+		} catch (SQLException e) {
+			e.printStackTrace(); 
+			log.error(e.getMessage());
+			sucflg=Constant.FORWARD_FAILURE;
+			throw e;	
+		} 
+		sucflg=Constant.FORWARD_SUCCESS;	
+		log.info("SqlselectEventById End.");
+		return eventInsertForm; 
+		}
+	
+	 public boolean DeleteEventById(String id) throws SQLException{
+		 log.info("SqlDeleteEventById Start.");
+		 boolean flag = false;
+		 Object object = false; 
+		 String sucflg = null;
+		 EventInsertForm eventInsertForm = new EventInsertForm(); 
+		 eventInsertForm.setId(id);
+		 try { 
+			 object = sqlMap.update("deleteEventById",eventInsertForm);
+		 } catch (SQLException e) { 
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;		
+		 } 
+		 if (object != null) {
+			 sucflg=Constant.FORWARD_SUCCESS;	
+			 log.info("sqldeleteEventById End.");
+			 flag = true; 
+			 } 
+			 return flag; 		 
+
+	  }
+	 public boolean UpdateEventById(EventInsertForm eventInsertForm) throws SQLException{
+		 log.info("SqlUpdateEventById Start.");
+		 boolean flag = false; 
+		 Object object = false;
+		 String sucflg = null;
+		 try { 
+			 object = sqlMap.update("updateEventById",eventInsertForm);
+		 } catch (SQLException e) {
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;		
+		 } 
+		 if (object != null) {
+			 sucflg=Constant.FORWARD_SUCCESS;	
+			 log.info("sqlUpdateEventById End.");
+			 flag = true; 		 
+			 } 
+			 return flag; 		 
+
+	 }
+	 
+
+	
 }

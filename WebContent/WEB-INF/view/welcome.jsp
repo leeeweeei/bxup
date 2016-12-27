@@ -17,7 +17,7 @@
 		
 		form.actionCmd.value = "Init";
 		form.target = "_top";
-		form.action = "./eventAdd";
+		form.action = "./welcome";
 		form.submit();
 		form.actionCmd.value = "";
     }
@@ -28,7 +28,7 @@
 <body>
 	<form>
 		<input type="hidden" id="actionCmd" name="actionCmd"></input> <a
-			href="#" onclick="onSubmit();">Link to EventAddAction</a>
+			href="#" onclick="onSubmit();">Link to ShowAllEvent</a>
 
 	</form>
 </body>
