@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -26,9 +28,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.mvc.service.ResourceService;
 import com.wang.form.EventInsertForm;
+import com.wang.utility.Constant;
 
 @Controller
 @RequestMapping(value = "/resources")
@@ -100,6 +106,10 @@ public class ResourceController {
 				model.addAttribute("event_desc", edit_event.getEvent_desc());
 				model.addAttribute("event_place", edit_event.getEvent_place());
 				model.addAttribute("id", edit_event.getId());
+				model.addAttribute("iphone4_img", edit_event.getIphone4_img());
+				model.addAttribute("iphone5_img", edit_event.getIphone5_img());
+				model.addAttribute("iphone6_img", edit_event.getIphone6_img());
+				model.addAttribute("iphone6p_img", edit_event.getIphone6p_img());
 				
 				return "editevent";
 			 }
@@ -119,10 +129,73 @@ public class ResourceController {
 	public String updateevent(@PathVariable String id,HttpServletRequest request,
 			HttpServletResponse response, EventInsertForm eventInsertForm) throws SQLException {
 		 log.info("updateevent called");
-		 resourceService.updateEventById(eventInsertForm);
-	 
-		 return "redirect:/resources";
-	}
-	
+		 
+		 
+		 
+			String iphoneimgtime = new SimpleDateFormat(
+					"yyyyMMddHHmmssSSS").format(new Date());
+			
+			HashMap<String, String> filename = new HashMap<String, String>();
+			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+					request.getSession().getServletContext());
+			
+			Properties properties = new Properties();
+			try {
+				properties.load(this.getClass().getClassLoader()
+						.getResourceAsStream("Webinfo.properties"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String picturepositiontmp = properties.getProperty("picturepositiontmp");
+			if (multipartResolver.isMultipart(request)) {
+				MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+				Iterator<?> iter = multiRequest.getFileNames();
+
+				while (iter.hasNext()) {
+					StringBuilder filenamesave = new StringBuilder();
+					MultipartFile file = multiRequest.getFile(iter.next()
+							.toString());
+					String picturename = file.getOriginalFilename();
+					int position = picturename.indexOf(Constant.POINT);	
+					if (file != null && file.getOriginalFilename() != Constant.BLANK) {
+						filenamesave.append(file.getName());
+						filenamesave.append(Constant.UNDERLINE);
+						filenamesave.append(picturename.substring(0,
+								position));		
+						filenamesave.append(iphoneimgtime);
+						filenamesave.append(picturename.substring(position));
+						//
+						filename.put(file.getName(), filenamesave.toString());
+						String path = picturepositiontmp + filenamesave.toString();
+						try {
+							file.transferTo(new File(path));
+						} catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}							
+					}
+					eventInsertForm.setiPhone4IMGName(filename.get(Constant.IPHONE4IMGNAME));
+					eventInsertForm.setiPhone5IMGName(filename.get(Constant.IPHONE5IMGNAME));
+					eventInsertForm.setiPhone6IMGName(filename.get(Constant.IPHONE6IMGNAME));
+					eventInsertForm.setiPhone6PIMGName(filename.get(Constant.IPHONE6PIMGNAME));
+			    }					
+	       }
+		    if(eventInsertForm.getiPhone4IMGName() != null){
+		    	resourceService.updateImg4(eventInsertForm);
+		    } else if(eventInsertForm.getiPhone5IMGName() != null){
+		    	resourceService.updateImg5(eventInsertForm);
+		    } else if(eventInsertForm.getiPhone6IMGName() != null){
+		    	resourceService.updateImg6(eventInsertForm);
+		    } else if(eventInsertForm.getiPhone6PIMGName() != null){
+		    	resourceService.updateImg6p(eventInsertForm);
+		    } 
+		     	resourceService.updateEventById(eventInsertForm);
+	           
+			    return "redirect:/resources";
+	}	
 	
 }

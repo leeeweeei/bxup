@@ -52,5 +52,41 @@ public class ResourceServiceImp implements ResourceService {
 			return null;
 	}
 	
+	@Override
+	public EventInsertForm updateImg4(EventInsertForm eventInsertForm) throws SQLException{
+		Logger log = Logger.getLogger(ResourceController.class.getName());		
+		dao = new LoginDao();
+		 boolean updateimg4 = dao.UpdateImg4(eventInsertForm);
+		 log.info("UpdateEventById");
+			return null;
+	}
+	
+	@Override
+	public EventInsertForm updateImg5(EventInsertForm eventInsertForm) throws SQLException{
+		Logger log = Logger.getLogger(ResourceController.class.getName());		
+		dao = new LoginDao();
+		 boolean updateimg5 = dao.UpdateImg5(eventInsertForm);
+		 log.info("UpdateEventById");
+			return null;
+	}
+	
+	@Override
+	public EventInsertForm updateImg6(EventInsertForm eventInsertForm) throws SQLException{
+		Logger log = Logger.getLogger(ResourceController.class.getName());		
+		dao = new LoginDao();
+		 boolean updateimg6 = dao.UpdateImg6(eventInsertForm);
+		 log.info("UpdateEventById");
+			return null;
+	}
+	
+	@Override
+	public EventInsertForm updateImg6p(EventInsertForm eventInsertForm) throws SQLException{
+		Logger log = Logger.getLogger(ResourceController.class.getName());		
+		dao = new LoginDao();
+		 boolean updateimg6p = dao.UpdateImg6p(eventInsertForm);
+		 log.info("UpdateEventById");
+			return null;
+	}
+	
 	
 }

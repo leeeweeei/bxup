@@ -39,6 +39,26 @@
 			event_time=#event_time#,event_link=#event_link#,event_desc=#event_desc#,event_place=#event_place#
 			WHERE id=#id# 
 	</update>
+	<update id="updateimg4" parameterClass="EventInsertForm"> 
+			update t_event 
+			SET iphone4_img=#iPhone4IMGName#
+			WHERE id=#id# 
+	</update>
+	<update id="updateimg5" parameterClass="EventInsertForm"> 
+			update t_event 
+			SET iphone5_img=#iPhone5IMGName#
+			WHERE id=#id# 
+	</update>
+	<update id="updateimg6" parameterClass="EventInsertForm"> 
+			update t_event 
+			SET iphone6_img=#iPhone6IMGName#
+			WHERE id=#id# 
+	</update>
+	<update id="updateimg6p" parameterClass="EventInsertForm"> 
+			update t_event 
+			SET iphone6p_img=#iPhone6PIMGName#
+			WHERE id=#id# 
+	</update>
 	
 	<!-- delete -->
 

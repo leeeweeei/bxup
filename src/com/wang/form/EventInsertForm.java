@@ -18,6 +18,11 @@ public class EventInsertForm {
 	private String androidIMGName1;
 	private String androidIMGName2;
 	private String androidIMGName3;
+
+	private String iphone4_img;
+	private String iphone5_img;
+	private String iphone6_img;
+	private String iphone6p_img;
 	private String eventDef;
 	private String friendDef;
 	private String pKDef;
@@ -27,7 +32,6 @@ public class EventInsertForm {
 	private String createDate;
 	private String createID;
 	private String actionCmd;
-
 	private String event_name;
 	private String event_start_date;
 	private String event_end_date;
@@ -36,9 +40,42 @@ public class EventInsertForm {
 	private String event_desc;
 	private String event_place;
 	private String create_id;
+	private String picturechangedname;
 	private String id;
 	private String del_fg;
-
+    
+	
+	public String getPicturechangedname() {
+		return picturechangedname;
+	}
+	public void setPicturechangedname(String picturechangedname) {
+		this.picturechangedname = picturechangedname;
+	}
+	
+	public String getIphone4_img() {
+		return iphone4_img;
+	}
+	public void setIphone4_img(String iphone4_img) {
+		this.iphone4_img = iphone4_img;
+	}
+	public String getIphone5_img() {
+		return iphone5_img;
+	}
+	public void setIphone5_img(String iphone5_img) {
+		this.iphone5_img = iphone5_img;
+	}
+	public String getIphone6_img() {
+		return iphone6_img;
+	}
+	public void setIphone6_img(String iphone6_img) {
+		this.iphone6_img = iphone6_img;
+	}
+	public String getIphone6p_img() {
+		return iphone6p_img;
+	}
+	public void setIphone6p_img(String iphone6p_img) {
+		this.iphone6p_img = iphone6p_img;
+	}
 	
 	public String getDel_fg() {
 		return del_fg;

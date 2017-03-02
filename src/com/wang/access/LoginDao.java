@@ -215,8 +215,87 @@ public class LoginDao {
 			 flag = true; 		 
 			 } 
 			 return flag; 		 
-
 	 }
+	 
+	 public boolean UpdateImg4(EventInsertForm eventInsertForm) throws SQLException{
+		 log.info("SqlUpdateEventById Start.");
+		 boolean flag = false; 
+		 Object object = false;
+		 String sucflg = null;
+		 try { 
+			 object = sqlMap.update("updateimg4",eventInsertForm);
+		 } catch (SQLException e) {
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;		
+		 } 
+		 if (object != null) {
+			 sucflg=Constant.FORWARD_SUCCESS;	
+			 log.info("sqlUpdateEventById End.");
+			 flag = true; 		 
+			 } 
+			 return flag; 		 
+	 }	
+	 
+	 public boolean UpdateImg5(EventInsertForm eventInsertForm) throws SQLException{
+		 log.info("SqlUpdateEventById Start.");
+		 boolean flag = false; 
+		 Object object = false;
+		 String sucflg = null;
+		 try { 
+			 object = sqlMap.update("updateimg5",eventInsertForm);
+		 } catch (SQLException e) {
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;		
+		 } 
+		 if (object != null) {
+			 sucflg=Constant.FORWARD_SUCCESS;	
+			 log.info("sqlUpdateEventById End.");
+			 flag = true; 		 
+			 } 
+			 return flag; 		 
+	 }	
+	 
+	 public boolean UpdateImg6(EventInsertForm eventInsertForm) throws SQLException{
+		 log.info("SqlUpdateEventById Start.");
+		 boolean flag = false; 
+		 Object object = false;
+		 String sucflg = null;
+		 try { 
+			 object = sqlMap.update("updateimg6",eventInsertForm);
+		 } catch (SQLException e) {
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;		
+		 } 
+		 if (object != null) {
+			 sucflg=Constant.FORWARD_SUCCESS;	
+			 log.info("sqlUpdateEventById End.");
+			 flag = true; 		 
+			 } 
+			 return flag; 		 
+	 }	
+	 
+	 public boolean UpdateImg6p(EventInsertForm eventInsertForm) throws SQLException{
+		 log.info("SqlUpdateEventById Start.");
+		 boolean flag = false; 
+		 Object object = false;
+		 String sucflg = null;
+		 try { 
+			 object = sqlMap.update("updateimg6p",eventInsertForm);
+		 } catch (SQLException e) {
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;		
+		 } 
+		 if (object != null) {
+			 sucflg=Constant.FORWARD_SUCCESS;	
+			 log.info("sqlUpdateEventById End.");
+			 flag = true; 		 
+			 } 
+			 return flag; 		 
+	 }	
 	 
 
 	

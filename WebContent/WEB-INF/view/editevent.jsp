@@ -78,6 +78,33 @@ function onSubmit(cmd){
 					<td style="width: 220px"><input type="text" name="event_place"
 						id="eventPlace" size="35" maxlength="45" value="${event_place}" /></td>
 				</tr>
+								<tr>
+					<td>iPhone4IMG:${iphone4_img}</td><td><input type="hidden" name="iphone4_img"
+						id="iphone4_img" value="${iphone4_img}" />
+				</tr>
+				<tr>		
+					<td><input type="file" id="iPhone4IMG" name="iPhone4IMG" size="30" />				
+				<tr>
+					<td>iPhone5IMG:${iphone5_img}</td><td><input type="hidden" name="iphone5_img"
+						id="iphone5_img" value="${iphone5_img}" />		
+				</tr>
+				<tr>
+					<td colspan="2"><input type="file" id="iPhone5IMG" name="iPhone5IMG" size="30" />
+				</tr>
+				<tr>
+					<td>iPhone6IMG:${iphone6_img}</td><td><input type="hidden" name="iphone6_img"
+						id="iphone6_img" value="${iphone6_img}" />		
+				</tr>
+				<tr>
+					<td colspan="2"><input type="file" id="iPhone6IMG" name="iPhone6IMG" size="30" />
+				</tr> 
+								<tr>
+					<td>iPhone6PIMG:${iphone6p_img}</td><td><input type="hidden" name="iphone6p_img"
+						id="iphone6p_img" value="${iphone6p_img}" />		
+				</tr>
+				<tr>
+					<td colspan="2"><input type="file" id="iPhone6PIMG" name="iPhone6PIMG" size="30" />
+				</tr> 
 		</table>		
            
 </form>    
