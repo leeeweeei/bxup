@@ -33,6 +33,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.mvc.service.CoachInsertServiceImpl;
 import com.mvc.service.EventInsertService;
 import com.mvc.service.GymInsertServiceImpl;
+import com.wang.access.EmailService;
 import com.wang.form.CoachForm;
 import com.wang.form.EventInsertForm;
 import com.wang.form.GymForm;
@@ -153,7 +154,7 @@ public class RestConstroller {
 	@RequestMapping(value = "/maineventAdd", method = RequestMethod.POST)
 	public String springUpload(HttpServletRequest request,
 			HttpServletResponse response, EventInsertForm eventInsertForm
-			) throws IllegalStateException, IOException {
+			) throws Exception {
 		log.info("maineventAdd called");
 		String mainflg = new String();
 		
@@ -189,63 +190,6 @@ public class RestConstroller {
 			decfileList.add(eventInsertForm.getMetalDef());
 		}
 		
-		
-		/*String iphoneimgtime = new SimpleDateFormat(
-		"yyyyMMddHHmmssSSS").format(new Date());
-		
-		
-		HashMap<String, String> filename = new HashMap<String, String>();
-		List<String> decfileList  = new ArrayList<String>();
-		
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-				request.getSession().getServletContext());
-		
-		Properties properties = new Properties();
-		properties.load(this.getClass().getClassLoader()
-				.getResourceAsStream("Webinfo.properties"));
-		String pictureposition = properties.getProperty("pictureposition");
-		
-		if (multipartResolver.isMultipart(request)) {
-			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
-			Iterator<?> iter = multiRequest.getFileNames();
-
-			while (iter.hasNext()) {
-				StringBuilder filenamesave = new StringBuilder();
-				MultipartFile file = multiRequest.getFile(iter.next()
-						.toString());
-				String picturename = file.getOriginalFilename();
-				int position = picturename.indexOf(Constant.POINT);	
-				if (file != null && file.getOriginalFilename() != Constant.BLANK) {
-					filenamesave.append(file.getName());
-					filenamesave.append(Constant.UNDERLINE);
-					filenamesave.append(picturename.substring(0,
-							position));		
-					filenamesave.append(iphoneimgtime);
-					filenamesave.append(picturename.substring(position));
-					//
-					filename.put(file.getName(), filenamesave.toString());
-					String path = pictureposition + filenamesave.toString();
-					file.transferTo(new File(path));
-					decfileList.add(filenamesave.toString());
-					
-			
-				}
-			}
-			String sucflg = eventInsertService.add(eventInsertForm,filename);
-			log.info("InsertForm called");
-			if(sucflg.equals(Constant.FORWARD_FAILURE)){
-				for(int i=0 ; i < decfileList.size(); i++){
-					File file =new File(pictureposition+decfileList.get(i));		
-					file.delete();
-				}
-				mainflg = Constant.FORWARD_FAILURE;
-			}else{
-				log.info("InsertForm ended");
-				 mainflg = Constant.FORWARD_SUCCESS;
-				}
-			}else{
-				 mainflg = Constant.FORWARD_FAILURE;
-			}*/
 		if(Constant.ONE.equals(eventInsertForm.getImg_Type()) || Constant.TWO.equals(eventInsertForm.getImg_Type())){
 			if(sucflg.equals(Constant.FORWARD_FAILURE)){
 				for(int i=0 ; i < decfileList.size(); i++){
@@ -260,6 +204,8 @@ public class RestConstroller {
 					file.delete();
 				}
 				log.info("InsertForm1 ended");
+				//20170301 mail 送信功能追加
+				//EmailService.sendmail();
 				mainflg = Constant.FORWARD_SUCCESS; 
 				}
 		} else if(Constant.THREE.equals(eventInsertForm.getImg_Type())){
@@ -276,6 +222,8 @@ public class RestConstroller {
 					file.delete();
 				}			
 				log.info("InsertForm2 ended");
+				//20170301 mail 送信功能追加
+				//EmailService.sendmail();
 				mainflg = Constant.FORWARD_SUCCESS; 
 				}
 			
