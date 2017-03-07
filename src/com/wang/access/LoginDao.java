@@ -12,8 +12,13 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.mvc.constroller.RestConstroller;
 import com.wang.form.CoachForm;
+import com.wang.form.CoachInfoForm;
+import com.wang.form.CoachPhotoForm;
 import com.wang.form.EventInsertForm;
+import com.wang.form.FeedBackForm;
 import com.wang.form.GymForm;
+import com.wang.form.GymInfoForm;
+import com.wang.form.GymPhotoForm;
 import com.wang.utility.Constant;
 import com.wang.utility.Imgtype;
 
@@ -296,7 +301,96 @@ public class LoginDao {
 			 } 
 			 return flag; 		 
 	 }	
+	 //20170303 Baojun ADD
+	 public static String AddT_coach(CoachInfoForm coachInfoForm) {
+			log.info("SqlAddT_coach Start.");
+			String sucflg = null;
+			
+				try {
+					sqlMap.insert("insertCoachInfoForm", coachInfoForm);
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+					log.error(e.getMessage());
+					sucflg=Constant.FORWARD_FAILURE;
+					return sucflg;
+				}
+					 sucflg=Constant.FORWARD_SUCCESS;
+					 return sucflg;	
+		}
 	 
+	 //20170304 Baojun Add
+	 public static String AddT_coach_photo_rel(CoachPhotoForm coachPhotoForm) {
+			log.info("SqlAddT_coach_photo_rel Start.");
+			String sucflg = null;
+			
+				try {
+					sqlMap.insert("insertCoachPhotoForm", coachPhotoForm);
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+					log.error(e.getMessage());
+					sucflg=Constant.FORWARD_FAILURE;
+					return sucflg;
+				}
+					 sucflg=Constant.FORWARD_SUCCESS;
+					 return sucflg;	
+	  }
+	 
+	 //20170304 Baojun ADD
+	 public static String AddT_gym(GymInfoForm gymInfoForm) {
+			log.info("SqlAddT_gym Start.");
+			String sucflg = null;
+			
+				try {
+					sqlMap.insert("insertGymInfoForm", gymInfoForm);
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+					log.error(e.getMessage());
+					sucflg=Constant.FORWARD_FAILURE;
+					return sucflg;
+				}
+					 sucflg=Constant.FORWARD_SUCCESS;
+					 return sucflg;	
+		}
+	 
+	 //20170304 Baojun Add
+	 public static String AddT_gym_photo_rel(GymPhotoForm gymPhotoForm) {
+			log.info("SqlAddT_coach_photo_rel Start.");
+			String sucflg = null;
+			
+				try {
+					sqlMap.insert("insertGymPhotoForm", gymPhotoForm);
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+					log.error(e.getMessage());
+					sucflg=Constant.FORWARD_FAILURE;
+					return sucflg;
+				}
+					 sucflg=Constant.FORWARD_SUCCESS;
+					 return sucflg;	
+	  }
+	 
+	    //20170304 Baojun Add
+		public static List<FeedBackForm> SelectAllFeedBack() throws SQLException {
+			log.info("SqlSelectAllEvent Start.");
+			List<FeedBackForm> feedBackForm = null; 
+			String sucflg = null;
+			try { 
+				feedBackForm = sqlMap.queryForList("selectAllFeedBack"); 
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;
+			} 
+			sucflg=Constant.FORWARD_SUCCESS;
+			
+			log.info("SqlselectAllEvent End.");
+			return feedBackForm; 
+			} 
 
 	
 }

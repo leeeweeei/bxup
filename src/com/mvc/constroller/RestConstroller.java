@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,13 +31,20 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.mvc.service.CoachInfoService;
 import com.mvc.service.CoachInsertServiceImpl;
 import com.mvc.service.EventInsertService;
+import com.mvc.service.FeedBackService;
+import com.mvc.service.GymInfoService;
 import com.mvc.service.GymInsertServiceImpl;
-import com.wang.access.EmailService;
 import com.wang.form.CoachForm;
+import com.wang.form.CoachInfoForm;
+import com.wang.form.CoachPhotoForm;
 import com.wang.form.EventInsertForm;
+import com.wang.form.FeedBackForm;
 import com.wang.form.GymForm;
+import com.wang.form.GymInfoForm;
+import com.wang.form.GymPhotoForm;
 import com.wang.utility.CSVUtils;
 import com.wang.utility.Constant;
 import com.wang.utility.DataFormatCheck;
@@ -54,12 +62,52 @@ public class RestConstroller {
 
 	@Autowired(required = false)
 	private GymInsertServiceImpl gymInsertService;
+	//20170303 Baojun Add
+	@Autowired(required = false)
+	private CoachInfoService coachInfoService;
+	//20170304 Baojun Add
+	@Autowired(required = false)
+	private GymInfoService gymInfoService;
+	//20170304 Baojun Add
+	@Autowired(required = false)
+	private FeedBackService feedBackService;
 	
 	@RequestMapping(value = "/eventAdd", method = RequestMethod.GET)
 	public String eventAdd() {
 		log.info("WelcomePage called");
 
 		return "eventAdd";
+	}
+	
+	
+	//20170303 Baojun ADD	
+	@RequestMapping(value = "/coachInfoAdd", method = RequestMethod.GET)
+	public String coachAdd() {
+		log.info("coachAdd called");
+			
+		return "coachInfoAdd";
+	}
+		
+	//20170304 Baojun ADD	
+	@RequestMapping(value = "/gymInfoAdd", method = RequestMethod.GET)
+	public String gymAdd() {
+		log.info("gymAdd called");
+			
+		return "gymInfoAdd";
+	}
+	
+	
+	//20170304 Baojun ADD	
+	@RequestMapping(value = "/feedback", method = RequestMethod.GET)
+	public String feedback(Map<String, Object> mode) throws SQLException {
+		log.info("feedback called");
+		List<FeedBackForm> feedback = feedBackService.findAll();
+		
+		
+		
+		mode.put("feedback", feedback);
+			
+		return "feedback";
 	}
 	
 	@RequestMapping(value = "/eventAdd", method = RequestMethod.POST)
@@ -204,8 +252,6 @@ public class RestConstroller {
 					file.delete();
 				}
 				log.info("InsertForm1 ended");
-				//20170301 mail 送信功能追加
-				//EmailService.sendmail();
 				mainflg = Constant.FORWARD_SUCCESS; 
 				}
 		} else if(Constant.THREE.equals(eventInsertForm.getImg_Type())){
@@ -222,12 +268,9 @@ public class RestConstroller {
 					file.delete();
 				}			
 				log.info("InsertForm2 ended");
-				//20170301 mail 送信功能追加
-				//EmailService.sendmail();
 				mainflg = Constant.FORWARD_SUCCESS; 
 				}
-			
-			
+		
 		}
 		return mainflg;
 		}
@@ -342,5 +385,104 @@ public class RestConstroller {
 		log.info("gymAdd ended");
 		return Constant.VIRGULE + "gymUploadEnd";
 	}
+	
+	//20170303 Baojun ADD
+	@RequestMapping(value = "/maincoachInfoAdd", method = RequestMethod.POST)
+	public String maincoachInfoAdd(Model model,HttpServletRequest request,
+			HttpServletResponse response, CoachInfoForm coachInfoForm
+			) throws IllegalStateException, IOException {
+		
+		CoachPhotoForm cachPhotoForm = new CoachPhotoForm();
+		log.info("maincoachInfoAdd called");
+		
+		
+		String create_time = new SimpleDateFormat(
+				"yyyyMMddHHmm").format(new Date());
+		
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		
+		
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader()
+				.getResourceAsStream("Webinfo.properties"));
+		String picturepositiontmp = properties.getProperty("coachpictureposition");
+		if (multipartResolver.isMultipart(request)) {
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+			Iterator<?> iter = multiRequest.getFileNames();
 
+			while (iter.hasNext()) {
+	
+				MultipartFile file = multiRequest.getFile(iter.next()
+						.toString());
+				String picturename = file.getOriginalFilename();
+				coachInfoForm.setAvatar(picturename);
+				cachPhotoForm.setPhoto(picturename);
+				if (file != null && file.getOriginalFilename() != Constant.BLANK) {	
+					String path = picturepositiontmp + picturename;
+					file.transferTo(new File(path));							
+				}
+			}		
+		}
+		String sucflg = coachInfoService.insertCoachInfo(coachInfoForm);
+		String ucfflg = coachInfoService.insertCoachPhoto(cachPhotoForm);
+        if(sucflg.equals(Constant.FORWARD_SUCCESS) && ucfflg.equals(Constant.FORWARD_SUCCESS)){
+        	log.info("insertCoachInfo and insertCoachPhoto success!");
+        	return	Constant.FORWARD_SUCCESS;
+        }else{
+	    	return	Constant.FORWARD_FAILURE;	
+        }
+	    
+		
+	}
+	
+	//20170304 Baojun Add
+	@RequestMapping(value = "/maingymInfoAdd", method = RequestMethod.POST)
+	public String maincoachInfoAdd(Model model,HttpServletRequest request,
+			HttpServletResponse response, GymInfoForm gymInfoForm
+			) throws IllegalStateException, IOException {
+		
+		GymPhotoForm gymPhotoForm = new GymPhotoForm();
+		log.info("maincoachInfoAdd called");
+		
+		
+		String create_time = new SimpleDateFormat(
+				"yyyyMMddHHmm").format(new Date());
+		
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		
+		
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader()
+				.getResourceAsStream("Webinfo.properties"));
+		String picturepositiontmp = properties.getProperty("gympictureposition");
+		if (multipartResolver.isMultipart(request)) {
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+			Iterator<?> iter = multiRequest.getFileNames();
+
+			while (iter.hasNext()) {
+	
+				MultipartFile file = multiRequest.getFile(iter.next()
+						.toString());
+				String picturename = file.getOriginalFilename();
+				gymInfoForm.setAvatar(picturename);
+				gymPhotoForm.setPhoto(picturename);
+				if (file != null && file.getOriginalFilename() != Constant.BLANK) {	
+					String path = picturepositiontmp + picturename;
+					file.transferTo(new File(path));							
+				}
+			}		
+		}
+		String sucflg = gymInfoService.insertGymInfo(gymInfoForm);
+		String ucfflg = gymInfoService.insertGymPhoto(gymPhotoForm);
+        if(sucflg.equals(Constant.FORWARD_SUCCESS) && ucfflg.equals(Constant.FORWARD_SUCCESS)){
+        	log.info("insertGymInfo and insertGymPhoto success!");
+        	return	Constant.FORWARD_SUCCESS;
+        }else{
+	    	return	Constant.FORWARD_FAILURE;	
+        }
+	}
+	
+	
 }

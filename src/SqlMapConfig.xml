@@ -26,4 +26,9 @@
 	<sqlMap resource="com/wang/form/EventInsertForm.xml" />
 	<sqlMap resource="com/wang/form/coachInsertForm.xml" />
 	<sqlMap resource="com/wang/form/gymInsertForm.xml" />
+	<sqlMap resource="com/wang/form/coachInfoForm.xml" />
+	<sqlMap resource="com/wang/form/coachPhotoForm.xml" />
+	<sqlMap resource="com/wang/form/gymInfoForm.xml" />
+	<sqlMap resource="com/wang/form/gymPhotoForm.xml" />
+	<sqlMap resource="com/wang/form/feedBackForm.xml" />
 </sqlMapConfig> 

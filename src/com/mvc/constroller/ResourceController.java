@@ -47,10 +47,9 @@ public class ResourceController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String showAllResource(Map<String, Object> mode) throws SQLException{
+	public String showAllResource(Map<String, Object> mode) throws Exception{
 		log.info("showAllResource called");
-		List<EventInsertForm> resources = resourceService.findAll();
-		
+		List<EventInsertForm> resources = resourceService.findAll();	
  		Properties properties = new Properties();
 		try {
 			properties.load(this.getClass().getClassLoader()
@@ -197,5 +196,5 @@ public class ResourceController {
 	           
 			    return "redirect:/resources";
 	}	
-	
+
 }

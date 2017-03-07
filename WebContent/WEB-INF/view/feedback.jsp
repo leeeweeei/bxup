@@ -35,17 +35,14 @@ function delConfirm(itemId){
 }
 </script>
 </head>	
-<h2>Event List</h2>	
+<h2>FeedBack List</h2>	
 <body>
 <c:if test="${not empty message}">
 	<div role="alert">
 		<p>${message}</p>
 	</div>
 </c:if>
-<br><input type="button"  class="blue_btn" value="NEWEVENT" onclick="javascript:window.location.href='./eventAdd'"/>
-	<input type="button"  class="blue_btn" value="NEWCOACH" onclick="javascript:window.location.href='./coachInfoAdd'"/>
-	<input type="button"  class="blue_btn" value="NEWGYM" onclick="javascript:window.location.href='./gymInfoAdd'"/>
-	<input type="button"  class="blue_btn" value="FeedBack" onclick="javascript:window.location.href='./feedback'"/>
+<br>
 	<table>
 		<tr>
 			<td>
@@ -53,26 +50,17 @@ function delConfirm(itemId){
 					<table border="1">
 						<tr>
 							<th>ID</th>
-							<th>EventName</th>
-							<th>EventStartDate</th>
-							<th>EventEndDate</th>
-							<th>EventTime</th>
-							<th>EventLink</th>
-							<th>EventDesc</th>
-							<th>EventPlace</th>
+							<th>User</th>
+							<th>Comment</th>
+							<th>Create_time</th>
+
 						</tr>
-						<c:forEach items="${resources}" var="item" varStatus="status">
+						<c:forEach items="${feedback}" var="item" varStatus="status">
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
-								<td><c:out value = "${item.event_name}" /></td>
-								<td><c:out value = "${item.event_start_date}" /></td>
-								<td><c:out value = "${item.event_end_date}" /></td>
-								<td><c:out value = "${item.event_time}" /></td>
-								<td><c:out value = "${item.event_link}" /></td>							
-								<td><c:out value = "${item.event_desc}" /></td>
-								<td><c:out value = "${item.event_place}" /></td>
-								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="Edit"></td>
-								<td><input type="button" onclick="delConfirm(${item.id});" value="Delete"></td>
+								<td><c:out value = "${item.user_id}" /></td>
+								<td><c:out value = "${item.comment}" /></td>
+								<td><c:out value = "${item.create_time}" /></td>
 							</tr>							
 						</c:forEach>
 					</table>	

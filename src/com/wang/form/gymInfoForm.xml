@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+ <!DOCTYPE sqlMap    
+ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"    
+ "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="sixthSpace">
+	<typeAlias alias="GymInfoForm" type="com.wang.form.GymInfoForm" />
+	<!-- select -->
+	<select id="getGymInfoForm" parameterClass="java.lang.Integer"
+		resultClass="com.wang.form.GymInfoForm">  
+         <![CDATA[ 
+             select imgtype from t_event where id = #id# 
+         ]]>
+	</select>
+	<!-- insert -->
+	<insert id="insertGymInfoForm" parameterClass="GymInfoForm">
+		insert into
+		t_gym(avatar,name,create_time,approved,delete_status,address,tel,profile,user_id)
+		values(#avatar#,#name#,#create_time#,#approved#,#delete_status#,#address#,#tel#,#profile#,#user_id#)
+	</insert>
+	<!-- delete -->
+	<delete id="deleteGymInfoForm" parameterClass="java.lang.Integer">
+		delete from t_event where create_date = #createDate#
+	</delete>
+</sqlMap> 
