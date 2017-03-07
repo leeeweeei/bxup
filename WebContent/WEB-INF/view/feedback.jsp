@@ -12,27 +12,13 @@
 <title>resources.jsp</title>
 <script type="text/javascript" src="./js/test.js"></script>
 <SCRIPT Language="JavaScript">
-function show(r){
-	if(r.value=='1' || r.value=='2'){
-		//alert(document.getElementById("c").border);
-		document.getElementById("c").style.display ='block';// 
-		document.getElementById("d").style.display ='none';
-		clearAll();
-	} else if(r.value=='3'){
-		//alert(document.getElementById("c").border);
-		document.getElementById("d").style.display ='block';//
-		document.getElementById("c").style.display ='none';
-		clearAll(); 
-	} else {
-		document.getElementById("c").style.display ='none';
-		document.getElementById("d").style.display ='none';
-	}
+
+function back(){
+	if(window.confirm('Are you sure return to the List screen ?')){
+		javascript:window.location.href='resources'
+     }
 }
-function delConfirm(itemId){	
-	if(window.confirm('Are you sure delete the event?')){
-		javascript:window.location.href='resources/event_delete/' + itemId
-    }
-}
+
 </script>
 </head>	
 <h2>FeedBack List</h2>	
@@ -68,8 +54,6 @@ function delConfirm(itemId){
 			</td>
 		</tr>
 	</table>
-			<br><input type="button" value="Back" onclick="back();">
-		
-    
+			<br><input type="button" value="Back" onclick="back();">		    
 </body>
 </html>
