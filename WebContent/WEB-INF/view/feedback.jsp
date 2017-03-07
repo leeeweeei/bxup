@@ -68,6 +68,8 @@ function delConfirm(itemId){
 			</td>
 		</tr>
 	</table>
+			<br><input type="button" value="Back" onclick="back();">
+		
     
 </body>
 </html>

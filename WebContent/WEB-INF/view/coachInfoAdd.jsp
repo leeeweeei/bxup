@@ -14,7 +14,6 @@
 <SCRIPT Language="JavaScript">
 
 function clearAll(){
-	alert("33333!");
 	document.getElementById("name").value = "";
 	document.getElementById("photo").value = "";
 	document.getElementById("age").value = "";
