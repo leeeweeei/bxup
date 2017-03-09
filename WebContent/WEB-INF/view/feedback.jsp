@@ -14,14 +14,14 @@
 <SCRIPT Language="JavaScript">
 
 function back(){
-	if(window.confirm('Are you sure return to the List screen ?')){
+	if(window.confirm('是否返回活动列表 ?')){
 		javascript:window.location.href='resources'
      }
 }
 
 </script>
 </head>	
-<h2>FeedBack List</h2>	
+<h2>反馈列表</h2>	
 <body>
 <c:if test="${not empty message}">
 	<div role="alert">
@@ -35,10 +35,10 @@ function back(){
 				<div id="global">
 					<table border="1">
 						<tr>
-							<th>ID</th>
-							<th>User</th>
-							<th>Comment</th>
-							<th>Create_time</th>
+							<th>No.</th>
+							<th>用户</th>
+							<th>反馈内容</th>
+							<th>反馈时间</th>
 
 						</tr>
 						<c:forEach items="${feedback}" var="item" varStatus="status">
@@ -54,6 +54,6 @@ function back(){
 			</td>
 		</tr>
 	</table>
-			<br><input type="button" value="Back" onclick="back();">		    
+			<br><input type="button" value="返回" onclick="back();">		    
 </body>
 </html>

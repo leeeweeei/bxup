@@ -32,32 +32,32 @@ function onSubmit(cmd){
 
 function checkInput(){	
 		if(document.getElementById("name").value == ""){
-			alert("Please fill in the name");
+			alert("请填写姓名");
 			document.getElementById("name").focus();
 			return false;
 		}
 		if(document.getElementById("photo").value == ""){
-			alert("Please fill in the photo");
+			alert("请填加一张照片");
 			document.getElementById("photo").focus();
 			return false;
 		}
 		if(document.getElementById("age").value == ""){
-			alert("Please fill in the age");
+			alert("请填写年龄");
 			document.getElementById("age").focus();
 			return false;
 		}		
 		if(document.getElementById("profile").value == ""){
-			alert("Please fill in the profile");
+			alert("请填写简历");
 			document.getElementById("profile").focus();
 			return false;
 		}        
 		if(document.getElementById("honor").value == ""){
-			alert("Please fill in the honor");
+			alert("请填写个人荣誉");
 			document.getElementById("honor").focus();
 			return false;
 		}
 		if(document.getElementById("gym_name").value == ""){
-			alert("Please fill in the eventdesc");
+			alert("请填写健身场馆名称");
 			document.getElementById("gym_name").focus();
 			return false;
 		} 
@@ -71,7 +71,7 @@ function checkInput(){
 
 
 function back(){
-	if(window.confirm('Are you sure return to the List screen ?')){
+	if(window.confirm('是否返回活动列表 ?')){
 		javascript:window.location.href='resources'
      }
 }
@@ -127,9 +127,9 @@ function back(){
 				
 			</table>
 
-		<br> <input type="submit" value="Upload"
+		<br> <input type="submit" value="上传"
 			onclick="return onSubmit('Comfirm');" class="input">
-			<input type="button" value="Back" onclick="back();">
-			 <input type="button" value="Reset" onclick="clearAll();">
+			<input type="button" value="返回" onclick="back();">
+			 <input type="button" value="重置" onclick="clearAll();">
 
 	</form>

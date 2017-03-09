@@ -5,7 +5,7 @@ public class CoachInfoForm {
 	private int id;
 	private int user_id; 
 	private int gym_id;
-	private int create_time;
+	private long create_time;
 	private int approved;
 	private int delete_status; 
 	private int gendar;
@@ -16,8 +16,27 @@ public class CoachInfoForm {
 	private String honor;  
 	private String profile;
 	private String gym_name;
-	
+	private String sex;
+	private String approvedfg;
 
+	public String getApprovedfg() {
+		return approvedfg;
+	}
+	public void setApprovedfg(String approvedfg) {
+		this.approvedfg = approvedfg;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public long getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(long create_time) {
+		this.create_time = create_time;
+	}
 	public String getGym_name() {
 		return gym_name;
 	}
@@ -41,12 +60,6 @@ public class CoachInfoForm {
 	}
 	public void setGym_id(int gym_id) {
 		this.gym_id = gym_id;
-	}
-	public int getCreate_time() {
-		return create_time;
-	}
-	public void setCreate_time(int create_time) {
-		this.create_time = create_time;
 	}
 	public int getApproved() {
 		return approved;

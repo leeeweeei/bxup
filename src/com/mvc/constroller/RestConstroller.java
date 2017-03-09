@@ -396,8 +396,9 @@ public class RestConstroller {
 		log.info("maincoachInfoAdd called");
 		
 		
-		String create_time = new SimpleDateFormat(
-				"yyyyMMddHHmm").format(new Date());
+		Date d = new Date();
+		Long create_time = d.getTime();
+		coachInfoForm.setCreate_time(create_time);
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
 				request.getSession().getServletContext());
@@ -446,8 +447,9 @@ public class RestConstroller {
 		log.info("maincoachInfoAdd called");
 		
 		
-		String create_time = new SimpleDateFormat(
-				"yyyyMMddHHmm").format(new Date());
+		Date d = new Date();
+		Long create_time = d.getTime();
+		gymInfoForm.setCreate_time(create_time);
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
 				request.getSession().getServletContext());

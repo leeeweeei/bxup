@@ -391,6 +391,44 @@ public class LoginDao {
 			log.info("SqlselectAllEvent End.");
 			return feedBackForm; 
 			} 
+		
+		//20170308 Baojun Add
+		public static List<GymInfoForm> SelectAllGym() throws SQLException {
+			log.info("SqlSelectAllEvent Start.");
+			List<GymInfoForm> gym = null; 
+			String sucflg = null;
+			try { 
+				gym = sqlMap.queryForList("selectAllGym"); 
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;
+			} 
+			sucflg=Constant.FORWARD_SUCCESS;
+			
+			log.info("SqlselectAllGym End.");
+			return gym; 
+			} 
+		
+		//20170308 Baojun Add
+		public static List<CoachInfoForm> SelectAllCoach() throws SQLException {
+			log.info("SqlSelectAllEvent Start.");
+			List<CoachInfoForm> coach = null; 
+			String sucflg = null;
+			try { 
+				coach = sqlMap.queryForList("selectAllCoach"); 
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;
+			} 
+			sucflg=Constant.FORWARD_SUCCESS;
+			
+			log.info("SqlselectAllCoach End.");
+			return coach; 
+			} 
 
 	
 }

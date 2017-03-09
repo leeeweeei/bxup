@@ -25,9 +25,13 @@ public class EmailService {
      * @param args
      * @throws Exception
      */
-    public static void sendmail() throws Exception {
+    public void sendmail() throws Exception {
+    	
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader()
+				.getResourceAsStream("mail.properties"));
+		//String picturepositiontmp = properties.getProperty("gympictureposition");
         // 属性对象
-        Properties properties = new  Properties();
         // 开启debug调试  ，打印信息
         properties.setProperty("mail.debug", "true"); 
         // 发送服务器需要身份验证  

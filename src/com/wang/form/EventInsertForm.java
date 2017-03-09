@@ -43,8 +43,15 @@ public class EventInsertForm {
 	private String picturechangedname;
 	private String id;
 	private String del_fg;
+	private String timem;
     
 	
+	public String getTimem() {
+		return timem;
+	}
+	public void setTimem(String timem) {
+		this.timem = timem;
+	}
 	public String getPicturechangedname() {
 		return picturechangedname;
 	}

@@ -7,7 +7,7 @@
 	<!-- select -->
 	<select id="selectAllEvent" resultClass="EventInsertForm">    
              select * from 
-             t_event where del_fg=0
+             t_event where del_fg=0 ORDER BY event_start_date DESC
 	</select>
 	<select id="selectEventById" resultClass="EventInsertForm">    
              select * from 

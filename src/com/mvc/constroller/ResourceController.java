@@ -51,6 +51,20 @@ public class ResourceController {
 		log.info("showAllResource called");
 		List<EventInsertForm> resources = resourceService.findAll();	
  		Properties properties = new Properties();
+		for(int i=0;i<resources.size();i++){
+
+			String event_time = resources.get(i).getEvent_time();
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(event_time.substring(0,2));
+			stringBuilder.append(":");
+			stringBuilder.append(event_time.substring(event_time.length()-2));
+			String timem = stringBuilder.toString();
+			resources.get(i).setTimem(timem); 			
+			
+		}
+ 		
+ 		
+ 		
 		try {
 			properties.load(this.getClass().getClassLoader()
 					.getResourceAsStream("Webinfo.properties"));

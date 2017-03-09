@@ -5,11 +5,9 @@
 <sqlMap namespace="fouthSpace">
 	<typeAlias alias="CoachInfoForm" type="com.wang.form.CoachInfoForm" />
 	<!-- select -->
-	<select id="getCoachInfoForm" parameterClass="java.lang.Integer"
-		resultClass="com.wang.form.CoachInfoForm">  
-         <![CDATA[ 
-             select imgtype from t_event where id = #id# 
-         ]]>
+	<select id="selectAllCoach" resultClass="CoachInfoForm">    
+             select * from 
+             t_coach where delete_status=0 ORDER BY create_time DESC
 	</select>
 	<!-- insert -->
 	<insert id="insertCoachInfoForm" parameterClass="CoachInfoForm">

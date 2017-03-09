@@ -35,17 +35,14 @@ function delConfirm(itemId){
 }
 </script>
 </head>	
-<h2>活动列表</h2>	
+<h2>教练列表</h2>	
 <body>
 <c:if test="${not empty message}">
 	<div role="alert">
 		<p>${message}</p>
 	</div>
 </c:if>
-<br><input type="button"  class="blue_btn" value="新建活动" onclick="javascript:window.location.href='./eventAdd'"/>
-	<input type="button"  class="blue_btn" value="新建教练" onclick="javascript:window.location.href='./coachInfoAdd'"/>
-	<input type="button"  class="blue_btn" value="新建体育馆" onclick="javascript:window.location.href='./gymInfoAdd'"/>
-	<input type="button"  class="blue_btn" value="客户反馈" onclick="javascript:window.location.href='./feedback'"/>
+<br>
 	<table>
 		<tr>
 			<td>
@@ -53,26 +50,27 @@ function delConfirm(itemId){
 					<table border="1">
 						<tr>
 							<th>No.</th>
-							<th>活动名称</th>
-							<th width="12%">开始日期</th>
-							<th width="12%">结束日期</th>
-							<th width="6%">开始时间</th>
-							<th>活动链接</th>
-							<th>活动简介</th>
-							<th>活动地点</th>
+							<th>名字</th>
+							<th>头像</th>
+							<th>性别</th>
+							<th>年龄</th>
+							<th>档案</th>
+							<th>荣誉</th>
+							<th>就职健身房</th>
+							<th>认证</th>
 						</tr>
-						<c:forEach items="${resources}" var="item" varStatus="status">
+						<c:forEach items="${coach}" var="item" varStatus="status">
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
-								<td><c:out value = "${item.event_name}" /></td>
-								<td><c:out value = "${item.event_start_date}" /></td>
-								<td><c:out value = "${item.event_end_date}" /></td>
-								<td><c:out value = "${item.timem}" /></td>
-								<td><c:out value = "${item.event_link}" /></td>							
-								<td><c:out value = "${item.event_desc}" /></td>
-								<td><c:out value = "${item.event_place}" /></td>
-								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
-								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td>
+								<td><c:out value = "${item.name}" /></td>
+								<td><c:out value = "${item.avatar}" /></td>
+								<td><c:out value = "${item.sex}" /></td>
+								<td><c:out value = "${item.age}" /></td>
+								<td><c:out value = "${item.profile}" /></td>							
+								<td><c:out value = "${item.honor}" /></td>
+								<td><c:out value = "${item.approvedfg}" /></td>
+<%-- 								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
+								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td> --%>
 							</tr>
 						</c:forEach>
 					</table>	

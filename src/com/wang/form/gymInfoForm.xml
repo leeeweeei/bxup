@@ -5,11 +5,9 @@
 <sqlMap namespace="sixthSpace">
 	<typeAlias alias="GymInfoForm" type="com.wang.form.GymInfoForm" />
 	<!-- select -->
-	<select id="getGymInfoForm" parameterClass="java.lang.Integer"
-		resultClass="com.wang.form.GymInfoForm">  
-         <![CDATA[ 
-             select imgtype from t_event where id = #id# 
-         ]]>
+	<select id="selectAllGym" resultClass="GymInfoForm">    
+             select * from 
+             t_gym where delete_status=0 ORDER BY create_time DESC
 	</select>
 	<!-- insert -->
 	<insert id="insertGymInfoForm" parameterClass="GymInfoForm">

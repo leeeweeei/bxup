@@ -2,7 +2,13 @@ package com.wang.form;
 
 public class GymInfoForm {
 	
-	private int create_time;
+	private long create_time;
+	public long getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(long create_time) {
+		this.create_time = create_time;
+	}
 	private int approved;
 	private int delete_status;
 	private int user_id ;
@@ -11,13 +17,14 @@ public class GymInfoForm {
 	private String profile;
 	private String address;
 	private String tel;
+	private String approvedfg;
 	
 	
-	public int getCreate_time() {
-		return create_time;
+	public String getApprovedfg() {
+		return approvedfg;
 	}
-	public void setCreate_time(int create_time) {
-		this.create_time = create_time;
+	public void setApprovedfg(String approvedfg) {
+		this.approvedfg = approvedfg;
 	}
 	public int getApproved() {
 		return approved;

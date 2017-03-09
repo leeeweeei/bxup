@@ -8,23 +8,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WelcomeController {
 			
-	static Logger log = Logger.getLogger(WelcomeController.class.getName());
+	static Logger log = Logger.getLogger(WelcomeController.class.getName());	
 	
-/*	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String welcome(Map<String, Object> model) {
-		return "";
-	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}*/
-	
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public String welcomepage() {
+	@RequestMapping(value = "/welcome1", method = RequestMethod.GET)
+	public String eventresources() {
 		log.info("WelcomePage called");			
 
 		return "redirect:/resources";
+	}
+	
+	@RequestMapping(value = "/welcome2", method = RequestMethod.GET)
+	public String coachresources() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/coach";
+	}
+	
+	@RequestMapping(value = "/welcome3", method = RequestMethod.GET)
+	public String mgyresources() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/gym";
 	}
 	
 

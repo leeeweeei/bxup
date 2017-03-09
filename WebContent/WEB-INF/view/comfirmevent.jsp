@@ -21,10 +21,9 @@ function onSubmit(cmd){
 }
 </script>
 <head>
-
 <title>comfirmevent.jsp</title>
 </head>	
-<h2>Comfirm Event </h2>	
+<h2>活动确认</h2>	
 <body>
 <form enctype="multipart/form-data" action="./maineventAdd" method="post">
 		<table>
@@ -32,74 +31,74 @@ function onSubmit(cmd){
 				<input type="hidden" name="startDate" value="${startDate}"/>
 				<input type="hidden" name="img_Type" value="${img_Type}"/>			
 				<tr>
-					<td style="width: 70px">EventName</td>
+					<td style="width: 70px">活动名称</td>
 					<td style="width: 220px"><input type="text" name="event_name"
 						id="eventName" size="35" maxlength="45" value="${event_name}" readonly/></td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventStartDate</td>
+					<td style="width: 70px">开始日期</td>
 					<td style="width: 220px"><input type="text" name="event_start_date"
 						id="eventStartDate" size="35" maxlength="10" value="${event_start_date}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" readonly/></td>				
 				</tr>
 				<tr>
-					<td style="width: 70px">EventEndDate</td>
+					<td style="width: 70px">结束日期</td>
 					<td style="width: 220px"><input type="text" name="event_end_date"
 						id="eventEndDate" size="35" maxlength="10" value="${event_end_date}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" readonly/></td>				
 				</tr>			
 				<tr>
-					<td style="width: 70px">EventTime</td>
+					<td style="width: 70px">开始时间</td>
 					<td style="width: 220px"><input type="text" name="event_time"
 						id="eventTime" size="35" maxlength="4" value="${event_time}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatTime(this)" readonly/></td>	
 				</tr>
 				<tr>
-					<td style="width: 70px">EventLink</td>
+					<td style="width: 70px">活动链接</td>
 					<td style="width: 220px"><input type="text" name="event_link"
 						id="eventLink" size="35" maxlength="200" value="${event_link}" readonly/></td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventDesc</td>
+					<td style="width: 70px">活动简介</td>
 					<td style="width: 220px"><textArea name="event_desc"
 							id="eventDesc" cols="30" rows="4" readonly="readonly">${event_desc}</textArea></td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventPlace</td>
+					<td style="width: 70px">活动地点</td>
 					<td style="width: 220px"><input type="text" name="event_place"
 						id="eventPlace" size="35" maxlength="45" value="${event_place}" readonly/></td>
 				</tr>
 				
 				<tr>
-					<td style="width: 70px">iPhone4IMGName</td>
+					<td style="width: 70px">iPhone4图片</td>
 					<td style="width: 220px"><input type="text" name="iPhone4IMGName"
 						id="eventPlace" size="35" maxlength="45" value="${iPhone4IMGName}" readonly/></td>
 				</tr> 
 				
 				<tr>
-					<td style="width: 70px">iPhone5IMGName</td>
+					<td style="width: 70px">iPhone5图片</td>
 					<td style="width: 220px"><input type="text" name="iPhone5IMGName"
 						id="eventPlace" size="35" maxlength="45" value="${iPhone5IMGName}" readonly/></td>
 				</tr> 
 				
 				<tr>
-					<td style="width: 70px">iPhone6IMGName</td>
+					<td style="width: 70px">iPhone6图片</td>
 					<td style="width: 220px"><input type="text" name="iPhone6IMGName"
 						id="eventPlace" size="35" maxlength="45" value="${iPhone6IMGName}" readonly/></td>
 				</tr> 
 				
 				<tr>
-					<td style="width: 70px">iPhone6PIMGName</td>
+					<td style="width: 100px">iPhone6P图片</td>
 					<td style="width: 220px"><input type="text" name="iPhone6PIMGName"
 						id="eventPlace" size="35" maxlength="45" value="${iPhone6PIMGName}" readonly/></td>
 				</tr>  
 				
 		</table>	
-		<br><input type="submit" value="Upload" onclick="return onSubmit('./maineventAdd');" class="input">
-		    <input type="submit"  class="blue_btn" value="Back" onclick="return onSubmit('./eventAdd');"/>	
+		<br><input type="submit" value="上传" onclick="return onSubmit('./maineventAdd');" class="input">
+		    <input type="submit"  class="blue_btn" value="返回" onclick="return onSubmit('./eventAdd');"/>	
            
 </form>    
 </body>

@@ -49,7 +49,7 @@ function show(r){
 }
 
 function back(){
-	if(window.confirm('Are you sure return to the List screen ?')){
+	if(window.confirm('是否返回活动列表 ?')){
 		javascript:window.location.href='resources'
      }
 }
@@ -85,7 +85,11 @@ function onSubmit(cmd){
 		if(rtn[i].checked){ 
 			rtnValue=rtn[i].value; 
 		} 
-	}	
+	}
+	if(rtnValue == ''){
+		alert("请选择一个项目");
+		return false;
+	}
 	if(checkInput()){
 		var form = document.forms[0];
 		if(rtnValue=='1' || rtnValue=='2' || rtnValue=='3'){
@@ -104,54 +108,54 @@ function checkInput(){
 	
 	if(document.getElementById("1").status == true || document.getElementById("2").status == true){
 		if(document.getElementById("eventName").value == ""){
-			alert("Please fill in the eventname");
+			alert("请填写活动名称");
 			document.getElementById("eventName").focus();
 			return false;
 		}
 		if(document.getElementById("eventStartDate").value == ""){
-			alert("Please fill in the eventStartDate");
+			alert("请填写开始日期");
 			document.getElementById("eventStartDate").focus();
 			return false;
 		}
 		if(document.getElementById("eventEndDate").value == ""){
-			alert("Please fill in the eventEndDate");
+			alert("请填写结束日期");
 			document.getElementById("eventEndDate").focus();
 			return false;
 		}		
 		if(document.getElementById("eventTime").value == ""){
-			alert("Please fill in the eventtime");
+			alert("请填写开始时间");
 			document.getElementById("eventTime").focus();
 			return false;
 		}        
 		if(document.getElementById("eventLink").value == ""){
-			alert("Please fill in the eventLink");
+			alert("请填加活动链接");
 			document.getElementById("eventLink").focus();
 			return false;
 		}
 		if(document.getElementById("eventDesc").value == ""){
-			alert("Please fill in the eventdesc");
+			alert("请填加活动简介");
 			document.getElementById("eventDesc").focus();
 			return false;
 		} 
 	
 		if(document.getElementById("eventPlace").value == ""){
-			alert("Please fill in the eventplace");
+			alert("请填加活动地点");
 			document.getElementById("eventPlace").focus();
 			return false;
 		}
 	} else if(document.getElementById("3").status == true) {
 		if(document.getElementById("startDate").value == ""){
-			alert("Please fill in the startdate");
+			alert("请填写开始日期");
 			document.getElementById("startDate").focus();
 			return false;
 		}      
 	
 		if(document.getElementById("endDate").value == ""){
-			alert("Please fill in the enddate");
+			alert("请填写结束日期");
 			document.getElementById("endDate").focus();
 			return false;
 		}  
-	} else if(document.getElementById("4").status == true){
+	} /* else if(document.getElementById("4").status == true){
 		if(document.getElementById("coachCsv").value == ""){
 			alert("Please fill in the coachCsv");
 			return false;
@@ -170,7 +174,7 @@ function checkInput(){
 			alert("Please fill in the .csv file");
 			return false;
 		}
-	}
+	} */
 
 	return true;
 }
@@ -183,8 +187,8 @@ function formatDate(date){
 		var ret=/^(?:(?!0000)[0-9]{4}\/(?:(?:0[1-9]|1[0-2])\/(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])\/(?:29|30)|(?:0[13578]|1[02])\/31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)\/02\/29)$/;
 		if(reg.test(value)==true){			
 				var y = date.value.substring(0,4);
-			    if(y<1800 || y > 2051){
-			    	alert("We could't support so far away time!");
+			    if(y<1800 || y > 2100){
+			    	alert("1800-2100之间的年份");
 			    	date.value = "";
 			    	date.focus();
 			    	return false;
@@ -196,7 +200,7 @@ function formatDate(date){
 				    	var eventStartDate = document.getElementById("eventStartDate").value.replace(/\//g,'');
 				    	var eventEndDate = document.getElementById("eventEndDate").value.replace(/\//g,'');
 				    	if(eventStartDate != "" && eventEndDate !="" && eventStartDate > eventEndDate){
-				    		alert("Eventstartdate is greater than eventenddate");
+				    		alert("开始日期不能在结束日期之后");
 				    		date.value = "";
 							date.focus();
 							return false;
@@ -204,19 +208,19 @@ function formatDate(date){
 				    	date.value = eventDate;
 						return true;
 					}else{
-						alert("Please write by the regular rule");
+						alert("请按照提示信息输入");
 						date.value = "";
 						date.focus();
 						return false;
 						}    		    			       
-		}else{
-		    alert("Please write by the number of 0-9");
+		}else{ 
+		    alert("请输入0-9 数字 ");
 		    date.value = "";
 		    date.focus();
 		    return false;
 		}	  
 	}else{
-		alert(" Please write by yyyymmdd");
+		alert("请按照 yyyymmdd 格式输入");
 		date.value = "";
 		date.focus();
     	return false;
@@ -233,19 +237,19 @@ function formatTime(time){
 				    	time.value = value;
 						return true;
 					}else{
-						alert("Please write by the regular rule");
+						alert("请按照提示信息输入");
 						time.value = "";
 						time.focus();
 						return false;
 						}    		    			       
 		}else{
-		    alert("Please write by the number of 0-9");
+		    alert("请输入0-9 数字");
 		    time.value = "";
 		    time.focus();
 		    return false;
 		}	  
 	}else{
-		alert(" Please write by hhmm");
+		alert("请按照 hhmm 格式输入");
 		time.value = "";
 		time.focus();
     	return false;
@@ -294,84 +298,84 @@ function load(){
 
 </head>
 <body onload="load()">
-	<h2>Picture Upload</h2>
+	<h2>新建活动</h2>
 	<form enctype="multipart/form-data" action="maineventAdd" method="post">
 
 		<input type="radio" name="img_Type" id="1" value="1"
-			onclick="show(this)">Event 
+			onclick="show(this)">活动 
 		<input type="radio"	name="img_Type" id="2" value="2" 
 			onclick="show(this)">Banner
 		<input type="radio" name="img_Type" id="3" value="3"
 			onclick="show(this)">Icon
-		<input type="radio" name="img_Type" id="4" value="4"
+	<!--  	<input type="radio" name="img_Type" id="4" value="4"
 			onclick="show(this)">coach
 		<input type="radio" name="img_Type" id="5" value="5"
 			onclick="show(this)">gym
-
+	-->
 		<div id="c" style="margin: 20px; border: 2px; display: none">
 			<table>
 				<tr>
-					<td style="width: 70px">EventName</td>
+					<td style="width: 70px">活动名称</td>
 					<td style="width: 220px"><input type="text" name="eventName"
 						id="eventName" size="35" maxlength="45" value="${event_name}" /></td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventStartDate</td>
+					<td style="width: 70px">开始日期</td>
 					<td style="width: 220px"><input type="text" name="eventStartDate"
 						id="eventStartDate" size="35" maxlength="10" value="${event_start_date}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
-					<td>*Please write by yyyymmdd</td>
+					<td>*请按照 yyyymmdd 格式输入</td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventEndDate</td>
+					<td style="width: 70px">结束日期</td>
 					<td style="width: 220px"><input type="text" name="eventEndDate"
 						id="eventEndDate" size="35" maxlength="10" value="${event_end_date}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
-					<td>*Please write by yyyymmdd</td>
+					<td>*请按照 yyyymmdd 格式输入</td>
 				</tr>
 				
 				<tr>
-					<td style="width: 70px">EventTime</td>
+					<td style="width: 70px">开始时间</td>
 					<td style="width: 220px"><input type="text" name="eventTime"
 						id="eventTime" size="35" maxlength="4" value="${event_time}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatTime(this)" /></td>
-					<td>*Please write by hhmm (24-hour)</td>
+					<td>*请按照 hhmm (24-hour) 格式输入</td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventLink</td>
+					<td style="width: 70px">活动链接</td>
 					<td style="width: 220px"><input type="text" name="eventLink"
 						id="eventLink" size="35" maxlength="200" value="${event_link}" /></td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventDesc</td>
+					<td style="width: 70px">活动简介</td>
 					<td style="width: 220px"><textArea name="eventDesc"
 							id="eventDesc" cols="30" rows="4">${event_desc}</textArea></td>
 				</tr>
 				<tr>
-					<td style="width: 70px">EventPlace</td>
+					<td style="width: 70px">活动地址</td>
 					<td style="width: 220px"><input type="text" name="eventPlace"
 						id="eventPlace" size="35" maxlength="45" value="${event_place}" /></td>
 				</tr>
 				<tr>
-					<td>iPhone4IMG</td>
+					<td>iPhone4适用图片</td>
 					<td colspan="2"><input type="file" id="iPhone4IMG" name="iPhone4IMG" size="35" />
 					</td>
 				</tr>
 				<tr>
-					<td>iPhone5IMG</td>
+					<td>iPhone5适用图片</td>
 					<td colspan="2"><input type="file" id="iPhone5IMG" name="iPhone5IMG" size="35" />
 					</td>
 				</tr>
 				<tr>
-					<td>iPhone6IMG</td>
+					<td>iPhone6适用图片</td>
 					<td colspan="2"><input type="file" id="iPhone6IMG" name="iPhone6IMG" size="35" />
 					</td>
 				</tr>
 				<tr>
-					<td>iPhone6PIMG</td>
+					<td>iPhone6P适用图片</td>
 					<td colspan="2"><input type="file" id="iPhone6PIMG" name="iPhone6PIMG" size="35" />
 					</td>
 				</tr>
@@ -380,37 +384,37 @@ function load(){
 		<div id="d" style="margin: 20px; border: 2px; display: none">
 			<table border="0">
 				<tr>
-					<td style="width: 70px">StartDate</td>
+					<td style="width: 70px">开始日期</td>
 					<td style="width: 220px"><input type="text" name="startDate"
 						id="startDate" size="35" maxlength="10" value="${startDate}"
 						onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
-					<td>*Please write by yyyymmdd</td>
+					<td>*请按照 yyyymmdd 格式输入</td>
 				</tr>
 				<tr>
-					<td>EndDate</td>
+					<td>结束日期</td>
 					<td><input type="text" name="endDate" id="endDate" size="35"
 						maxlength="10" value="${endDate}" onfocus="this.style.imeMode='disabled'"
 						onchange="formatDate(this)" /></td>
-					<td>*Please write by yyyymmdd</td>
+					<td>*请按照 yyyymmdd 格式输入</td>
 				</tr>
 				<tr>
-					<td>event_def</td>
+					<td>event_def适用图片</td>
 					<td colspan="2"><input type="file" id="event_def" name="event_def" size="35">
 					</td>
 				</tr>
 				<tr>
-					<td>fri_def</td>
+					<td>fri_def适用图片</td>
 					<td colspan="2"><input type="file" id="fri_def" name="fri_def" size="35">
 					</td>
 				</tr>
 				<tr>
-					<td>pk_def</td>
+					<td>pk_def适用图片</td>
 					<td colspan="2"><input type="file" id="pk_def" name="pk_def" size="35">
 					</td>
 				</tr>
 				<tr>
-					<td>metal_def</td>
+					<td>metal_def适用图片</td>
 					<td colspan="2"><input type="file" id="metal_def" name="metal_def" size="35">
 					</td>
 				</tr>
@@ -434,9 +438,9 @@ function load(){
 				</tr>
 			</table>
 		</div>
-		<br> <input type="submit" value="Comfirm"
+		<br> <input type="submit" value="确认"
 			onclick="return onSubmit('Comfirm');" class="input">
-			<input type="button" value="Back" onclick="back();">
-			 <input type="button" value="Reset" onclick="clearAll();">
+			<input type="button" value="返回" onclick="back();">
+			 <input type="button" value="重置" onclick="clearAll();">
 
 	</form>

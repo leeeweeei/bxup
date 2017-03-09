@@ -11,7 +11,7 @@ import com.wang.form.EventInsertForm;
 
 
 @Service
-public class ResourceServiceImp implements ResourceService {
+public class ResourceServiceImpl implements ResourceService {
 	LoginDao dao = null;
 
 	@Override
