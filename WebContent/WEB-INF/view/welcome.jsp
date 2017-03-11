@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=MS932"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%  
     String path = request.getContextPath();  
     String basePath = request.getScheme() + "://"  
@@ -41,19 +41,41 @@
 		form.submit();
 		form.actionCmd.value = "";
     }
+	
+	function onSubmit4(){
+		var form = document.forms[0];
+		
+		form.actionCmd.value = "Init";
+		form.target = "_top";
+		form.action = "./welcome4";
+		form.submit();
+		form.actionCmd.value = "";
+    }
+	
 </script>
 </head>
 
 <body>
 	<form>
+	<table>
 		<tr>
 		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
-			href="#" onclick="onSubmit1();">Link to ShowAllEvent</a></td>
-	    <td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
-			href="#" onclick="onSubmit2();">Link to ShowAllCoach</a></td>
-		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
-			href="#" onclick="onSubmit3();">Link to ShowAllGym</a></td>	
+			href="#" onclick="onSubmit1();">活动项目一览</a></td>
 		</tr>
+		
+		<tr>		
+	    <td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit2();">教练员信息一览</a></td>
+		</tr>
+		<tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit3();">健身房信息一览</a></td>	
+		</tr>
+		<tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit4();">客户反馈信息</a></td>	
+		</tr>
+	</table>	
 	</form>
 </body>
 

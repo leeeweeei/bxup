@@ -9,6 +9,10 @@
              select * from 
              t_gym where delete_status=0 ORDER BY create_time DESC
 	</select>
+    <select id="selectAllGymnameById" resultClass="GymInfoForm">    
+             select name from 
+             t_gym where delete_status=0 and id=#gymid#
+	</select>
 	<!-- insert -->
 	<insert id="insertGymInfoForm" parameterClass="GymInfoForm">
 		insert into

@@ -29,9 +29,15 @@ function show(r){
 	}
 }
 function delConfirm(itemId){	
-	if(window.confirm('Are you sure delete the event?')){
+	if(window.confirm('确定要删除该活动吗?')){
 		javascript:window.location.href='resources/event_delete/' + itemId
     }
+}
+
+function back(){
+	if(window.confirm('是否返回导航画面 ?')){
+		javascript:window.location.href='/bxup'
+     }
 }
 </script>
 </head>	
@@ -43,9 +49,7 @@ function delConfirm(itemId){
 	</div>
 </c:if>
 <br><input type="button"  class="blue_btn" value="新建活动" onclick="javascript:window.location.href='./eventAdd'"/>
-	<input type="button"  class="blue_btn" value="新建教练" onclick="javascript:window.location.href='./coachInfoAdd'"/>
-	<input type="button"  class="blue_btn" value="新建体育馆" onclick="javascript:window.location.href='./gymInfoAdd'"/>
-	<input type="button"  class="blue_btn" value="客户反馈" onclick="javascript:window.location.href='./feedback'"/>
+	<input type="button" value="返回" onclick="back();"/>		
 	<table>
 		<tr>
 			<td>

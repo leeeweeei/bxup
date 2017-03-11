@@ -31,6 +31,13 @@ public class WelcomeController {
 		return "redirect:/gym";
 	}
 	
+	@RequestMapping(value = "/welcome4", method = RequestMethod.GET)
+	public String feedback() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/feedback";
+	}
+	
 
 
 }

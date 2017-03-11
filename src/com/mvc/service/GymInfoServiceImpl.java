@@ -47,6 +47,17 @@ public class GymInfoServiceImpl implements GymInfoService{
 		
 		return sucflg;
 		
-	};	
+	};
+	
+	//20170311 Baojun add
+	@Override
+	public Object findgymById(int gymid) {
+		Logger log = Logger.getLogger(ResourceController.class.getName());					
+		dao = new LoginDao();
+
+		Object gym = LoginDao.SelectAllGymnameById(gymid);	
+		log.info("selectAllGymSuccess");
+			return gym;
+		}
 
 }

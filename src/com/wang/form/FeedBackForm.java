@@ -10,7 +10,14 @@ public class FeedBackForm {
 	private int user_id ;
 	private String comment;
 	private Date create_time;
+	private String simple_createtime;
 	
+	public String getSimple_createtime() {
+		return simple_createtime;
+	}
+	public void setSimple_createtime(String simple_createtime) {
+		this.simple_createtime = simple_createtime;
+	}
 	public int getId() {
 		return id;
 	}

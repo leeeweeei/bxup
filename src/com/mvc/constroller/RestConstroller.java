@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -79,15 +80,23 @@ public class RestConstroller {
 		return "eventAdd";
 	}
 	
-	
 	//20170303 Baojun ADD	
 	@RequestMapping(value = "/coachInfoAdd", method = RequestMethod.GET)
-	public String coachAdd() {
+	public String coachAdd(Map<String, Object> mode) throws SQLException {
 		log.info("coachAdd called");
+		
+		List<GymInfoForm> gym = gymInfoService.findAll();	
+/*		List<String> gymnamelist = new ArrayList<String>();
+		
+		for(int i=0;i<gym.size();i++){
+
+			gymnamelist.add(gym.get(i).getName());
+		}*/
+		mode.put("coachInfoAdd", gym);
 			
 		return "coachInfoAdd";
 	}
-		
+	
 	//20170304 Baojun ADD	
 	@RequestMapping(value = "/gymInfoAdd", method = RequestMethod.GET)
 	public String gymAdd() {
@@ -394,16 +403,14 @@ public class RestConstroller {
 		
 		CoachPhotoForm cachPhotoForm = new CoachPhotoForm();
 		log.info("maincoachInfoAdd called");
-		
-		
+					
 		Date d = new Date();
 		Long create_time = d.getTime();
 		coachInfoForm.setCreate_time(create_time);
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
 				request.getSession().getServletContext());
-		
-		
+			
 		Properties properties = new Properties();
 		properties.load(this.getClass().getClassLoader()
 				.getResourceAsStream("Webinfo.properties"));
@@ -411,9 +418,7 @@ public class RestConstroller {
 		if (multipartResolver.isMultipart(request)) {
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
 			Iterator<?> iter = multiRequest.getFileNames();
-
-			while (iter.hasNext()) {
-	
+			while (iter.hasNext()) {		
 				MultipartFile file = multiRequest.getFile(iter.next()
 						.toString());
 				String picturename = file.getOriginalFilename();
@@ -429,12 +434,10 @@ public class RestConstroller {
 		String ucfflg = coachInfoService.insertCoachPhoto(cachPhotoForm);
         if(sucflg.equals(Constant.FORWARD_SUCCESS) && ucfflg.equals(Constant.FORWARD_SUCCESS)){
         	log.info("insertCoachInfo and insertCoachPhoto success!");
-        	return	Constant.FORWARD_SUCCESS;
+        	return	"redirect:/coach";	
         }else{
 	    	return	Constant.FORWARD_FAILURE;	
-        }
-	    
-		
+        }	    			
 	}
 	
 	//20170304 Baojun Add
@@ -480,7 +483,7 @@ public class RestConstroller {
 		String ucfflg = gymInfoService.insertGymPhoto(gymPhotoForm);
         if(sucflg.equals(Constant.FORWARD_SUCCESS) && ucfflg.equals(Constant.FORWARD_SUCCESS)){
         	log.info("insertGymInfo and insertGymPhoto success!");
-        	return	Constant.FORWARD_SUCCESS;
+        	return	"redirect:/gym";
         }else{
 	    	return	Constant.FORWARD_FAILURE;	
         }

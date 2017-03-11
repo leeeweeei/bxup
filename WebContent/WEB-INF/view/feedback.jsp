@@ -14,8 +14,8 @@
 <SCRIPT Language="JavaScript">
 
 function back(){
-	if(window.confirm('是否返回活动列表 ?')){
-		javascript:window.location.href='resources'
+	if(window.confirm('是否返回导航画面 ?')){
+		javascript:window.location.href='/bxup'
      }
 }
 
@@ -28,7 +28,7 @@ function back(){
 		<p>${message}</p>
 	</div>
 </c:if>
-<br>
+<br><input type="button" value="返回" onclick="back();"/>	
 	<table>
 		<tr>
 			<td>
@@ -46,14 +46,13 @@ function back(){
 								<td><c:out value = "${status.count}" /></td>
 								<td><c:out value = "${item.user_id}" /></td>
 								<td><c:out value = "${item.comment}" /></td>
-								<td><c:out value = "${item.create_time}" /></td>
+								<td><c:out value = "${item.simple_createtime}" /></td>
 							</tr>							
 						</c:forEach>
 					</table>	
 				</div>
 			</td>
 		</tr>
-	</table>
-			<br><input type="button" value="返回" onclick="back();">		    
+	</table>	    
 </body>
 </html>

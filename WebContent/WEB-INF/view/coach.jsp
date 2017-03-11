@@ -33,6 +33,12 @@ function delConfirm(itemId){
 		javascript:window.location.href='resources/event_delete/' + itemId
     }
 }
+
+function back(){
+	if(window.confirm('是否返回导航画面 ?')){
+		javascript:window.location.href='/bxup'
+     }
+}
 </script>
 </head>	
 <h2>教练列表</h2>	
@@ -42,7 +48,8 @@ function delConfirm(itemId){
 		<p>${message}</p>
 	</div>
 </c:if>
-<br>
+<br><input type="button"  class="blue_btn" value="新建教练" onclick="javascript:window.location.href='./coachInfoAdd'"/>
+	<input type="button" value="返回" onclick="back();"/>	
 	<table>
 		<tr>
 			<td>
@@ -51,7 +58,7 @@ function delConfirm(itemId){
 						<tr>
 							<th>No.</th>
 							<th>名字</th>
-							<th>头像</th>
+							<th>照片</th>
 							<th>性别</th>
 							<th>年龄</th>
 							<th>档案</th>
@@ -63,13 +70,14 @@ function delConfirm(itemId){
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
 								<td><c:out value = "${item.name}" /></td>
-								<td><c:out value = "${item.avatar}" /></td>
+								<td><c:out value = "${item.avatar}" /></td><%-- <img src=" ${item.avatar} "/><br/> --%>
 								<td><c:out value = "${item.sex}" /></td>
 								<td><c:out value = "${item.age}" /></td>
 								<td><c:out value = "${item.profile}" /></td>							
 								<td><c:out value = "${item.honor}" /></td>
+								<td><c:out value = "${item.gym_name}" /></td>
 								<td><c:out value = "${item.approvedfg}" /></td>
-<%-- 								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
+<%-- 							<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
 								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td> --%>
 							</tr>
 						</c:forEach>

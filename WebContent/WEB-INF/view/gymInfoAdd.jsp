@@ -60,8 +60,8 @@ function checkInput(){
 
 
 function back(){
-	if(window.confirm('是否返回活动列表 ?')){
-		javascript:window.location.href='resources'
+	if(window.confirm('是否返回健身房列表 ?')){
+		javascript:window.location.href='gym'
      }
 }
 
@@ -96,7 +96,7 @@ function back(){
 				<tr>
 					<td style="width: 70px">电话</td>
 					<td style="width: 220px"><input type="text" name="tel"
-						id="tel" size="35" maxlength="200" value="${tel}" /></td>
+						id="tel" size="35" maxlength="10" value="${tel}" /></td>
 				</tr>
 				<tr>
 					<td style="width: 70px">认证</td>

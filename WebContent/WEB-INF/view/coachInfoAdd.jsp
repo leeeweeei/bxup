@@ -6,7 +6,7 @@
             + path + "/";  
 %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="true">
 <head>
 <title>eventadd.jsp</title>
@@ -71,8 +71,8 @@ function checkInput(){
 
 
 function back(){
-	if(window.confirm('是否返回活动列表 ?')){
-		javascript:window.location.href='resources'
+	if(window.confirm('是否返回教练员列表 ?')){
+		javascript:window.location.href='coach'
      }
 }
 
@@ -102,7 +102,7 @@ function back(){
 				<tr>
 					<td style="width: 70px">年龄</td>
 					<td style="width: 220px"><input type="text" name="age"
-						id="age" size="35" maxlength="4" value="${age}"/></td>
+						id="age" size="35" maxlength="2" value="${age}"/></td>
 				</tr>
 				<tr>
 					<td style="width: 70px">档案</td>
@@ -116,8 +116,14 @@ function back(){
 				</tr>
 				<tr>
 					<td style="width: 75px">就职健身房</td>
-					<td style="width: 220px"><input type="text" name="gym_name"
-							id="gym_name" size="35" value="${gym_name}" /></td>
+					<td style="width: 220px">
+					<select name="gym_id">
+					<c:forEach var="gym" items="${coachInfoAdd}" varStatus="status">
+						<option value="${gym.id}">${gym.name}</option>
+					</c:forEach>
+					</select>
+					<input type="hidden" name="gym_id" value="${gym.id}"/>
+					</td>
 				</tr>
 				<tr>
 					<td style="width: 70px">认证</td>

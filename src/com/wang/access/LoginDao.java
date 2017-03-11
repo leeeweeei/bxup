@@ -429,6 +429,25 @@ public class LoginDao {
 			log.info("SqlselectAllCoach End.");
 			return coach; 
 			} 
+		
+		//20170311 Baojun Add
+		public static Object SelectAllGymnameById(int gymid){
+			log.info("SqlSelectAllEvent Start.");
+			String sucflg = null;
+			Object gym = null; 
+			try { 
+				gym = sqlMap.queryForObject("selectAllGymnameById",gymid); 
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+		
+			} 
+			sucflg=Constant.FORWARD_SUCCESS;
+			
+			log.info("SqlselectAllGym End.");
+			return gym; 
+			} 
 
 	
 }

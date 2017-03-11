@@ -33,6 +33,12 @@ function delConfirm(itemId){
 		javascript:window.location.href='resources/event_delete/' + itemId
     }
 }
+
+function back(){
+	if(window.confirm('是否返回导航画面 ?')){
+		javascript:window.location.href='/bxup'
+     }
+}
 </script>
 </head>	
 <h2>健身房列表</h2>	
@@ -42,7 +48,8 @@ function delConfirm(itemId){
 		<p>${message}</p>
 	</div>
 </c:if>
-<br>
+<br><input type="button"  class="blue_btn" value="新建健身房" onclick="javascript:window.location.href='./gymInfoAdd'"/>
+	<input type="button" value="返回" onclick="back();"/>
 	<table>
 		<tr>
 			<td>
