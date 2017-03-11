@@ -41,7 +41,8 @@ public class EmailService {
         // 发送邮件协议名称 
         properties.setProperty("mail.transport.protocol", "smtp");
         // 设置邮件服务器主机名 
-        properties.setProperty("mail.host", "smtp.163.com");
+        String host = properties.getProperty("mail.smtp.host");
+        properties.setProperty("mail.host", host);
         // 环境信息
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
