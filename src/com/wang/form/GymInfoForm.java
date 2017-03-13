@@ -13,9 +13,15 @@ public class GymInfoForm {
 	private String address;
 	private String tel;
 	private String approvedfg;
+	private String pictureurl;
 	
 	
-	
+	public String getPictureurl() {
+		return pictureurl;
+	}
+	public void setPictureurl(String pictureurl) {
+		this.pictureurl = pictureurl;
+	}
 	public int getId() {
 		return id;
 	}

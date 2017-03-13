@@ -46,6 +46,7 @@ import com.wang.form.FeedBackForm;
 import com.wang.form.GymForm;
 import com.wang.form.GymInfoForm;
 import com.wang.form.GymPhotoForm;
+import com.wang.form.UserForm;
 import com.wang.utility.CSVUtils;
 import com.wang.utility.Constant;
 import com.wang.utility.DataFormatCheck;
@@ -111,9 +112,15 @@ public class RestConstroller {
 	public String feedback(Map<String, Object> mode) throws SQLException {
 		log.info("feedback called");
 		List<FeedBackForm> feedback = feedBackService.findAll();
-		
-		
-		
+		for(int i=0;i<feedback.size();i++){
+			
+			
+			int userid = feedback.get(i).getUser_id();
+			if(userid != 0){
+				UserForm userForm = (UserForm) feedBackService.findnikenameById(userid);
+				feedback.get(i).setNikename(userForm.getNickname());
+			}
+		}
 		mode.put("feedback", feedback);
 			
 		return "feedback";

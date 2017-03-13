@@ -68,7 +68,7 @@ function back(){
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
 								<td><c:out value = "${item.name}" /></td>
-								<td><c:out value = "${item.avatar}" /></td>
+								<td><a href="${item.pictureurl}" target="_blank"><c:out value = "${item.avatar}" /></a></td>
 								<td><c:out value = "${item.profile}" /></td>							
 								<td><c:out value = "${item.address}" /></td>
 								<td><c:out value = "${item.tel}" /></td>

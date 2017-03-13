@@ -8,5 +8,6 @@ import com.wang.form.FeedBackForm;
 public interface FeedBackService {
 	
 	List<FeedBackForm> findAll() throws SQLException;
-
+	Object findnikenameById(int userid);
+	
 }

@@ -18,7 +18,14 @@ public class CoachInfoForm {
 	private String gym_name;
 	private String sex;
 	private String approvedfg;
+	private String pictureurl;
 
+	public String getPictureurl() {
+		return pictureurl;
+	}
+	public void setPictureurl(String pictureurl) {
+		this.pictureurl = pictureurl;
+	}
 	public String getApprovedfg() {
 		return approvedfg;
 	}

@@ -34,6 +34,16 @@ public class FeedBackServiceImpl implements FeedBackService{
 			return feedback;
 		}
 	
-	
+	//20170311 Baojun add
+	@Override
+	public Object findnikenameById(int userid) {
+		Logger log = Logger.getLogger(ResourceController.class.getName());					
+		dao = new LoginDao();
+
+		Object nickname = LoginDao.SelectnikemnameById(userid);	
+		log.info("selectAllGymSuccess");
+			return nickname;
+		}
+
 
 }

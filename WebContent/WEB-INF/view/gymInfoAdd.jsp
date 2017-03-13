@@ -68,7 +68,7 @@ function back(){
 </script>
 
 </head>
-<body onload="load()">
+<body>
 	<h2>健身房信息</h2>
 	<form enctype="multipart/form-data" action="maingymInfoAdd" method="post">
 

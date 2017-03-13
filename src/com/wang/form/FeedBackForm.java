@@ -11,7 +11,14 @@ public class FeedBackForm {
 	private String comment;
 	private Date create_time;
 	private String simple_createtime;
+	private String nikename;
 	
+	public String getNikename() {
+		return nikename;
+	}
+	public void setNikename(String nikename) {
+		this.nikename = nikename;
+	}
 	public String getSimple_createtime() {
 		return simple_createtime;
 	}

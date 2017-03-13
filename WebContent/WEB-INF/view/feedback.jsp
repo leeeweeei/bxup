@@ -44,7 +44,7 @@ function back(){
 						<c:forEach items="${feedback}" var="item" varStatus="status">
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
-								<td><c:out value = "${item.user_id}" /></td>
+								<td><c:out value = "${item.nikename}" /></td>
 								<td><c:out value = "${item.comment}" /></td>
 								<td><c:out value = "${item.simple_createtime}" /></td>
 							</tr>							

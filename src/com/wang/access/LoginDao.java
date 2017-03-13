@@ -448,6 +448,25 @@ public class LoginDao {
 			log.info("SqlselectAllGym End.");
 			return gym; 
 			} 
+		
+		//20170311 Baojun Add
+		public static Object SelectnikemnameById(int userid){
+			log.info("SelectnikemnameById Start.");
+			String sucflg = null;
+			Object nickname = null; 
+			try { 
+				nickname = sqlMap.queryForObject("selectnikenameById",userid); 
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+		
+			} 
+			sucflg=Constant.FORWARD_SUCCESS;
+			
+			log.info("SelectnikemnameById End.");
+			return nickname; 
+			} 
 
 	
 }
