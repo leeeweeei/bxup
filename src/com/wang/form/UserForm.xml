@@ -5,7 +5,7 @@
 <sqlMap namespace="UserSpace">
 	<typeAlias alias="UserForm" type="com.wang.form.UserForm" />
 	<!-- select -->
-    <select id="selectnickbyid" resultClass="UserForm">    
+    <select id="selectnikenameById" resultClass="UserForm">    
              select * from 
              t_user where user_id=#user_id#
 	</select>
