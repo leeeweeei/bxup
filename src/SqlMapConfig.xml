@@ -32,4 +32,9 @@
 	<sqlMap resource="com/wang/form/gymPhotoForm.xml" />
 	<sqlMap resource="com/wang/form/feedBackForm.xml" />
 	<sqlMap resource="com/wang/form/UserForm.xml" />
+	<sqlMap resource="com/wang/form/ShowForm.xml" />
+	<sqlMap resource="com/wang/form/PhotoForm.xml" />
+	<sqlMap resource="com/wang/form/ShowPhotoRelForm.xml" />
+	<sqlMap resource="com/wang/form/SubscribeForm.xml" />
+	
 </sqlMapConfig> 

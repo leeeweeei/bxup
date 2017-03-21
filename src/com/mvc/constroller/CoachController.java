@@ -1,7 +1,5 @@
 package com.mvc.constroller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -15,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mvc.service.CoachInfoService;
 import com.mvc.service.GymInfoService;
 import com.wang.form.CoachInfoForm;
-import com.wang.form.CoachPhotoForm;
 import com.wang.form.GymInfoForm;
-import com.wang.utility.Constant;
 
 
 @Controller
@@ -63,9 +59,7 @@ public class CoachController {
 			
 			coach.get(i).setPictureurl(picture_url + "/" + coach.get(i).getAvatar());
 			
-			SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-			java.util.Date date = new Date(coach.get(i).getCreate_time() * 1000);
-				String cre_time = sdf.format(date); 				
+					
 		}
 
 		

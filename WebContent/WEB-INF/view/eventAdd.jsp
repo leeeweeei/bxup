@@ -320,6 +320,11 @@ function load(){
 						id="eventName" size="35" maxlength="45" value="${event_name}" /></td>
 				</tr>
 				<tr>
+					<td style="width: 70px">活动标签</td>
+					<td style="width: 220px"><input type="text" name="tab"
+						id="tab" size="35" maxlength="45" value="${tab}" /></td>
+				</tr>
+				<tr>
 					<td style="width: 70px">开始日期</td>
 					<td style="width: 220px"><input type="text" name="eventStartDate"
 						id="eventStartDate" size="35" maxlength="10" value="${event_start_date}"

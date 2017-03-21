@@ -52,6 +52,56 @@
 		form.actionCmd.value = "";
     }
 	
+	function onSubmit5(){
+		var form = document.forms[0];
+		
+		form.actionCmd.value = "Init";
+		form.target = "_top";
+		form.action = "./welcome5";
+		form.submit();
+		form.actionCmd.value = "";
+    }
+	
+	function onSubmit6(){
+		var form = document.forms[0];
+		
+		form.actionCmd.value = "Init";
+		form.target = "_top";
+		form.action = "./welcome6";
+		form.submit();
+		form.actionCmd.value = "";
+    }
+	
+	function onSubmit8(){
+		var form = document.forms[0];
+		
+		form.actionCmd.value = "Init";
+		form.target = "_top";
+		form.action = "./welcome8";
+		form.submit();
+		form.actionCmd.value = "";
+    }
+	
+	function onSubmit9(){
+		var form = document.forms[0];
+		
+		form.actionCmd.value = "Init";
+		form.target = "_top";
+		form.action = "./welcome9";
+		form.submit();
+		form.actionCmd.value = "";
+    }
+	
+	function onSubmit7(){
+		var form = document.forms[0];
+		
+		form.actionCmd.value = "Init";
+		form.target = "_top";
+		form.action = "./welcome7";
+		form.submit();
+		form.actionCmd.value = "";
+    }
+	
 </script>
 </head>
 
@@ -70,6 +120,26 @@
 		<tr>	
 		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
 			href="#" onclick="onSubmit3();">健身房信息一览</a></td>	
+		</tr>
+		<tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit5();">知道一览</a></td>	
+		</tr>
+		<tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit6();">精选一览</a></td>	
+		</tr>
+	    <tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit9();">头条一览</a></td>	
+		</tr>
+		<tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit7();">用户一览</a></td>	
+		</tr>
+		<tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit8();">秀场一览</a></td>	
 		</tr>
 		<tr>	
 		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a

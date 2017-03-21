@@ -112,6 +112,7 @@ public class ResourceController {
 				  }*/
 			
 				model.addAttribute("event_name", edit_event.getEvent_name());
+				model.addAttribute("tab", edit_event.getTab());
 				model.addAttribute("event_start_date", edit_event.getEvent_start_date());
 				model.addAttribute("event_end_date", edit_event.getEvent_end_date());
 				model.addAttribute("event_time", edit_event.getEvent_time());

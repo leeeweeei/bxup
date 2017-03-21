@@ -11,6 +11,7 @@ public class EventInsertForm {
 	private String eventTime;
 	private String eventDesc;
 	private String eventPlace;
+	private String tab;
 	private String iPhone4IMGName;
 	private String iPhone5IMGName;
 	private String iPhone6IMGName;
@@ -18,7 +19,6 @@ public class EventInsertForm {
 	private String androidIMGName1;
 	private String androidIMGName2;
 	private String androidIMGName3;
-
 	private String iphone4_img;
 	private String iphone5_img;
 	private String iphone6_img;
@@ -46,6 +46,12 @@ public class EventInsertForm {
 	private String timem;
     
 	
+	public String getTab() {
+		return tab;
+	}
+	public void setTab(String tab) {
+		this.tab = tab;
+	}
 	public String getTimem() {
 		return timem;
 	}

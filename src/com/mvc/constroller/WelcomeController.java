@@ -38,6 +38,40 @@ public class WelcomeController {
 		return "redirect:/feedback";
 	}
 	
+	@RequestMapping(value = "/welcome5", method = RequestMethod.GET)
+	public String known() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/known";
+	}
+	
+	@RequestMapping(value = "/welcome6", method = RequestMethod.GET)
+	public String choose() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/choose";
+	}
+	
+	@RequestMapping(value = "/welcome7", method = RequestMethod.GET)
+	public String user() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/user";
+	}
+	
+	@RequestMapping(value = "/welcome8", method = RequestMethod.GET)
+	public String show() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/show";
+	}
+	
+	@RequestMapping(value = "/welcome9", method = RequestMethod.GET)
+	public String headline() {
+		log.info("WelcomePage called");			
+
+		return "redirect:/headline";
+	}
 
 
 }

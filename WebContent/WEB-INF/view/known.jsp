@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-<title>resources.jsp</title>
+<title>known.jsp</title>
 <script type="text/javascript" src="./js/test.js"></script>
 <SCRIPT Language="JavaScript">
 function show(r){
@@ -29,7 +29,7 @@ function show(r){
 	}
 }
 function delConfirm(itemId){	
-	if(window.confirm('确定要删除该活动吗?')){
+	if(window.confirm('Are you sure delete the event?')){
 		javascript:window.location.href='resources/event_delete/' + itemId
     }
 }
@@ -41,15 +41,15 @@ function back(){
 }
 </script>
 </head>	
-<h2>活动列表</h2>	
+<h2>知道一览</h2>	
 <body>
 <c:if test="${not empty message}">
 	<div role="alert">
 		<p>${message}</p>
 	</div>
 </c:if>
-<br><input type="button"  class="blue_btn" value="新建活动" onclick="javascript:window.location.href='./eventAdd'"/>
-	<input type="button" value="返回" onclick="back();"/>		
+<br><input type="button"  class="blue_btn" value="新建精选" onclick="javascript:window.location.href='./subscribeAdd'"/>
+    <input type="button" value="返回" onclick="back();"/>
 	<table>
 		<tr>
 			<td>
@@ -57,28 +57,22 @@ function back(){
 					<table border="1">
 						<tr>
 							<th>No.</th>
-							<th>活动名称</th>
+							<th>设定Feed</th>
+							<th>标题</th>
 							<th>标签</th>
-							<th width="12%">开始日期</th>
-							<th width="12%">结束日期</th>
-							<th width="6%">开始时间</th>
-							<th>活动链接</th>
-							<th>活动简介</th>
-							<th>活动地点</th>
+							<th>URL</th>		
 						</tr>
-						<c:forEach items="${resources}" var="item" varStatus="status">
+						<c:forEach items="${known}" var="item" varStatus="status">
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
-								<td><c:out value = "${item.event_name}" /></td>
+								<td><c:out value = "${item}" /></td>	
+								<td><c:out value = "${item.title}" /></td>
 								<td><c:out value = "${item.tab}" /></td>
-								<td><c:out value = "${item.event_start_date}" /></td>
-								<td><c:out value = "${item.event_end_date}" /></td>
-								<td><c:out value = "${item.timem}" /></td>
-								<td><c:out value = "${item.event_link}" /></td>							
-								<td><c:out value = "${item.event_desc}" /></td>
-								<td><c:out value = "${item.event_place}" /></td>
-								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
-								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td>
+								<td><c:out value = "${item.url}" /></td>						
+																	
+								
+<%-- 								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
+								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td> --%>
 							</tr>
 						</c:forEach>
 					</table>	

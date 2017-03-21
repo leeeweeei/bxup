@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,6 +37,9 @@ import com.mvc.service.EventInsertService;
 import com.mvc.service.FeedBackService;
 import com.mvc.service.GymInfoService;
 import com.mvc.service.GymInsertServiceImpl;
+import com.mvc.service.ShowService;
+import com.mvc.service.SubscribeService;
+import com.mvc.service.UserService;
 import com.wang.form.CoachForm;
 import com.wang.form.CoachInfoForm;
 import com.wang.form.CoachPhotoForm;
@@ -46,6 +48,10 @@ import com.wang.form.FeedBackForm;
 import com.wang.form.GymForm;
 import com.wang.form.GymInfoForm;
 import com.wang.form.GymPhotoForm;
+import com.wang.form.PhotoForm;
+import com.wang.form.ShowForm;
+import com.wang.form.ShowPhotoRelForm;
+import com.wang.form.SubscribeForm;
 import com.wang.form.UserForm;
 import com.wang.utility.CSVUtils;
 import com.wang.utility.Constant;
@@ -73,6 +79,16 @@ public class RestConstroller {
 	//20170304 Baojun Add
 	@Autowired(required = false)
 	private FeedBackService feedBackService;
+	//20170314 Baojun Add
+	@Autowired(required = false)
+	private UserService userService;
+	//20170314 Baojun Add
+	@Autowired(required = false)
+	private ShowService showService;
+	//20170319 Baojun Add
+	@Autowired(required = false)
+	private SubscribeService subscribeService;
+	
 	
 	@RequestMapping(value = "/eventAdd", method = RequestMethod.GET)
 	public String eventAdd() {
@@ -126,6 +142,35 @@ public class RestConstroller {
 		return "feedback";
 	}
 	
+	//20170315 Baojun ADD	
+	@RequestMapping(value = "/userInfoAdd", method = RequestMethod.GET)
+	public String userInfoAdd() {
+		log.info("userInfoAdd called");
+			
+		return "userInfoAdd";
+	}
+	
+	//20170315 Baojun ADD	
+	@RequestMapping(value = "/showInfoAdd", method = RequestMethod.GET)
+	public String showInfoAdd(Map<String, Object> mode) throws SQLException {
+		log.info("showInfoAdd called");
+		
+		
+		List<UserForm> user = userService.findAll();
+		mode.put("showInfoAdd", user);
+		return "showInfoAdd";
+	}
+	
+	//20170319 Baojun ADD	
+	@RequestMapping(value = "/subscribeAdd", method = RequestMethod.GET)
+	public String knownInfoAdd(Map<String, Object> mode) throws SQLException {
+		log.info("subscribeAdd called");
+
+
+		return "subscribeInfoAdd";
+	}
+	
+	
 	@RequestMapping(value = "/eventAdd", method = RequestMethod.POST)
 	public String eventAdd(Model model,HttpServletRequest request,
 			HttpServletResponse response, EventInsertForm eventInsertForm) {
@@ -140,6 +185,7 @@ public class RestConstroller {
 		model.addAttribute("img_Type", eventInsertForm.getImg_Type());
 		model.addAttribute("endDate", eventInsertForm.getEndDate());
 		model.addAttribute("startDate", eventInsertForm.getStartDate());
+		model.addAttribute("tab", eventInsertForm.getTab());
 		
 		return "eventAdd";
 	}
@@ -150,6 +196,7 @@ public class RestConstroller {
 			) throws IllegalStateException, IOException {
 		log.info("comfirmeventAdd called");
 	    model.addAttribute("event_name", eventInsertForm.getEventName());
+	    model.addAttribute("tab", eventInsertForm.getTab());
 		model.addAttribute("event_start_date", eventInsertForm.getEventStartDate());
 		model.addAttribute("event_end_date", eventInsertForm.getEventEndDate());
 		model.addAttribute("event_time", eventInsertForm.getEventTime());
@@ -496,5 +543,147 @@ public class RestConstroller {
         }
 	}
 	
+	//20170314 Baojun Add
+		@RequestMapping(value = "/userAdd", method = RequestMethod.POST)
+		public String userAdd(Model model,HttpServletRequest request,
+				HttpServletResponse response, UserForm userForm
+				) throws IllegalStateException, IOException {
+						
+			
+			Date d = new Date();
+			Long create_time = d.getTime();
+			userForm.setCreate_time(create_time);
+			userForm.setPlatform_id("999999999");
 	
+			String sucflg = userService.insertUserInfo(userForm);
+	        if(sucflg.equals(Constant.FORWARD_SUCCESS)){
+	        	log.info("insertUserInfo  success!");
+	        	return	"redirect:/user";
+	        }else{
+		    	return	Constant.FORWARD_FAILURE;	
+	        }
+		}
+		
+		//20170315 Baojun Add
+		@RequestMapping(value = "/showAdd", method = RequestMethod.POST)
+		public String showAdd(Model model,HttpServletRequest request,
+				HttpServletResponse response, ShowForm showForm
+				) throws IllegalStateException, IOException, SQLException {
+			log.info("showAdd called");			
+			PhotoForm photoForm = new PhotoForm();
+			ShowPhotoRelForm showPhotoRelForm = new ShowPhotoRelForm();
+			Date d = new Date();
+			Long create_time = d.getTime();
+			showForm.setCreate_time(create_time);
+			photoForm.setCreate_time(create_time);
+			
+			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+					request.getSession().getServletContext());
+			
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader()
+					.getResourceAsStream("Webinfo.properties"));
+			String picturepositiontmp = properties.getProperty("gympictureposition");
+			List<String> filenameList  = new ArrayList<String>();
+			
+			if (multipartResolver.isMultipart(request)) {
+				MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+				Iterator<?> iter = multiRequest.getFileNames();
+				while (iter.hasNext()) {		
+					MultipartFile file = multiRequest.getFile(iter.next()
+							.toString());
+					String picturename = file.getOriginalFilename();
+					filenameList.add(picturename);
+					if (file != null && file.getOriginalFilename() != Constant.BLANK) {	
+						String path = picturepositiontmp + picturename;
+						//file.transferTo(new File(path));							
+					}
+				}		
+			}
+			long user_id = showForm.getUser_id();
+			showService.insertShow(showForm);
+			showForm.getId();
+			
+			String relflg=null;
+			
+			showPhotoRelForm.setShow_id(showForm.getId());
+			for(int i=0;i<filenameList.size();i++){
+				photoForm.setFile_name(filenameList.get(i));
+				photoForm.setCreate_user_id(user_id);
+				if(filenameList.get(i) != ""){
+				showService.insertPhoto(photoForm);
+				photoForm.getId();
+				showPhotoRelForm.setPhoto_id(photoForm.getId());
+				relflg = showService.insertPhotoshowrel(showPhotoRelForm);
+				}
+			}
+			//List<PhotoForm> photo = showService.findPhotoidByuserid(user_id);
+			//List<ShowForm> show = showService.findShowidByuserid(user_id);
+/*			for(int i=0;i<photo.size();i++){
+				showPhotoRelForm.setPhoto_id(photo.get(i).getId());
+				showPhotoRelForm.setShow_id(show.get(i).getId());
+				photoForm.setCreate_user_id(user_id);
+				if(filenameList.get(i) != ""){
+				String ucfflg = showService.insertPhoto(photoForm);
+				}
+				String relflg = showService.insertPhotoshowrel(showPhotoRelForm);
+			}	*/	
+			
+	        if(relflg.equals(Constant.FORWARD_SUCCESS)){
+	        	log.info("insertShow success!");
+	        	return	"redirect:/user";
+	        }else{
+		    	return	Constant.FORWARD_FAILURE;	
+	        }
+		}	
+		
+		
+		//20170319 Baojun Add
+		@RequestMapping(value = "/subscribeInfoAdd", method = RequestMethod.POST)
+		public String subscribeInfoAdd(Model model,HttpServletRequest request,
+				HttpServletResponse response, SubscribeForm subscribeForm
+				) throws IllegalStateException, IOException {
+						
+			
+			Date d = new Date();
+			subscribeForm.setPublish_time(d);
+			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+					request.getSession().getServletContext());
+			
+			
+			Properties properties = new Properties();
+			properties.load(this.getClass().getClassLoader()
+					.getResourceAsStream("Webinfo.properties"));
+			String picturepositiontmp = properties.getProperty("gympictureposition");
+			if (multipartResolver.isMultipart(request)) {
+				MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+				Iterator<?> iter = multiRequest.getFileNames();
+
+				while (iter.hasNext()) {
+		
+					MultipartFile file = multiRequest.getFile(iter.next()
+							.toString());
+					String picturename = file.getOriginalFilename();
+					subscribeForm.setImg(picturename);
+					if (file != null && file.getOriginalFilename() != Constant.BLANK) {	
+						String path = picturepositiontmp + picturename;
+						//file.transferTo(new File(path));							
+					}
+				}		
+			}
+	
+			String sucflg = subscribeService.insertSubscribeInfo(subscribeForm);
+	        if(sucflg.equals(Constant.FORWARD_SUCCESS) && subscribeForm.getSubscribe_type()==0){
+	        	log.info("insertSubscribeInfo Success!");
+	        	return	"redirect:/headline";
+	        }else if(sucflg.equals(Constant.FORWARD_SUCCESS) && subscribeForm.getSubscribe_type()==2){
+	        	log.info("insertSubscribeInfo Success!");
+	        	return	"redirect:/known";        		    		
+	        }else if(sucflg.equals(Constant.FORWARD_SUCCESS) && subscribeForm.getSubscribe_type()==3){
+	        	log.info("insertSubscribeInfo Success!");
+	        	return	"redirect:/choose";    
+	        }else{   	
+	            return	Constant.FORWARD_FAILURE;
+	        }
+		}	
 }

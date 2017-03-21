@@ -19,6 +19,11 @@ import com.wang.form.FeedBackForm;
 import com.wang.form.GymForm;
 import com.wang.form.GymInfoForm;
 import com.wang.form.GymPhotoForm;
+import com.wang.form.SubscribeForm;
+import com.wang.form.PhotoForm;
+import com.wang.form.ShowForm;
+import com.wang.form.ShowPhotoRelForm;
+import com.wang.form.UserForm;
 import com.wang.utility.Constant;
 import com.wang.utility.Imgtype;
 
@@ -50,6 +55,7 @@ public class LoginDao {
 				|| Imgtype.STRING_BANNER.getStringValue().equals(
 						Integer.toString(imgtype))) {
 			eventAdd.setEventName(eventInsertForm.getEventName());
+			eventAdd.setTab(eventInsertForm.getTab());
 			eventAdd.setEventDesc(eventInsertForm.getEventDesc());
 			eventAdd.setEventPlace(eventInsertForm.getEventPlace());
 			eventAdd.setImgtype(imgtype);
@@ -466,7 +472,249 @@ public class LoginDao {
 			
 			log.info("SelectnikemnameById End.");
 			return nickname; 
+			}
+		
+		
+		//20170314 Baojun Add
+		public static List<UserForm> SelectAllUser() throws SQLException {
+			log.info("SqlSelectAllUser Start.");
+			List<UserForm> user = null; 	
+			String sucflg = null;
+			try { 
+				user = sqlMap.queryForList("selectAllUser"); 
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+				log.error(e.getMessage());
+				sucflg=Constant.FORWARD_FAILURE;
+				throw e;
 			} 
+			sucflg=Constant.FORWARD_SUCCESS;
+			
+			log.info("SqlselectAllUser End.");
+			return user; 
+			} 
+		
+		 //20170314 Baojun ADD
+		 public static String AddT_user(UserForm userForm) {
+				log.info("SqlAddT_user Start.");
+				String sucflg = null;
+				
+					try {
+						sqlMap.insert("insertUserForm", userForm);
+					} catch (SQLException e) {
 
-	
+						e.printStackTrace();
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+						return sucflg;
+					}
+						 sucflg=Constant.FORWARD_SUCCESS;
+						 return sucflg;	
+			}
+		 
+		 
+			//20170315 Baojun Add
+			public static List<ShowForm> SelectAllShow() throws SQLException {
+				log.info("SqlSelectAllShow Start.");
+				List<ShowForm> show = null; 	
+				String sucflg = null;
+				try { 
+					show = sqlMap.queryForList("selectAllShow"); 
+				} catch (SQLException e) { 
+					e.printStackTrace(); 
+					log.error(e.getMessage());
+					sucflg=Constant.FORWARD_FAILURE;
+					throw e;
+				} 
+				sucflg=Constant.FORWARD_SUCCESS;
+				
+				log.info("SqlselectAllShow End.");
+				return show; 
+				} 
+			
+			 //20170315 Baojun ADD
+			 public static String AddT_show(ShowForm showForm) {
+					log.info("SqlAddT_show Start.");
+					String sucflg = null;
+					
+						try {
+							sqlMap.insert("insertShowForm", showForm);
+						} catch (SQLException e) {
+
+							e.printStackTrace();
+							log.error(e.getMessage());
+							sucflg=Constant.FORWARD_FAILURE;
+							return sucflg;
+						}
+							 sucflg=Constant.FORWARD_SUCCESS;
+							 return sucflg;	
+				}
+			 
+			 //20170315 Baojun ADD
+			 public static String AddT_photo(PhotoForm photoForm) {
+					log.info("SqlAddT_show Start.");
+					String sucflg = null;
+					
+						try {
+							sqlMap.insert("insertPhotoForm", photoForm);
+						} catch (SQLException e) {
+
+							e.printStackTrace();
+							log.error(e.getMessage());
+							sucflg=Constant.FORWARD_FAILURE;
+							return sucflg;
+						}
+							 sucflg=Constant.FORWARD_SUCCESS;
+							 return sucflg;	
+				}
+			 
+			 //20170315 Baojun ADD
+			 public static String AddT_showphotorel(ShowPhotoRelForm showPhotoRelForm) {
+					log.info("SqlAddT_show Start.");
+					String sucflg = null;			
+						try {
+							sqlMap.insert("insertshowPhotorelForm", showPhotoRelForm);
+						} catch (SQLException e) {
+							e.printStackTrace();
+							log.error(e.getMessage());
+							sucflg=Constant.FORWARD_FAILURE;
+							return sucflg;
+						}
+							 sucflg=Constant.FORWARD_SUCCESS;
+							 return sucflg;	
+				}
+			
+			 
+				//20170316 Baojun Add
+				public static List<PhotoForm> FindT_photoid(long user_id) {
+					log.info("FindT_photobyid Start.");
+					String sucflg = null;
+					List<PhotoForm> photo = null; 
+					try { 
+						photo = sqlMap.queryForList("selectphotobyid",user_id); 
+					} catch (SQLException e) { 
+						e.printStackTrace(); 
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+				
+					} 
+					sucflg=Constant.FORWARD_SUCCESS;
+					
+					log.info("FindT_photobyid End.");
+					return photo; 
+				}
+			 
+				//20170316 Baojun Add
+				public static List<ShowForm> FindT_showid(long user_id) {
+					log.info("FindT_photobyid Start.");
+					String sucflg = null;
+					List<ShowForm> show = null; 
+					try { 
+						show = sqlMap.queryForList("selectshowbyid",user_id); 
+					} catch (SQLException e) { 
+						e.printStackTrace(); 
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+				
+					} 
+					sucflg=Constant.FORWARD_SUCCESS;
+					
+					log.info("FindT_photobyid End.");
+					return show; 
+				}
+				
+				
+				//20170318 Baojun Add
+				public static List<UserForm> SelectNicknameByid(long user_id) {
+					log.info("FindT_photobyid Start.");
+					String sucflg = null;
+					List<UserForm> user = null; 
+					try { 
+						user = sqlMap.queryForList("selectnickbyid",user_id); 
+					} catch (SQLException e) { 
+						e.printStackTrace(); 
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+				
+					} 
+					sucflg=Constant.FORWARD_SUCCESS;
+					
+					log.info("selectnickbyid End.");
+					return user; 
+				}
+				
+				
+				//20170318 Baojun Add
+				public static List<ShowPhotoRelForm> FindT_showphotorel(long id) {
+					log.info("FindShowPhotoRel Start.");
+					String sucflg = null;
+					List<ShowPhotoRelForm> rel = null; 
+					try { 
+						rel = sqlMap.queryForList("selectrelbyid",id); 
+					} catch (SQLException e) { 
+						e.printStackTrace(); 
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+				
+					} 
+					sucflg=Constant.FORWARD_SUCCESS;
+					
+					log.info("selectShowPhotoRel End.");
+					return rel; 
+				}
+				
+				public static List<PhotoForm> FindT_photonamebyid(long photo_id) {
+					log.info("Findphotonamebyid Start.");
+					String sucflg = null;
+					List<PhotoForm> photo = null; 
+					try { 
+						photo = sqlMap.queryForList("selectphotonamebyid",photo_id); 
+					} catch (SQLException e) { 
+						e.printStackTrace(); 
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+				
+					} 
+					sucflg=Constant.FORWARD_SUCCESS;
+					
+					log.info("selectphotonamebyid End.");
+					return photo; 
+				}
+				
+				public static List<SubscribeForm> SelectAllsubscribe() {
+					log.info("Findsubscribe Start.");
+					String sucflg = null;
+					List<SubscribeForm> subscribe = null; 
+					try { 
+						subscribe = sqlMap.queryForList("SelectAllsubscribe"); 
+					} catch (SQLException e) { 
+						e.printStackTrace(); 
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+				
+					} 
+					sucflg=Constant.FORWARD_SUCCESS;
+					
+					log.info("selectsubscribe End.");
+					return subscribe; 
+				}
+				
+				public static String insertSubscribeInfo(SubscribeForm subscribeForm) {
+					log.info("insertSubscribeInfo Start.");
+					String sucflg = null;		
+					try { 
+						 sqlMap.insert("insertSubscribeInfo",subscribeForm); 
+					} catch (SQLException e) { 
+						e.printStackTrace(); 
+						log.error(e.getMessage());
+						sucflg=Constant.FORWARD_FAILURE;
+				
+					} 
+					sucflg=Constant.FORWARD_SUCCESS;
+					
+					log.info("insertSubscribeInfo End.");
+					return sucflg; 
+				}
+				
+				
 }

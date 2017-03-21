@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+ <!DOCTYPE sqlMap    
+ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"    
+ "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="PhotoShowRelSpace">
+	<typeAlias alias="ShowPhotoRelForm" type="com.wang.form.ShowPhotoRelForm" />
+	<!-- select -->
+	<select id="selectrelbyid" resultClass="ShowPhotoRelForm">    
+			select * from 
+            t_show_photo_rel where show_id=#id# 
+	</select>
+	<!-- insert -->
+	<insert id="insertshowPhotorelForm" parameterClass="ShowPhotoRelForm">
+			insert into
+			t_show_photo_rel(show_id,photo_id)
+			values(#show_id#,#photo_id#)
+	</insert>
+	<!-- delete -->
+
+</sqlMap> 

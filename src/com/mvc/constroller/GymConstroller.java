@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mvc.service.GymInfoService;
 import com.wang.form.GymInfoForm;
-import com.wang.utility.Constant;
 
 
 
