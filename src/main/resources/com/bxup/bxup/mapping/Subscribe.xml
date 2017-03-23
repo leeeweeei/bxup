@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+ <!DOCTYPE sqlMap    
+ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"    
+ "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SubscribeSpace">
+	<typeAlias alias="SubscribeForm" type="com.bxup.bxup.model.Subscribe" />
+	<!-- select -->
+	<select id="SelectAllsubscribe" resultClass="SubscribeForm">    
+             select * from 
+             t_subscribe
+	</select>
+	<!-- insert -->
+	<insert id="insertSubscribeInfo" parameterClass="SubscribeForm">
+			insert into
+				t_subscribe(title,tab,url,img,publish_time,subscribe_type,status)
+				values(#title#,#tab#,#url#,#img#,#publish_time#,#subscribe_type#,#status#)
+	</insert>
+	<!-- delete -->
+
+</sqlMap> 

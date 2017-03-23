@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+ <!DOCTYPE sqlMap    
+ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"    
+ "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="seventhSpace">
+	<typeAlias alias="GymPhotoForm" type="com.bxup.bxup.model.GymPhoto" />
+	<!-- select -->
+	<select id="getGymPhotoForm" parameterClass="java.lang.Integer"
+		resultClass="com.bxup.bxup.model.GymPhoto">  
+         <![CDATA[ 
+             select imgtype from t_event where id = #id# 
+         ]]>
+	</select>
+	<!-- insert -->
+	<insert id="insertGymPhotoForm" parameterClass="GymPhotoForm">
+		insert into
+		t_gym_photo_rel(gym_id,photo,type,delete_status)
+		values(#gym_id#,#photo#,#type#,#delete_status#)
+	</insert>
+	<!-- delete -->
+</sqlMap>

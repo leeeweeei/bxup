@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+ <!DOCTYPE sqlMapConfig  
+ PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"  
+ "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<properties resource="Webinfo.properties" />
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" errorTracingEnabled="true" maxRequests="32"
+		maxSessions="10" maxTransactions="5" useStatementNamespaces="false" />
+	<transactionManager type="JDBC">
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="${Driver}" />
+			<property name="JDBC.ConnectionURL" value="${jdbc_url}" />
+			<property name="JDBC.Username" value="${jdbc_username}" />
+			<property name="JDBC.Password" value="${jdbc_password}" />
+			<property name="Pool.MaximumActiveConnections" value="10" />
+			<property name="Pool.MaximumIdleConnections" value="5" />
+			<property name="Pool.MaximumCheckoutTime" value="120000" />
+			<property name="Pool.TimeToWait" value="500" />
+			<property name="Pool.PingQuery" value="select 1 from ACCOUNT" />
+			<property name="Pool.PingEnabled" value="false" />
+			<property name="Pool.PingConnectionsOlderThan" value="1" />
+			<property name="Pool.PingConnectionsNotUsedFor" value="1" />
+		</dataSource>
+	</transactionManager>
+	<sqlMap resource="com/bxup/bxup/mapping/Event.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/coach.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/coachPhoto.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/gym.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/gymPhoto.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/feedBack.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/User.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/Show.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/Photo.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/ShowPhotoRel.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/Subscribe.xml" />
+	
+</sqlMapConfig> 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+ <!DOCTYPE sqlMap    
+ PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"    
+ "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="sixthSpace">
+	<typeAlias alias="Gym" type="com.bxup.bxup.model.Gym" />
+	<!-- select -->
+	<select id="selectAllGym" resultClass="Gym">    
+             select * from 
+             t_gym where delete_status=0 ORDER BY create_time DESC
+	</select>
+    <select id="selectAllGymnameById" resultClass="Gym">    
+             select name from 
+             t_gym where delete_status=0 and id=#gymid#
+	</select>
+	<!-- insert -->
+	<insert id="insertGymInfoForm" parameterClass="Gym">
+		insert into
+		t_gym(avatar,name,create_time,approved,delete_status,address,tel,profile,user_id,tab)
+		values(#avatar#,#name#,#create_time#,#approved#,#delete_status#,#address#,#tel#,#profile#,#user_id#,#tab#)
+	</insert>
+	<!-- delete -->
+	<delete id="deleteGymInfoForm" parameterClass="Gym">
+	</delete>
+</sqlMap> 
