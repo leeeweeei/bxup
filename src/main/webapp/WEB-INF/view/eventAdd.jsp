@@ -29,7 +29,7 @@ function show(r){
 		document.getElementById("coachDiv").style.display ='none';
 		clearAll(); 
 	} else if(r.value=='4'){
-		document.getElementById("coachDiv").style.display ='block';
+		document.getElementById("loginpictureDiv").style.display ='block';
 		document.getElementById("d").style.display ='none';
 		document.getElementById("c").style.display ='none';
 		document.getElementById("gymDiv").style.display ='none';
@@ -95,7 +95,7 @@ function onSubmit(cmd){
 		if(rtnValue=='1' || rtnValue=='2' || rtnValue=='3'){
 			form.action = "./comfirmeventAdd";
 		} else if(rtnValue=='4'){
-			form.action = "./coachAdd";
+			form.action = "./loginpictureAdd";
 		} else if(rtnValue=='5'){
 			form.action = "./gymAdd";
 		}		
@@ -307,11 +307,11 @@ function load(){
 			onclick="show(this)">Banner
 		<input type="radio" name="img_Type" id="3" value="3"
 			onclick="show(this)">图标
-	<!--  	<input type="radio" name="img_Type" id="4" value="4"
-			onclick="show(this)">coach
-		<input type="radio" name="img_Type" id="5" value="5"
-			onclick="show(this)">gym
-	-->
+	  	<input type="radio" name="img_Type" id="4" value="4"
+			onclick="show(this)">闪屏
+<!-- 		<input type="radio" name="img_Type" id="5" value="5"
+			onclick="show(this)">gym -->
+	
 		<div id="c" style="margin: 20px; border: 2px; display: none">
 			<table>
 				<tr>
@@ -425,11 +425,11 @@ function load(){
 				</tr> -->
 			</table>
 		</div>
-		<div id="coachDiv" style="margin: 20px; border: 2px; display: none">
+		<div id="loginpictureDiv" style="margin: 20px; border: 2px; display: none">
 			<table>
 				<tr>
-					<td>coachCsv</td>
-					<td colspan="2"><input type="file" id="coachCsv" name="coachCsv" size="35">
+					<td>添加图片</td>
+					<td colspan="2"><input type="file" id="iPhone5IMG" name="iPhone5IMG" size="35" />
 					</td>
 				</tr>
 			</table>

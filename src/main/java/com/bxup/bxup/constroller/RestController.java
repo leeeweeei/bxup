@@ -322,6 +322,48 @@ public class RestController {
 		return mainflg;
 		}
 	
+	//20170325 Baojun ADD
+	@RequestMapping(value = "/loginpictureAdd", method = RequestMethod.POST)
+	public String loginpictureAdd(Model model,HttpServletRequest request,
+			HttpServletResponse response, Event event
+			) throws IllegalStateException, IOException {
+		
+
+		log.info("loginpictureAdd called");
+		
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+			
+		Properties properties = new Properties();
+		properties.load(this.getClass().getClassLoader()
+				.getResourceAsStream("Webinfo.properties"));
+		String picturepositiontmp = properties.getProperty("coachpictureposition");
+		if (multipartResolver.isMultipart(request)) {
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;				
+			Iterator<?> iter = multiRequest.getFileNames();
+			while (iter.hasNext()) {		
+				MultipartFile file = multiRequest.getFile(iter.next()
+						.toString());
+				String picturename = file.getOriginalFilename();				
+				if (file != null && file.getOriginalFilename() != CommonConstant.BLANK) {	
+					event.setIphone5_img(picturename);
+					String path = picturepositiontmp + picturename;
+					//file.transferTo(new File(path));							
+				}
+			}		
+		}
+		String sucflg = eventInsertService.insertEvent(event);
+
+        if(sucflg.equals(CommonConstant.FORWARD_SUCCESS)){
+        	log.info("loginpictureAdd success!");
+        	return	"redirect:/resources";	
+        }else{
+	    	return	CommonConstant.FORWARD_FAILURE;	
+        }	    			
+	}
+	
+	
+	
 	//20170303 Baojun ADD
 	@RequestMapping(value = "/maincoachInfoAdd", method = RequestMethod.POST)
 	public String maincoachInfoAdd(Model model,HttpServletRequest request,
@@ -559,4 +601,5 @@ public class RestController {
 	            return	CommonConstant.FORWARD_FAILURE;
 	        }
 		}	
+		
 }

@@ -56,7 +56,7 @@ public class EventInsertServiceImpl implements EventInsertService{
 				eventInsertForm.setEventDesc(eventInsertForm.getEvent_desc());
 				eventInsertForm.setEventPlace(eventInsertForm.getEvent_place());
 				eventInsertForm.setiPhone4IMGName(eventInsertForm.getiPhone4IMGName());
-				eventInsertForm.setiPhone5IMGName(eventInsertForm.getiPhone5IMGName());
+				
 				eventInsertForm.setiPhone6IMGName(eventInsertForm.getiPhone6IMGName());
 				eventInsertForm.setiPhone6PIMGName(eventInsertForm.getiPhone6PIMGName());
 				eventInsertForm.setDel_fg("0");
@@ -75,6 +75,10 @@ public class EventInsertServiceImpl implements EventInsertService{
 				eventInsertForm.setFriendDef(eventInsertForm.getFriendDef());
 				eventInsertForm.setpKDef(eventInsertForm.getpKDef());
 				eventInsertForm.setMetalDef(eventInsertForm.getMetalDef());
+			} else if(img_type.equals(ImgtypeEnum.STRING_LOGINPICTURE.getStringValue())){
+				imgtype = Integer.parseInt(img_type);
+				eventInsertForm.setiPhone5IMGName(eventInsertForm.getiPhone5IMGName());
+				
 			}
 			dao = new LoginDao();
 			String sucflg = LoginDao.AddT_event(eventInsertForm, imgtype);

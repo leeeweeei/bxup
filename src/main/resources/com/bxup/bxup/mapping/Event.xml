@@ -24,8 +24,8 @@
 	</insert>
 	<insert id="insertEventInsertForm2" parameterClass="Event">
 		insert into
-		t_icon_img(event_def_name,fri_def_name,pk_def_name,metal_def_name,start_date,end_date,create_date,create_id)
-		values(#eventDef#,#friendDef#,#pKDef#,#metalDef#,#startDate#,#endDate#,#createDate#,#createID#)
+		t_icon_img(event_def_name,fri_def_name,pk_def_name,metal_def_name,start_date,end_date,create_date,create_id,iphone5_img)
+		values(#eventDef#,#friendDef#,#pKDef#,#metalDef#,#startDate#,#endDate#,#createDate#,#createID#,#iPhone5IMGName#)
 	</insert>
 	<!-- update -->
 	<update id="deleteEventById" parameterClass="Event">          

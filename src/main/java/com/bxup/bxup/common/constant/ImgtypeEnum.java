@@ -5,6 +5,7 @@ public enum ImgtypeEnum {
 	STRING_EVENT("1"),
 	STRING_BANNER("2"),
 	STRING_ICON("3"),
+	STRING_LOGINPICTURE("4"),
 	
 	INT_EVENT(1),
 	INT_BANNER(2),

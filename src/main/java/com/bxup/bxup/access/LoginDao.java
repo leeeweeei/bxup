@@ -57,7 +57,6 @@ public class LoginDao {
 			eventAdd.setEventPlace(eventInsertForm.getEventPlace());
 			eventAdd.setImgtype(imgtype);
 			eventAdd.setiPhone4IMGName(eventInsertForm.getiPhone4IMGName());
-			eventAdd.setiPhone5IMGName(eventInsertForm.getiPhone5IMGName());
 			eventAdd.setiPhone6IMGName(eventInsertForm.getiPhone6IMGName());
 			eventAdd.setiPhone6PIMGName(eventInsertForm.getiPhone6PIMGName());
 			eventAdd.setAndroidIMGName1(eventInsertForm.getAndroidIMGName1());
@@ -82,8 +81,11 @@ public class LoginDao {
 				 sucflg=CommonConstant.FORWARD_SUCCESS;
 				 return sucflg;
 		} else if (ImgtypeEnum.STRING_ICON.getStringValue().equals(
-				Integer.toString(imgtype))) {
+				Integer.toString(imgtype))
+				|| ImgtypeEnum.STRING_LOGINPICTURE.getStringValue().equals(
+						Integer.toString(imgtype))) {
 			eventAdd.setEventDef(eventInsertForm.getEventDef());
+			eventAdd.setiPhone5IMGName(eventInsertForm.getiPhone5IMGName());
 			eventAdd.setFriendDef(eventInsertForm.getFriendDef());
 			eventAdd.setpKDef(eventInsertForm.getpKDef());
 			eventAdd.setMetalDef(eventInsertForm.getMetalDef());
