@@ -9,7 +9,7 @@ public interface UserService {
 
 	List<User> findAll() throws SQLException;
 	String insertUserInfo(User userForm);
-	List<User> findnicknamebyid(long user_id) throws SQLException;
+	User findnicknamebyid(long user_id) throws SQLException;
 	
 	
 }

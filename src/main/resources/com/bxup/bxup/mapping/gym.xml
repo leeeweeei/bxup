@@ -16,8 +16,8 @@
 	<!-- insert -->
 	<insert id="insertGymInfoForm" parameterClass="Gym">
 		insert into
-		t_gym(avatar,name,create_time,approved,delete_status,address,tel,profile,user_id,tab)
-		values(#avatar#,#name#,#create_time#,#approved#,#delete_status#,#address#,#tel#,#profile#,#user_id#,#tab#)
+		t_gym(avatar,name,create_time,approved,delete_status,province,city,address,tel,profile,user_id,tag,hot)
+		values(#avatar#,#name#,#create_time#,#approved#,#delete_status#,#province#,#city#,#address#,#tel#,#profile#,#user_id#,#tag#,#hot#)
 	</insert>
 	<!-- delete -->
 	<delete id="deleteGymInfoForm" parameterClass="Gym">

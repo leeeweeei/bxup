@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bxup.bxup.access.LoginDao;
 import com.bxup.bxup.constroller.ResourceController;
+import com.bxup.bxup.controller.client.dto.ShowDto;
 import com.bxup.bxup.model.Photo;
 import com.bxup.bxup.model.Show;
 import com.bxup.bxup.model.ShowPhotoRel;
@@ -19,12 +20,12 @@ public class ShowServiceImpl implements ShowService{
 LoginDao dao = null;
 	
 	@Override
-	public List<Show> findAll() throws SQLException {
+	public List<ShowDto> findAll() throws SQLException {
 		Logger log = Logger.getLogger(ResourceController.class.getName());					
 		dao = new LoginDao();
-		List<Show> show = LoginDao.SelectAllShow();	
+		List<ShowDto> showDto = LoginDao.SelectAllShow();	
 		log.info("selectAllShowSuccess");
-			return show;
+			return showDto;
 	}
 	
 	

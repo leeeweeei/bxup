@@ -1,5 +1,7 @@
 package com.bxup.bxup.model;
 
+import java.util.List;
+
 public class Show {
 	
 	private long id;
@@ -22,13 +24,14 @@ public class Show {
 	
 	private String location;    
 	
-	private Object nickname;
+	private String nickname;
 	
+	private List<String> photos;
 	
-	public Object getNickname() {
+	public String getNickname() {
 		return nickname;
 	}
-	public void setNickname(Object nickname) {
+	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 	public long getId() {
@@ -90,6 +93,12 @@ public class Show {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public List<String> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<String> photos) {
+		this.photos = photos;
 	}
 
 }

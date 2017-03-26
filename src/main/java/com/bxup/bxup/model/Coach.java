@@ -36,15 +36,40 @@ public class Coach {
 	
 	private String pictureurl;
 	
-	private String tab;
-
+	private String tag;
 	
-	public String getTab() {
-		return tab;
+	private int hot;
+	
+	private String province;
+	
+	private String city;
+	
+	
+	
+	public int getHot() {
+		return hot;
 	}
-	public void setTab(String tab) {
-		this.tab = tab;
+	public void setHot(int hot) {
+		this.hot = hot;
 	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}	
 	public String getPictureurl() {
 		return pictureurl;
 	}

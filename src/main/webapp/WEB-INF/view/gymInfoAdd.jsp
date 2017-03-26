@@ -61,6 +61,11 @@ function checkInput(){
 			document.getElementById("tab").focus();
 			return false;
 		}
+		if (isNaN(document.getElementById("hot").value)) {
+			alert("请输入数字作为热度值！"); 
+			document.getElementById("hot").focus();
+		    return false;
+		} 
 	return true;
 }
 
@@ -85,14 +90,19 @@ function back(){
 						id="name" size="35" maxlength="45" value="${name}" /></td>
 				</tr>			
 				<tr>
-					<td>图片</td>
-					<td colspan="2"><input type="file" id="gympicture" name="gympicture" size="35" />
-					</td>
-				</tr>
-				<tr>
 					<td style="width: 70px">档案</td>
 					<td style="width: 220px"><input type="text" name="profile"
 						id="profile" size="35" value="${profile}"/></td>
+				</tr>
+				<tr>
+					<td style="width: 70px">省</td>
+					<td style="width: 220px"><input type="text" name="province"
+						id="province" size="35" maxlength="200" value="${province}" /></td>
+				</tr>
+				<tr>
+					<td style="width: 70px">市</td>
+					<td style="width: 220px"><input type="text" name="city"
+						id="city" size="35" maxlength="200" value="${city}" /></td>
 				</tr>
 				<tr>
 					<td style="width: 70px">地址</td>
@@ -111,9 +121,40 @@ function back(){
 				</tr>
 				<tr>
 					<td style="width: 70px">标签</td>
-					<td style="width: 220px"><input type="text" name="tab"
-						id="tab" size="35" maxlength="200" value="${tab}" /></td>
+					<td style="width: 220px"><input type="text" name="tag"
+						id="tag" size="35" maxlength="200" value="${tag}" /></td>
 				</tr>
+				<tr>
+					<td style="width: 70px">热度</td>
+					<td style="width: 220px"><input type="text" name="hot"
+						id="hot" size="35" maxlength="200" value="${hot}" /></td>
+				</tr>
+				<tr>
+					<td>图片1</td>
+					<td colspan="2"><input type="file" id="gympicture1" name="gympicture1" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>图片2</td>
+					<td colspan="2"><input type="file" id="gympicture2" name="gympicture2" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>图片3</td>
+					<td colspan="2"><input type="file" id="gympicture3" name="gympicture3" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>图片4</td>
+					<td colspan="2"><input type="file" id="gympicture4" name="gympicture4" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>图片5</td>
+					<td colspan="2"><input type="file" id="gympicture5" name="gympicture5" size="35" />
+					</td>
+				</tr>
+				
 				
 			</table>
 

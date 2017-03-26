@@ -7,62 +7,41 @@
 	<typeAlias alias="PhotoForm" type="com.bxup.bxup.model.Photo" />
 	<typeAlias alias="ShowPhotoRelForm" type="com.bxup.bxup.model.ShowPhotoRel" />
 	<typeAlias alias="UserForm" type="com.bxup.bxup.model.User" />
-	
-<!-- 	<resultMap id="ShowResult" class="ShowForm">   
-    <result property="id" column="id"/>   
-    <result property="keyName" column="keyName"/>   
-    <result property="lock" column="lockId" select="getLockById"/>   
-    </resultMap>
-	
-	<resultMap id="UserResult" class="UserForm">   
-    <result property="id" column="id"/>   
-    <result property="keyName" column="keyName"/>   
-    <result property="lock" column="lockId" select="getLockById"/>   
-    </resultMap>
-    
-    <resultMap id="ShowPhotoRelResult" class="ShowPhotoRelForm">   
-    <result property="id" column="id"/>   
-    <result property="keyName" column="keyName"/>   
-    <result property="lock" column="lockId" select="getLockById"/>   
-    </resultMap> -->
-    
-    <resultMap id="PhotoResult" class="PhotoForm">   
-    <result property="id" column="id"/>   
-    <result property="create_user_id" column="create_user_id"/>   
-    <result property="file_name" column="file_name" select="getphotonameById"/>   
-    </resultMap>
-	
-	
-	
-	
+
+	<resultMap id="DtoResultMap" class="com.bxup.bxup.controller.client.dto.ShowDto">
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="BIGINT" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+	</resultMap>
+
 	<!-- select -->
-	<select id="selectAllShow" resultClass="ShowForm">    
-             select * from 
-             t_show where delete_status = 0 
+	<select id="selectAllShow" resultMap="DtoResultMap">
+		select s.description,s.create_time,photo.file_name img,u.nickname nickname
+		from t_show s left join t_user u on s.user_id = u.user_id
+		left join t_show_photo_rel rel on s.id = rel.show_id
+		left join t_photo photo on rel.photo_id = photo.id
+		where delete_status = 1
 	</select>
-	
-	<select id="selectshowbyid" resultClass="ShowForm">    
-             select * from 
-             t_show where delete_status = 0 and user_id=#user_id# ORDER BY id DESC
+
+	<select id="selectshowbyid" resultClass="ShowForm">
+		select * from
+		t_show where delete_status = 0 and user_id=#user_id# ORDER BY id DESC
 	</select>
-	
-	<select id="getphotonameById" resultClass="PhotoForm">    
-             select file_name from 
-             t_photo where id=#show_id#
+
+	<select id="getphotonameById" resultClass="PhotoForm">
+		select file_name from
+		t_photo where id=#show_id#
 	</select>
-	
-	
-	
-	
+
 	<!-- insert -->
 	<insert id="insertShowForm" parameterClass="ShowForm">
-			insert into
-			t_show(user_id,description,create_time,like_count,delete_status,width,height,show_type)
-			values(#user_id#,#description#,#create_time#,#like_count#,#delete_status#,#width#,#height#,#show_type#)
-<!-- 			    <selectKey resultClass="long" type="post" keyProperty="id" >     
-                         select LAST_INSERT_ID() as value     
-                </selectKey>    --> 
-			
+		insert into
+		t_show(user_id,description,create_time,like_count,delete_status,width,height,show_type)
+		values(#user_id#,#description#,#create_time#,#like_count#,#delete_status#,#width#,#height#,#show_type#)
+		<!-- <selectKey resultClass="long" type="post" keyProperty="id" > select 
+			LAST_INSERT_ID() as value </selectKey> -->
+
 	</insert>
 	<!-- delete -->
 

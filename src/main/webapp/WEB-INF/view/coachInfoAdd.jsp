@@ -67,9 +67,14 @@ function checkInput(){
 			document.getElementById("age").focus();
 		    return false;
 		} 
-		if (isNaN(document.getElementById("tab").value)) {
+		if (document.getElementById("tab").value == "") {
 			alert("请添加标签！"); 
 			document.getElementById("tab").focus();
+		    return false;
+		}
+		if (isNaN(document.getElementById("hot").value)) {
+			alert("请输入数字作为热度值！"); 
+			document.getElementById("hot").focus();
 		    return false;
 		} 
 	return true;
@@ -111,6 +116,16 @@ function back(){
 						id="age" size="35" maxlength="2" value="${age}"/></td>
 				</tr>
 				<tr>
+					<td style="width: 70px">省</td>
+					<td style="width: 220px"><input type="text" name="province"
+						id="province" size="35" maxlength="200" value="${province}" /></td>
+				</tr>
+				<tr>
+					<td style="width: 70px">市</td>
+					<td style="width: 220px"><input type="text" name="city"
+						id="city" size="35" maxlength="200" value="${city}" /></td>
+				</tr>
+				<tr>
 					<td style="width: 70px">档案</td>
 					<td style="width: 220px"><input type="text" name="profile"
 						id="profile" size="35" value="${profile}"/></td>
@@ -138,8 +153,13 @@ function back(){
 				</tr>
 				<tr>
 					<td style="width: 70px">标签</td>
-					<td style="width: 220px"><input type="text" name="tab"
-						id="tab" size="35" maxlength="200" value="${tab}" /></td>
+					<td style="width: 220px"><input type="text" name="tag"
+						id="tag" size="35" maxlength="200" value="${tag}" /></td>
+				</tr>
+				<tr>
+					<td style="width: 70px">热度</td>
+					<td style="width: 220px"><input type="text" name="hot"
+						id="hot" size="35" maxlength="4" value="${hot}" /></td>
 				</tr>
 				
 			</table>

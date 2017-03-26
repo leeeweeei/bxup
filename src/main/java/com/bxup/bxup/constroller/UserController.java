@@ -35,11 +35,11 @@ public class UserController {
 
 		for(int i=0;i<user.size();i++){
 		
-			if(user.get(i).getGender() == 1){
-				user.get(i).setSex("男");
-			}else{
-				user.get(i).setSex("女");
-			}	
+//			if(user.get(i).getGender() == 1){
+//				user.get(i).setSex("男");
+//			}else{
+//				user.get(i).setSex("女");
+//			}	
 
 		
 		}

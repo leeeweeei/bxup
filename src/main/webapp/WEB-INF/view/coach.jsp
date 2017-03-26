@@ -36,7 +36,7 @@ function delConfirm(itemId){
 
 function back(){
 	if(window.confirm('是否返回导航画面 ?')){
-		javascript:window.location.href='/bxup'
+		javascript:window.location.href='/BXAdmin'
      }
 }
 </script>
@@ -61,11 +61,15 @@ function back(){
 							<th>照片</th>
 							<th>性别</th>
 							<th>年龄</th>
+							<th>省</th>
+							<th>市</th>
 							<th>档案</th>
 							<th>荣誉</th>
 							<th>就职健身房</th>
 							<th>认证</th>
 							<th>标签</th>
+							<th>热度</th>
+
 						</tr>
 						<c:forEach items="${coach}" var="item" varStatus="status">
 							<tr>
@@ -74,11 +78,14 @@ function back(){
 								<td><a href="${item.pictureurl}" target="_blank"><c:out value = "${item.avatar}" /></a></td>
 								<td><c:out value = "${item.sex}" /></td>
 								<td><c:out value = "${item.age}" /></td>
+								<td><c:out value = "${item.province}" /></td>
+								<td><c:out value = "${item.city}" /></td>
 								<td><c:out value = "${item.profile}" /></td>							
 								<td><c:out value = "${item.honor}" /></td>
 								<td><c:out value = "${item.gym_name}" /></td>
 								<td><c:out value = "${item.approvedfg}" /></td>
-								<td><c:out value = "${item.tab}" /></td>
+								<td><c:out value = "${item.tag}" /></td>
+								<td><c:out value = "${item.hot}" /></td>
 							</tr>
 						</c:forEach>
 					</table>	
