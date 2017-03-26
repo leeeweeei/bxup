@@ -15,7 +15,7 @@
 
 function back(){
 	if(window.confirm('是否返回导航画面 ?')){
-		javascript:window.location.href='/bxup'
+		javascript:window.location.href='/BXAdmin'
      }
 }
 

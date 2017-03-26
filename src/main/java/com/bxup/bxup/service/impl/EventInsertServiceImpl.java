@@ -77,7 +77,7 @@ public class EventInsertServiceImpl implements EventInsertService{
 				eventInsertForm.setMetalDef(eventInsertForm.getMetalDef());
 			} else if(img_type.equals(ImgtypeEnum.STRING_LOGINPICTURE.getStringValue())){
 				imgtype = Integer.parseInt(img_type);
-				eventInsertForm.setiPhone5IMGName(eventInsertForm.getiPhone5IMGName());
+				eventInsertForm.setiPhone5IMGName(eventInsertForm.getIphone5_img());
 				
 			}
 			dao = new LoginDao();

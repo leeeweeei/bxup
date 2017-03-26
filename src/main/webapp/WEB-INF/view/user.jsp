@@ -10,36 +10,6 @@
 <html>
 <head>
 <title>resources.jsp</title>
-<script type="text/javascript" src="./js/test.js"></script>
-<SCRIPT Language="JavaScript">
-function show(r){
-	if(r.value=='1' || r.value=='2'){
-		//alert(document.getElementById("c").border);
-		document.getElementById("c").style.display ='block';// 
-		document.getElementById("d").style.display ='none';
-		clearAll();
-	} else if(r.value=='3'){
-		//alert(document.getElementById("c").border);
-		document.getElementById("d").style.display ='block';//
-		document.getElementById("c").style.display ='none';
-		clearAll(); 
-	} else {
-		document.getElementById("c").style.display ='none';
-		document.getElementById("d").style.display ='none';
-	}
-}
-function delConfirm(itemId){	
-	if(window.confirm('Are you sure delete the event?')){
-		javascript:window.location.href='resources/event_delete/' + itemId
-    }
-}
-
-function back(){
-	if(window.confirm('是否返回导航画面 ?')){
-		javascript:window.location.href='/bxup'
-     }
-}
-</script>
 </head>	
 <h2>用户列表</h2>	
 <body>
@@ -49,6 +19,7 @@ function back(){
 	</div>
 </c:if>
 <br><input type="button"  class="blue_btn" value="新建用户" onclick="javascript:window.location.href='./userInfoAdd'"/>
+	<input type="button" value="用户一览CSV取得" onclick="exportConfirm()"/>
 	<input type="button" value="返回" onclick="back();"/>
 	<table>
 		<tr>
@@ -90,6 +61,21 @@ function back(){
 			</td>
 		</tr>
 	</table>
-    
+<script src="./resources/js/jquery-1.12.4.min.js"></script>
+<script src="./resources/js/test.js"></script>
+<SCRIPT Language="JavaScript">
+
+/**数据库导出确认*/
+function exportConfirm(){
+    var url = "./user/csvExport"
+    window.open(url);
+}
+
+function back(){
+	if(window.confirm('是否返回导航画面 ?')){
+		javascript:window.location.href='/BXAdmin'
+     }
+}
+</script>   
 </body>
 </html>

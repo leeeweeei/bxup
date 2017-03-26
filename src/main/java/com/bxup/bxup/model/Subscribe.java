@@ -16,6 +16,8 @@ public class Subscribe {
 	
 	private String img;
 	
+	private String feedImg;
+	
 	private Integer status;
 	
 	private Integer subscribe_type;
@@ -73,6 +75,12 @@ public class Subscribe {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}	
+	public String getFeedImg() {
+		return feedImg;
+	}
+	public void setFeedImg(String feedImg) {
+		this.feedImg = feedImg;
 	}
 	public Date getPublish_time() {
 		return publish_time;

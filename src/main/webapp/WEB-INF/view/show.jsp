@@ -36,7 +36,7 @@ function delConfirm(itemId){
 
 function back(){
 	if(window.confirm('是否返回导航画面 ?')){
-		javascript:window.location.href='/bxup'
+		javascript:window.location.href='/BXAdmin'
      }
 }
 </script>
@@ -68,14 +68,9 @@ function back(){
 						<c:forEach items="${show}" var="item" varStatus="status">
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
-								<td><c:out value = "${item}" /></td>
-								<td><a href="${item.pictureurl}" target="_blank"><c:out value = "${item.avatar}" /></a></td>	
-								<td><c:out value = "${item.mobile}" /></td>
-								<td><c:out value = "${item.intro}" /></td>
-								<td><c:out value = "${item.platform_id}" /></td>						
-																	
-
-								
+								<td><c:out value = "${item.description}" /></td>
+								<td><c:out value = "${item.img}" /></td>	
+								<td><c:out value = "${item.createTime}" /></td>																											
 <%-- 								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
 								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td> --%>
 							</tr>

@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserService{
 	};
 	
 	@Override
-	public List<User> findnicknamebyid(long user_id) throws SQLException {
+	public User findnicknamebyid(long user_id) throws SQLException {
 		Logger log = Logger.getLogger(ResourceController.class.getName());					
 		dao = new LoginDao();
-		List<User> user = LoginDao.SelectNicknameByid(user_id);	
+		User user = LoginDao.SelectNicknameByid(user_id);	
 		log.info("selectNicknameByidSuccess");
 			return user;
 	}

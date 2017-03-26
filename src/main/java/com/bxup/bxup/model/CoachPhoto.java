@@ -11,7 +11,6 @@ public class CoachPhoto {
 	
 	private int delete_status;
 
-	
 	public int getCoach_id() {
 		return coach_id;
 	}
