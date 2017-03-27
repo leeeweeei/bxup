@@ -674,5 +674,28 @@ public class LoginDao {
 		log.info("insertSubscribeInfo End.");
 		return sucflg;
 	}
+	
+	public boolean DeleteShowById(long id) throws SQLException {
+		log.info("SqlDeleteEventById Start.");
+		boolean flag = false;
+		Object object = false;
+		String sucflg = null;
+		Show show = new Show();
+		show.setId(id);
+		try {
+			object = sqlMap.update("deleteShowById", show);
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+			sucflg = CommonConstant.FORWARD_FAILURE;
+			throw e;
+		}
+		if (object != null) {
+			sucflg = CommonConstant.FORWARD_SUCCESS;
+			log.info("sqldeleteEventById End.");
+			flag = true;
+		}
+		return flag;
+
+	}
 
 }

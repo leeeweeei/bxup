@@ -504,20 +504,9 @@ public class RestController {
 				relflg = showService.insertPhotoshowrel(showPhotoRelForm);
 			}
 		}
-		// List<PhotoForm> photo = showService.findPhotoidByuserid(user_id);
-		// List<ShowForm> show = showService.findShowidByuserid(user_id);
-		/*
-		 * for(int i=0;i<photo.size();i++){
-		 * showPhotoRelForm.setPhoto_id(photo.get(i).getId());
-		 * showPhotoRelForm.setShow_id(show.get(i).getId());
-		 * photoForm.setCreate_user_id(user_id); if(filenameList.get(i) != ""){
-		 * String ucfflg = showService.insertPhoto(photoForm); } String relflg =
-		 * showService.insertPhotoshowrel(showPhotoRelForm); }
-		 */
-
 		if (relflg.equals(CommonConstant.FORWARD_SUCCESS)) {
 			log.info("insertShow success!");
-			return "redirect:/user";
+			return "redirect:/show";
 		} else {
 			return CommonConstant.FORWARD_FAILURE;
 		}

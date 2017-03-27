@@ -16,5 +16,6 @@ public interface ShowService {
 	String insertPhotoshowrel(ShowPhotoRel showPhotoRelForm);
 	List<ShowPhotoRel> findrelbyid(long user_id) throws SQLException;
 	List<Photo> findphotonamebyid(long photo_id) throws SQLException;
+	Show deleteShowById(long id) throws SQLException;
 	
 }

@@ -6,7 +6,7 @@ public class User {
 
 	private String sex;
 
-	private Long userId;
+	private Long user_Id;
 
 	private String platform_id;// 第三方平台ID
 
@@ -33,21 +33,25 @@ public class User {
 	private String goal;// 健身目标
 
 	private Long create_time;
+	
 	private Long last_login_time;
+	
 	private String last_login_ip;
+	
 	private String device_type;
 
 	private List<Coach> coach;
+	
 	private List<Gym> gym;
 
-	public Long getUserId() {
-		return userId;
+	public Long getUser_Id() {
+		return user_Id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser_Id(Long user_Id) {
+		this.user_Id = user_Id;
 	}
-
+	
 	public String getPlatform_id() {
 		return platform_id;
 	}

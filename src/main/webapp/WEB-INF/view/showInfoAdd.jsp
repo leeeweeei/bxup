@@ -24,6 +24,8 @@ function clearAll(){
 
 function onSubmit(cmd){
 	if(checkInput()){
+		var newString = document.getElementById("description").value.replace(/\n/g, '_@').replace(/\r/g, '_#');
+		document.getElementById("result").innerHTML = newString;
 		var form = document.forms[0];	
 		form.submit();
 	}	
@@ -76,6 +78,7 @@ function back(){
      }
 }
 
+
 </script>
 
 </head>
@@ -89,10 +92,10 @@ function back(){
 					<td style="width: 220px">
 					<select name="user_id">
 					<c:forEach var="user" items="${showInfoAdd}" varStatus="status">
-						<option value="${user.user_id}">${user.nickname}</option>
+						<option value="${user.user_Id}">${user.nickname}</option>
 					</c:forEach>
 					</select>
-					<input type="hidden" name="user_id" value="${user.user_id}"/>
+					<input type="hidden" name="user_id" value="${user.user_Id}"/>
 					</td>
 				</tr>
 				<tr>

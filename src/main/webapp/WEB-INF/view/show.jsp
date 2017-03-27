@@ -28,9 +28,10 @@ function show(r){
 		document.getElementById("d").style.display ='none';
 	}
 }
+
 function delConfirm(itemId){	
-	if(window.confirm('Are you sure delete the event?')){
-		javascript:window.location.href='resources/event_delete/' + itemId
+	if(window.confirm('你确定要删除这个秀场吗?')){
+		javascript:window.location.href='show/show_delete/' + itemId
     }
 }
 
@@ -69,10 +70,14 @@ function back(){
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
 								<td><c:out value = "${item.description}" /></td>
-								<td><c:out value = "${item.img}" /></td>	
-								<td><c:out value = "${item.createTime}" /></td>																											
+								<td><c:out value = "${item.img1}" /></td>	
+								<td><c:out value = "${item.img2}" /></td>	
+								<td><c:out value = "${item.img3}" /></td>	
+								<td><c:out value = "${item.img4}" /></td>	
+								<td><c:out value = "${item.createTime}" /></td>
+								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td>																											
 <%-- 								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
-								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td> --%>
+								 --%>
 							</tr>
 						</c:forEach>
 					</table>	

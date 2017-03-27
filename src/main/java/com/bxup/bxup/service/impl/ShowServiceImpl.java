@@ -30,7 +30,8 @@ LoginDao dao = null;
 	
 	
 	@Override
-	public String insertShow(Show showForm){						
+	public String insertShow(Show showForm){
+		showForm.setDelete_status(1);
 		String sucflg = LoginDao.AddT_show(showForm);						
 		return sucflg;		
 	};
@@ -59,6 +60,17 @@ LoginDao dao = null;
 		return photo;		
 	};
 	
+	@Override
+	public Show deleteShowById(long id) throws SQLException{
+		Logger log = Logger.getLogger(ResourceController.class.getName());		
+		dao = new LoginDao();
+		 boolean deleteshow = dao.DeleteShowById(id);
+		 if(deleteshow = true){
+			log.info("DeleteShowByIdSuccess");
+		 }
+		 
+			return null;
+	}
 	
 
 

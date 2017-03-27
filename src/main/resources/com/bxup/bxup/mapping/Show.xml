@@ -9,6 +9,7 @@
 	<typeAlias alias="UserForm" type="com.bxup.bxup.model.User" />
 
 	<resultMap id="DtoResultMap" class="com.bxup.bxup.controller.client.dto.ShowDto">
+		<result column="id" property="id" jdbcType="BIGINT" />
 		<result column="description" property="description" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="BIGINT" />
 		<result column="img" property="img" jdbcType="VARCHAR" />
@@ -17,11 +18,11 @@
 
 	<!-- select -->
 	<select id="selectAllShow" resultMap="DtoResultMap">
-		select s.description,s.create_time,photo.file_name img,u.nickname nickname
+		select s.id id,s.description,s.create_time,photo.file_name img,u.nickname nickname
 		from t_show s left join t_user u on s.user_id = u.user_id
 		left join t_show_photo_rel rel on s.id = rel.show_id
 		left join t_photo photo on rel.photo_id = photo.id
-		where delete_status = 1
+		where delete_status = 1 order by s.id
 	</select>
 
 	<select id="selectshowbyid" resultClass="ShowForm">
@@ -39,10 +40,16 @@
 		insert into
 		t_show(user_id,description,create_time,like_count,delete_status,width,height,show_type)
 		values(#user_id#,#description#,#create_time#,#like_count#,#delete_status#,#width#,#height#,#show_type#)
-		<!-- <selectKey resultClass="long" type="post" keyProperty="id" > select 
-			LAST_INSERT_ID() as value </selectKey> -->
+		 <selectKey resultClass="long"  keyProperty="id"> select 
+			LAST_INSERT_ID() as value </selectKey>
 
 	</insert>
 	<!-- delete -->
+	<!-- update -->
+	<update id="deleteShowById" parameterClass="ShowForm">          
+			update t_show  
+			SET delete_status=-1
+			WHERE id=#id# 
+	</update>
 
 </sqlMap> 
