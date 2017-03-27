@@ -75,10 +75,8 @@ function back(){
 								<td><c:out value = "${item.img3}" /></td>	
 								<td><c:out value = "${item.img4}" /></td>	
 								<td><c:out value = "${item.createTime}" /></td>
-								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td>																											
-<%-- 								<td><input type="button" onclick="javascript:window.location.href='resources/event_edit/${item.id}'" value="编辑"></td>
-								 --%>
-							</tr>
+								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td>																										
+							</tr>																																														
 						</c:forEach>
 					</table>	
 				</div>

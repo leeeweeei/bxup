@@ -9,12 +9,31 @@
              select * from 
              t_subscribe
 	</select>
+	<select id="SelectSubscribeForID" resultClass="SubscribeForm">    
+             select * from 
+             t_subscribe where id=#id#
+	</select>
 	<!-- insert -->
 	<insert id="insertSubscribeInfo" parameterClass="SubscribeForm">
 			insert into
 				t_subscribe(title,tab,url,img,publish_time,subscribe_type,status)
 				values(#title#,#tab#,#url#,#img#,#publish_time#,#subscribe_type#,#status#)
 	</insert>
+	<!-- update -->
+	<update id="updateFeedImgToNullByType" parameterClass="SubscribeForm">          
+			update t_subscribe  
+			SET feedImg=null,
+			publish_time=#publish_time#			
+			WHERE subscribe_type=#subscribe_type#
+			AND publish_time is not null
+	</update>
+	<update id="updateFeedImgByid" parameterClass="SubscribeForm">          
+			update t_subscribe  
+			SET feedImg=#feedImg#,
+			publish_time=#publish_time#
+			WHERE id=#id#
+			AND subscribe_type=#subscribe_type#
+	</update>
 	<!-- delete -->
 
 </sqlMap> 

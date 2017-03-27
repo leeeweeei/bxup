@@ -504,6 +504,7 @@ public class RestController {
 				relflg = showService.insertPhotoshowrel(showPhotoRelForm);
 			}
 		}
+
 		if (relflg.equals(CommonConstant.FORWARD_SUCCESS)) {
 			log.info("insertShow success!");
 			return "redirect:/show";
@@ -511,6 +512,7 @@ public class RestController {
 			return CommonConstant.FORWARD_FAILURE;
 		}
 	}
+
 
 	// 20170319 Baojun Add
 	@RequestMapping(value = "/subscribeInfoAdd", method = RequestMethod.POST)

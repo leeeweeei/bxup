@@ -5,7 +5,7 @@ import java.util.List;
 public class User {
 
 	private String sex;
-
+	
 	private Long user_Id;
 
 	private String platform_id;// 第三方平台ID
@@ -44,6 +44,8 @@ public class User {
 	
 	private List<Gym> gym;
 
+
+	
 	public Long getUser_Id() {
 		return user_Id;
 	}
@@ -51,7 +53,7 @@ public class User {
 	public void setUser_Id(Long user_Id) {
 		this.user_Id = user_Id;
 	}
-	
+
 	public String getPlatform_id() {
 		return platform_id;
 	}

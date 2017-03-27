@@ -42,7 +42,6 @@
 		values(#user_id#,#description#,#create_time#,#like_count#,#delete_status#,#width#,#height#,#show_type#)
 		 <selectKey resultClass="long"  keyProperty="id"> select 
 			LAST_INSERT_ID() as value </selectKey>
-
 	</insert>
 	<!-- delete -->
 	<!-- update -->

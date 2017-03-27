@@ -49,6 +49,7 @@ function back(){
 	</div>
 </c:if>
 <br><input type="button"  class="blue_btn" value="新建用户" onclick="javascript:window.location.href='./userInfoAdd'"/>
+	<input type="button" value="用户一览CSV取得" onclick="exportConfirm()"/>
 	<input type="button" value="返回" onclick="back();"/>
 	<table>
 		<tr>
@@ -90,6 +91,21 @@ function back(){
 			</td>
 		</tr>
 	</table>
-    
+<script src="./resources/js/jquery-1.12.4.min.js"></script>
+<script src="./resources/js/test.js"></script>
+<SCRIPT Language="JavaScript">
+
+/**数据库导出确认*/
+function exportConfirm(){
+    var url = "./user/csvExport"
+    window.open(url);
+}
+
+function back(){
+	if(window.confirm('是否返回导航画面 ?')){
+		javascript:window.location.href='/BXAdmin'
+     }
+}
+</script>   
 </body>
 </html>

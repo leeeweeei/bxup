@@ -1,6 +1,8 @@
 package com.bxup.bxup.service.impl;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -72,6 +74,10 @@ LoginDao dao = null;
 			return null;
 	}
 	
-
+    private String transferLongToDate(String dateFormat,Long millSec){
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        Date date= new Date(millSec);
+               return sdf.format(date);
+       }
 
 }
