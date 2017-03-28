@@ -27,6 +27,17 @@ public class ShowDto {
 	
 	private String img4;
 	
+	private String create_Time;
+	
+
+	public String getCreate_Time() {
+		return create_Time;
+	}
+
+	public void setCreate_Time(String create_Time) {
+		this.create_Time = create_Time;
+	}
+
 	public String getImg() {
 		return img;
 	}

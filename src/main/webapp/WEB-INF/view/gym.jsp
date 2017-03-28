@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-<title>resources.jsp</title>
+<title>gym.jsp</title>
 <script type="text/javascript" src="./js/test.js"></script>
 <SCRIPT Language="JavaScript">
 function show(r){
@@ -48,7 +48,7 @@ function back(){
 		<p>${message}</p>
 	</div>
 </c:if>
-<br><input type="button"  class="blue_btn" value="新建健身房" onclick="javascript:window.location.href='./gymInfoAdd'"/>
+<br><input type="button"  class="blue_btn" value="新建健身房" onclick="javascript:window.location.href='./gym/gymInfo'"/>
 	<input type="button" value="返回" onclick="back();"/>
 	<table>
 		<tr>
@@ -57,8 +57,7 @@ function back(){
 					<table border="1">
 						<tr>
 							<th>No.</th>
-							<th>名字</th>
-							<th>图片</th>
+							<th>名字</th>							
 							<th>档案</th>
 							<th>省</th>
 							<th>市</th>
@@ -67,12 +66,16 @@ function back(){
 							<th>认证</th>
 							<th>标签</th>
 							<th>热度</th>
+							<th>图片1</th>
+							<th>图片2</th>
+							<th>图片3</th>
+							<th>图片4</th>
+							<th>图片5</th>
 						</tr>
 						<c:forEach items="${gym}" var="item" varStatus="status">
 							<tr>
 								<td><c:out value = "${status.count}" /></td>
-								<td><c:out value = "${item.name}" /></td>
-								<td><a href="${item.pictureurl}" target="_blank"><c:out value = "${item.avatar}" /></a></td>
+								<td><c:out value = "${item.name}" /></td>								
 								<td><c:out value = "${item.profile}" /></td>
 								<td><c:out value = "${item.province}" /></td>
 								<td><c:out value = "${item.city}" /></td>							
@@ -81,6 +84,11 @@ function back(){
 								<td><c:out value = "${item.approvedfg}" /></td>
 								<td><c:out value = "${item.tag}" /></td>
 								<td><c:out value = "${item.hot}" /></td>
+								<td><a href="${item.gympicture1}" target="_blank"><c:out value = "${item.gympictureName1}" /></a></td>
+								<td><a href="${item.gympicture2}" target="_blank"><c:out value = "${item.gympictureName2}" /></a></td>
+								<td><a href="${item.gympicture3}" target="_blank"><c:out value = "${item.gympictureName3}" /></a></td>
+								<td><a href="${item.gympicture4}" target="_blank"><c:out value = "${item.gympictureName4}" /></a></td>
+								<td><a href="${item.gympicture5}" target="_blank"><c:out value = "${item.gympictureName5}" /></a></td>
 							</tr>
 						</c:forEach>
 					</table>	

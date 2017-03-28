@@ -1,6 +1,8 @@
 package com.bxup.bxup.constroller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +46,7 @@ public class ShowController {
 				show.setId(showDto.get(i).getId());
 				show.setDescription(showDto.get(i).getDescription());
 				show.setNickname(showDto.get(i).getNickname());
-				//System.out.println(transferLongToDate("yyyy/MM/dd",showDto.get(i).getCreate_time()));
+				show.setCreate_Time(transferLongToDate("yyyy/MM/dd",showDto.get(i).getCreateTime()));
 				show.setCreateTime(showDto.get(i).getCreateTime());
 				show.setImg1(showDto.get(i).getImg());
 				imgcount = 2;
@@ -100,5 +102,11 @@ public class ShowController {
 		 	 
 		 return "redirect:/show";	
 	}
-
+	
+	
+    private String transferLongToDate(String dateFormat,Long millSec){
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        Date date= new Date(millSec);
+               return sdf.format(date);
+       }
 }

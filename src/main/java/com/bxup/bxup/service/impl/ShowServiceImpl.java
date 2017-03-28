@@ -74,10 +74,5 @@ LoginDao dao = null;
 			return null;
 	}
 	
-    private String transferLongToDate(String dateFormat,Long millSec){
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        Date date= new Date(millSec);
-               return sdf.format(date);
-       }
 
 }

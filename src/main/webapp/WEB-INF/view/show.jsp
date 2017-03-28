@@ -74,7 +74,7 @@ function back(){
 								<td><c:out value = "${item.img2}" /></td>	
 								<td><c:out value = "${item.img3}" /></td>	
 								<td><c:out value = "${item.img4}" /></td>	
-								<td><c:out value = "${item.createTime}" /></td>
+								<td><c:out value = "${item.create_Time}" /></td>
 								<td><input type="button" onclick="delConfirm(${item.id});" value="删除"></td>																										
 							</tr>																																														
 						</c:forEach>

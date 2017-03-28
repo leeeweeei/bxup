@@ -34,5 +34,6 @@
 	<sqlMap resource="com/bxup/bxup/mapping/Photo.xml" />
 	<sqlMap resource="com/bxup/bxup/mapping/ShowPhotoRel.xml" />
 	<sqlMap resource="com/bxup/bxup/mapping/Subscribe.xml" />
+	<sqlMap resource="com/bxup/bxup/mapping/WelcomeImg.xml" />
 	
 </sqlMapConfig> 

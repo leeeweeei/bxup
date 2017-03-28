@@ -102,6 +102,15 @@
 		form.actionCmd.value = "";
     }
 	
+	function onSubmit10(){
+		var form = document.forms[0];
+		
+		form.actionCmd.value = "Init";
+		form.target = "_top";
+		form.action = "./welcome10";
+		form.submit();
+		form.actionCmd.value = "";
+    }
 </script>
 </head>
 
@@ -140,6 +149,10 @@
 		<tr>	
 		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
 			href="#" onclick="onSubmit8();">秀场一览</a></td>	
+		</tr>
+		<tr>	
+		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a
+			href="#" onclick="onSubmit10();">闪屏一览</a></td>	
 		</tr>
 		<tr>	
 		<td><input type="hidden" id="actionCmd" name="actionCmd"></input> <a

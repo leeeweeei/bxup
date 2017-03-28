@@ -19,7 +19,7 @@ function clearAll(){
 	document.getElementById("profile").value = "";
 	document.getElementById("address").value = "";
 	document.getElementById("tel").value = "";
-	document.getElementById("tab").value = "";
+	document.getElementById("tag").value = "";
 }
 
 function onSubmit(cmd){
@@ -72,7 +72,7 @@ function checkInput(){
 
 function back(){
 	if(window.confirm('是否返回健身房列表 ?')){
-		javascript:window.location.href='gym'
+		javascript:window.location.href='../gym'
      }
 }
 
@@ -81,7 +81,7 @@ function back(){
 </head>
 <body>
 	<h2>健身房信息</h2>
-	<form enctype="multipart/form-data" action="maingymInfoAdd" method="post">
+	<form enctype="multipart/form-data" action="gymInfoAdd" method="post">
 
 			<table>
 				<tr>

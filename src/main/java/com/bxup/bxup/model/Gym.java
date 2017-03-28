@@ -1,8 +1,14 @@
 package com.bxup.bxup.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Gym {
 	
 	private int id;
+	
+	private String avatar;
+	
+	private String name;
 	
 	private long create_time;
 	
@@ -10,36 +16,45 @@ public class Gym {
 	
 	private int delete_status;
 	
-	private int user_id ;
-	
-	private String avatar;
-	
-	private String name;
-	
 	private String profile;
 	
 	private String address;
 	
 	private String tel;
 	
-	private String approvedfg;
-	
-	private String pictureurl;
-	
-	private String tag;
-	
-	private int hot;
+	private int user_id ;
 	
 	private String province;
 	
 	private String city;
 	
+	private String tag;
+
+	private Long hot;
+	
+	private String approvedfg;
+		
+	private MultipartFile gympicture1;
+	
+	private MultipartFile gympicture2;
+	
+	private MultipartFile gympicture3;
+	
+	private MultipartFile gympicture4;
+	
+	private MultipartFile gympicture5;
 	
 	
-	public int getHot() {
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Long getHot() {
 		return hot;
 	}
-	public void setHot(int hot) {
+	public void setHot(Long hot) {
 		this.hot = hot;
 	}
 	public String getTag() {
@@ -59,19 +74,6 @@ public class Gym {
 	}
 	public void setCity(String city) {
 		this.city = city;
-	}
-		
-	public String getPictureurl() {
-		return pictureurl;
-	}
-	public void setPictureurl(String pictureurl) {
-		this.pictureurl = pictureurl;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public long getCreate_time() {
 		return create_time;
@@ -133,6 +135,35 @@ public class Gym {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
-
+	public MultipartFile getGympicture1() {
+		return gympicture1;
+	}
+	public void setGympicture1(MultipartFile gympicture1) {
+		this.gympicture1 = gympicture1;
+	}
+	public MultipartFile getGympicture2() {
+		return gympicture2;
+	}
+	public void setGympicture2(MultipartFile gympicture2) {
+		this.gympicture2 = gympicture2;
+	}
+	public MultipartFile getGympicture3() {
+		return gympicture3;
+	}
+	public void setGympicture3(MultipartFile gympicture3) {
+		this.gympicture3 = gympicture3;
+	}
+	public MultipartFile getGympicture4() {
+		return gympicture4;
+	}
+	public void setGympicture4(MultipartFile gympicture4) {
+		this.gympicture4 = gympicture4;
+	}
+	public MultipartFile getGympicture5() {
+		return gympicture5;
+	}
+	public void setGympicture5(MultipartFile gympicture5) {
+		this.gympicture5 = gympicture5;
+	}
+	
 }

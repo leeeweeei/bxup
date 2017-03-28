@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bxup.bxup.access.LoginDao;
 import com.bxup.bxup.constroller.ResourceController;
+import com.bxup.bxup.controller.client.dto.GymDto;
 import com.bxup.bxup.model.Gym;
 import com.bxup.bxup.model.GymPhoto;
 import com.bxup.bxup.service.GymService;
@@ -18,10 +19,10 @@ public class GymServiceImpl implements GymService{
 	LoginDao dao = null;
 	
 	@Override
-	public List<Gym> findAll() throws SQLException {
+	public List<GymDto> findAll() throws SQLException {
 		Logger log = Logger.getLogger(ResourceController.class.getName());					
 		dao = new LoginDao();
-		List<Gym> gym = LoginDao.SelectAllGym();	
+		List<GymDto> gym = LoginDao.SelectAllGym();	
 		log.info("selectAllGymSuccess");
 			return gym;
 		}

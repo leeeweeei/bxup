@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import com.bxup.bxup.common.constant.CommonConstant;
 import com.bxup.bxup.common.constant.ImgtypeEnum;
 import com.bxup.bxup.constroller.RestController;
+import com.bxup.bxup.controller.client.dto.GymDto;
 import com.bxup.bxup.controller.client.dto.ShowDto;
 import com.bxup.bxup.model.Coach;
 import com.bxup.bxup.model.CoachPhoto;
@@ -21,6 +22,7 @@ import com.bxup.bxup.model.Show;
 import com.bxup.bxup.model.ShowPhotoRel;
 import com.bxup.bxup.model.Subscribe;
 import com.bxup.bxup.model.User;
+import com.bxup.bxup.model.WelcomeIMG;
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
@@ -619,9 +621,9 @@ public class LoginDao {
 	public static String AddT_gym(Gym gymInfoForm) {
 		log.info("SqlAddT_gym Start.");
 		String sucflg = null;
-
+		Object generatedKey = null;
 		try {
-			sqlMap.insert("insertGymInfoForm", gymInfoForm);
+			generatedKey = sqlMap.insert("insertGymInfoForm", gymInfoForm);
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -629,7 +631,7 @@ public class LoginDao {
 			sucflg = CommonConstant.FORWARD_FAILURE;
 			return sucflg;
 		}
-		sucflg = CommonConstant.FORWARD_SUCCESS;
+		sucflg = generatedKey.toString();
 		return sucflg;
 	}
 
@@ -671,9 +673,9 @@ public class LoginDao {
 	}
 
 	// 20170308 Baojun Add
-	public static List<Gym> SelectAllGym() throws SQLException {
+	public static List<GymDto> SelectAllGym() throws SQLException {
 		log.info("SqlSelectAllEvent Start.");
-		List<Gym> gym = null;
+		List<GymDto> gym = null;
 		String sucflg = null;
 		try {
 			gym = sqlMap.queryForList("selectAllGym", gym);
@@ -1026,27 +1028,79 @@ public class LoginDao {
 		}
 		return flag;
 	}
-	
-	  //20170325 wwb Add public static List<Subscribe>
-	
-	//20170325 wwb Add
+
+	// 20170325 wwb Add
 	public static List<Subscribe> SelectSubscribeForID(long id) {
 		log.info("Find T_subscribe Start.");
 		String sucflg = null;
-		List<Subscribe> subscribe = null; 
-		try { 
-			subscribe = sqlMap.queryForList("SelectSubscribeForID",id); 
-		} catch (SQLException e) { 
-			e.printStackTrace(); 
+		List<Subscribe> subscribe = null;
+		try {
+			subscribe = sqlMap.queryForList("SelectSubscribeForID", id);
+		} catch (SQLException e) {
+			e.printStackTrace();
 			log.error(e.getMessage());
-			sucflg=CommonConstant.FORWARD_FAILURE;
-	
-		} 
-		sucflg=CommonConstant.FORWARD_SUCCESS;
-		
+			sucflg = CommonConstant.FORWARD_FAILURE;
+
+		}
+		sucflg = CommonConstant.FORWARD_SUCCESS;
+
 		log.info("selectnickbyid End.");
-		return subscribe; 
+		return subscribe;
 	}
-	
+
+	// 20170327 Baojun Add
+	public static List<WelcomeIMG> SelectAllWelcomePhoto() throws SQLException {
+		log.info("SelectAllWelcomePhoto Start.");
+		List<WelcomeIMG> welcomePhoto = null;
+		String sucflg = null;
+		try {
+			welcomePhoto = sqlMap.queryForList("selectAllWelcomePhoto", welcomePhoto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+			sucflg = CommonConstant.FORWARD_FAILURE;
+			throw e;
+		}
+		sucflg = CommonConstant.FORWARD_SUCCESS;
+
+		log.info("SelectAllWelcomePhoto End.");
+		return welcomePhoto;
+	}
+
+	// 20170327 Baojun Add
+	public static String AddT_welcomePhoto(WelcomeIMG welcomePhoto) {
+		log.info("insertWelcomePhoto Start.");
+		String sucflg = null;
+		try {
+			sqlMap.insert("insertWelcomePhoto", welcomePhoto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+			sucflg = CommonConstant.FORWARD_FAILURE;
+
+		}
+		sucflg = CommonConstant.FORWARD_SUCCESS;
+
+		log.info("insertWelcomePhoto End.");
+		return sucflg;
+	}
+
+	// 20170327 Baojun Add
+	public static String updateT_welcomePhoto(WelcomeIMG welcomePhoto) {
+		log.info("insertWelcomePhoto Start.");
+		String sucflg = null;
+		try {
+			sqlMap.update("updateWelcomePhoto", welcomePhoto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+			sucflg = CommonConstant.FORWARD_FAILURE;
+
+		}
+		sucflg = CommonConstant.FORWARD_SUCCESS;
+
+		log.info("insertWelcomePhoto End.");
+		return sucflg;
+	}
 
 }

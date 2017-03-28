@@ -28,6 +28,7 @@ public class Show {
 	
 	private List<String> photos;
 	
+	
 	public String getNickname() {
 		return nickname;
 	}
